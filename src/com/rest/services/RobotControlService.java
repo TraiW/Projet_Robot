@@ -26,6 +26,7 @@ public class RobotControlService {
 		public void init(){
 			checkRobot();
 		}
+		
 
 		private void checkRobot() {
 			Object obj=context.getAttribute(ROBOT_SIMULATOR_LABEL);
