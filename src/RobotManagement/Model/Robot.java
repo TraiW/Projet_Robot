@@ -5,7 +5,7 @@ public class Robot {
 	private Orientation orientationInit, orientation;
 	private Env env_decouvert;
 	//capteur de vision ?
-		
+	
 	public Robot(int xInit, int yInit, int x, int y,
 				Orientation orientationInit, Orientation orientation,
 				Env env_decouvert) {
