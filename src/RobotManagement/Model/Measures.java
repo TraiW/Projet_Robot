@@ -45,6 +45,4 @@ public class Measures {
 	public int getDistanceParcourue(){
 		return distanceParcourue;
 	}
-	
-
 }
