@@ -75,6 +75,4 @@ public class Robot {
 		this.env_decouvert = env_decouvert;
 	}
 	
-	
-	
 }
