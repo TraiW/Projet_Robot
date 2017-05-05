@@ -1,7 +1,5 @@
 package RobotManagement.Model;
 
-import java.util.ArrayList;
-
 public class Robot {
 	private int xInit,yInit,x,y;
 	private Orientation orientationInit, orientation;
