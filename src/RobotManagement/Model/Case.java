@@ -29,4 +29,9 @@ public class Case {
 		this.masquage = masquage;
 	}
 
+	@Override
+	public String toString() {
+		return "Case [etat_case=" + etat_case + ", masquage=" + masquage + "]";
+	}
+
 }
