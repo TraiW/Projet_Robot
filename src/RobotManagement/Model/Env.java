@@ -32,8 +32,7 @@ public class Env extends Config {
 		
 		for(i=0;i<getX_plateau();i++){
 			for(j=0;j<getY_plateau();j++){
-			    Enum_Etat_Case vide = null;
-				c = new Case(vide.vide,true);
+				c = new Case(Enum_Etat_Case.vide,true);
 				this.tableauEnv[i][j]=c;            
 			}
 		}
@@ -41,8 +40,7 @@ public class Env extends Config {
 		for(i=0;i<nbreObstacle;i++){
 			x=aleatoire.nextInt(getX_plateau());
 			y=aleatoire.nextInt(getY_plateau());
-			Enum_Etat_Case obstacle = null;
-			this.tableauEnv[x][y].setEtat_case(obstacle.obstacle);				
+			this.tableauEnv[x][y].setEtat_case(Enum_Etat_Case.obstacle);				
 		}
 	}
 
