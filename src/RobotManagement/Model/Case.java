@@ -9,25 +9,13 @@ public class Case {
 	
 	public Case(Enum_Etat_Case etat_case, boolean masquage){
 		this.etat_case=etat_case;
-		this.masquage=masquage;	
-		
+		this.masquage=masquage;
 	}
- 
-	public Enum_Etat_Case getEtat_case() {
-		return etat_case;
-	}
-
-	public void setEtat_case(Enum_Etat_Case etat_case) {
-		this.etat_case = etat_case;
-	}
-
-	public boolean isMasquage() {
-		return masquage;
-	}
-
-	public void setMasquage(boolean masquage) {
-		this.masquage = masquage;
-	}
+	
+	public Enum_Etat_Case getEtat_case(){return etat_case;}
+	public void setEtat_case(Enum_Etat_Case etat_case){this.etat_case = etat_case;}
+	public boolean isMasquage(){return masquage;}
+	public void setMasquage(boolean masquage) {this.masquage = masquage;}
 
 	@Override
 	public String toString() {

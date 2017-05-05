@@ -9,41 +9,24 @@ public class Measures {
 	 *  Distance parcouru par le robot depuis le lancement du simulateur
 	 *  */
 	
-	int nbrCommandes = 0;
-	int nbrObstaclesRencontres = 0;
-	int nbrObstaclesVisibles = 0;
-	int distanceParcourue = 0;
+	private int nbrCommandes = 0;
+	private int nbrObstaclesRencontres = 0;
+	private int nbrObstaclesVisibles = 0;
+	private int distanceParcourue = 0;
 	
-	public void setCommandes(){
-		nbrCommandes = nbrCommandes + 1;
-	}
+	public void addCommandes(){nbrCommandes += 1;}
+	public int getNbrCommandes(){return nbrCommandes;}
+	public void addObstaclesRencontres(){nbrObstaclesRencontres += 1;}	 
+	public int getObstaclesRencontres(){return nbrObstaclesRencontres;}	
+	public void addObstaclesVisibles(){nbrObstaclesVisibles += 1;}
+	public int getObstaclesVisibles(){return nbrObstaclesVisibles;}	
+	public void addDistanceParcourue(){distanceParcourue += 1;}
+	public int getDistanceParcourue(){return distanceParcourue;}
 	
-	public int getNbrCommandes(){
-		return nbrCommandes; 
+	public void razMesures(){
+		nbrCommandes = 0;
+		nbrObstaclesRencontres = 0;
+		nbrObstaclesVisibles = 0;
+		distanceParcourue = 0;
 	}
-	
-	public void setObstaclesRencontres(){
-		nbrObstaclesRencontres = nbrObstaclesRencontres + 1;
-	}
-	 
-	public int getObstaclesRencontres(){
-		return nbrObstaclesRencontres;
-	}
-	
-	public void setObstaclesVisibles(){
-		nbrObstaclesVisibles = nbrObstaclesVisibles + 1;
-	}
-	
-	public int getObstaclesVisibles(){
-		return nbrObstaclesVisibles;
-	}
-	
-	public void setDistanceParcourue(){
-		distanceParcourue = distanceParcourue + 1;
-	}
-	
-	public int getDistanceParcourue(){
-		return distanceParcourue;
-	}
-	
 }

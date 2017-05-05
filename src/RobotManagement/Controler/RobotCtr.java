@@ -12,21 +12,10 @@ public class RobotCtr {
 		this.robot = robot;
 	}
 
-	public Env getEnvironnement() {
-		return environnement;
-	}
-
-	public void setEnvironnement(Env environnement) {
-		this.environnement = environnement;
-	}
-
-	public Robot getRobot() {
-		return robot;
-	}
-
-	public void setRobot(Robot robot) {
-		this.robot = robot;
-	}
+	public Env getEnvironnement() {return environnement;}
+	public void setEnvironnement(Env environnement) {this.environnement = environnement;}
+	public Robot getRobot() {return robot;}
+	public void setRobot(Robot robot) {this.robot = robot;}
 
 	public boolean deplacerRobot(Enum_Direction_Robot dir){
 		boolean retour=false;
