@@ -12,7 +12,7 @@ public class Case {
 		this.masquage=masquage;	
 		
 	}
-
+ 
 	public Enum_Etat_Case getEtat_case() {
 		return etat_case;
 	}
