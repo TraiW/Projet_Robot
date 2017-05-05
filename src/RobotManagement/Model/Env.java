@@ -17,6 +17,13 @@ public class Env extends Config {
 		setY_plateau(Y_plateau);
 		setNbreCase_plateau(nbreCase);			
 	}
+	/***
+	 * getter et setter sur le tableau environnement 
+	 * 			
+	 */
+	public Case[][] getTableauEnv(){return tableauEnv;}
+	public void setTableauEnv(Case[][] tableauEnv){this.tableauEnv = tableauEnv;}
+	
 	
 	/***
 	 * methode de génération d'environnement 
@@ -44,22 +51,6 @@ public class Env extends Config {
 		}
 	}
 
-	/***
-	 * getter sur le tableau environnement 
-	 * 			
-	 */
-	public Case[][] getTableauEnv() {
-		return tableauEnv;
-	}
-	
-	/***
-	 * setter sur le tableau environnement 
-	 * 			
-	 */
-	public void setTableauEnv(Case[][] tableauEnv) {
-		this.tableauEnv = tableauEnv;
-	}
-	
 	/***
 	 * methode permettant d'afficher ma matrice sous forme ASCII  
 	 * 			

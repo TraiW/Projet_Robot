@@ -5,6 +5,7 @@ public class Robot {
 	private Enum_Orientation_Robot orientationInit, orientation;
 	private Env env_decouvert;
 	private Measures mesures;
+	private Config conf;
 	//capteur de vision ?
 	
 	public Robot(int xInit, int yInit, int x, int y,
@@ -46,9 +47,8 @@ public class Robot {
 	}
 	
 	public boolean DeplacementEtreValide(int x, int y) {
-		//TODO changer les "9" en fonction de la config ?
 		boolean retour=false;
-		if (x >= 0 && x <= 9 && y >= 0 && y <= 9) {
+		if (x >= 0 && x <= conf.getX_plateau() && y >= 0 && y <= conf.getY_plateau()) {
 			if ((x == this.x + 1 || x == this.x - 1) || (y == this.y + 1 || y == this.y - 1)) {
 				if (env_decouvert.getTableauEnv()[x][y].etat_case==Enum_Etat_Case.vide) {
 					retour = true;
