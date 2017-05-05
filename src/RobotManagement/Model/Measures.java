@@ -29,4 +29,5 @@ public class Measures {
 		nbrObstaclesVisibles = 0;
 		distanceParcourue = 0;
 	}
+	
 }

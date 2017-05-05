@@ -21,5 +21,5 @@ public class Case {
 	public String toString() {
 		return "Case [etat_case=" + etat_case + ", masquage=" + masquage + "]";
 	}
-
+	
 }
