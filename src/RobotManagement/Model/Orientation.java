@@ -1,5 +1,5 @@
 package RobotManagement.Model;
 
 public enum Orientation {
-	N,S,E,W
+	N,S,E,W 
 }
