@@ -2,12 +2,12 @@ package RobotManagement.Model;
 
 public class Robot {
 	private int xInit,yInit,x,y;
-	private Orientation orientationInit, orientation;
+	private Enum_Orientation_Robot orientationInit, orientation;
 	private Env env_decouvert;
 	//capteur de vision ?
 	
 	public Robot(int xInit, int yInit, int x, int y,
-				Orientation orientationInit, Orientation orientation,
+			Enum_Orientation_Robot orientationInit, Enum_Orientation_Robot orientation,
 				Env env_decouvert) {
 			super();
 			this.xInit = xInit;
@@ -51,19 +51,19 @@ public class Robot {
 		this.y = y;
 	}
 
-	public Orientation getOrientationInit() {
+	public Enum_Orientation_Robot getOrientationInit() {
 		return orientationInit;
 	}
 
-	public void setOrientationInit(Orientation orientationInit) {
+	public void setOrientationInit(Enum_Orientation_Robot orientationInit) {
 		this.orientationInit = orientationInit;
 	}
 
-	public Orientation getOrientation() {
+	public Enum_Orientation_Robot getOrientation() {
 		return orientation;
 	}
 
-	public void setOrientation(Orientation orientation) {
+	public void setOrientation(Enum_Orientation_Robot orientation) {
 		this.orientation = orientation;
 	}
 
@@ -73,6 +73,11 @@ public class Robot {
 
 	public void setEnv_decouvert(Env env_decouvert) {
 		this.env_decouvert = env_decouvert;
+	}
+	
+	public void deplacement(int x, int y){
+		setX(x);
+		setY(y);
 	}
 	
 }
