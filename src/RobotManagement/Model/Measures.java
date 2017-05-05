@@ -31,7 +31,7 @@ public class Measures {
 	}
 	
 	public void setObstaclesVisibles(){
-		/*récupère le pattern de vision du robot et regarde ce qu'il y a dans la case, si obstacle, faire +1*/
+		nbrObstaclesVisibles = nbrObstaclesVisibles + 1;
 	}
 	
 	public int getObstaclesVisibles(){
