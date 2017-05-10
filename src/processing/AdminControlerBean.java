@@ -12,13 +12,14 @@ import dao.instance.AdminDao;
 import model.LoginBean;
 import model.AdminModelBean;
 
-@ManagedBean
+@ManagedBean(name = "AdminControler")
 @ApplicationScoped // Utilisation de application scope afin d'offrir un point d'entrée unique à l'ensemble des clients
 public class AdminControlerBean {
 	private AdminDao AdminDao;
 	public AdminControlerBean() {
 		this.AdminDao=DaoFabric.getInstance().createAdminDao();
 	}
+	
 	public String checkUser(LoginBean loginBean){
 		AdminModelBean admin = this.AdminDao.checkAdmin(loginBean.getLogin(),loginBean.getPwd());
 		if(admin!=null){
