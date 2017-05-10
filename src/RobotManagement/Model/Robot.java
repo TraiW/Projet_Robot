@@ -3,7 +3,7 @@ package RobotManagement.Model;
 public class Robot extends Config {
 	private int xInit,yInit,x,y;
 	private Enum_Orientation_Robot orientationInit, orientation;
-	private Env env_decouvert=new Env(getX_plateau(), getY_plateau(), getTaux_chance());
+	private Env env_decouvert=null;
 	private Measures mesures = new Measures();
 	//private Config conf;
 	//capteur de vision ?
@@ -41,21 +41,29 @@ public class Robot extends Config {
 		//ajouter nbr obstacles visibles
 		if (DeplacementEtreValide(x, y)) {
 //			mesures.addDistanceParcourue();					
+			
+			Case[][] tab=env_decouvert.getTableauEnv();
+			tab[this.x][this.y].setParcouru();
 			setX(x);
 			setY(y);
+			tab[this.x][this.y].setRobot();
 		}
 	}
 	
 	public boolean DeplacementEtreValide(int x, int y) {
 		boolean retour=false;
-		if (x >= 0 && x <= getX_plateau() && y >= 0 && y <= getY_plateau()) {
-			if ((x == this.x + 1 || x == this.x - 1) || (y == this.y + 1 || y == this.y - 1)) {
-				if (env_decouvert.getTableauEnv()[x][y].etat_case==Enum_Etat_Case.vide) {
+		if (x >= 0 && x <= env_decouvert.getX_plateau() && y >= 0 && y <= env_decouvert.getY_plateau()) {
+			if ( (x==this.x && (y==this.y+1 || y==this.y-1)) 
+					|| (y==this.y && (x==this.x+1 || x==this.x-1)) ) {
+				if (env_decouvert.getTableauEnv()[x][y].etat_case==Enum_Etat_Case.vide 
+						|| env_decouvert.getTableauEnv()[x][y].etat_case==Enum_Etat_Case.parcouru) {
 					retour = true;
 				} else {
 					mesures.addObstaclesRencontres();
 					System.out.println("Déplacment impossible : Obstacle");
 				}
+			}else{
+				System.out.println("Déplacment impossible : 1 case par 1 case");
 			}
 		} else {
 			System.out.println("Coordonnées hors plateau");
@@ -63,7 +71,6 @@ public class Robot extends Config {
 		return retour;
 	}
 	
-	@SuppressWarnings("null")
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Measures mesures1 = new Measures();

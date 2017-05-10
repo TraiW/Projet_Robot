@@ -17,6 +17,16 @@ public class Case {
 	public boolean isMasquage(){return masquage;}
 	public void setMasquage(boolean masquage) {this.masquage = masquage;}
 
+	public void setRobot()
+	{
+		this.etat_case=Enum_Etat_Case.robot;
+		this.masquage=false;
+	}
+	public void setParcouru()
+	{
+		this.etat_case=Enum_Etat_Case.parcouru;
+	}
+	
 	@Override
 	public String toString() {
 		return "Case [etat_case=" + etat_case + ", masquage=" + masquage + "]";
