@@ -22,23 +22,23 @@ public class RobotCtr {
 		switch(dir)
 		{
 			case UP:
-				robot.deplacement(robot.getX(),robot.getY()+1);
-				robot.setOrientation(Enum_Orientation_Robot.N);
-				retour=true;
-				break;
-			case DOWN:
 				robot.deplacement(robot.getX(),robot.getY()-1);
 				robot.setOrientation(Enum_Orientation_Robot.N);
 				retour=true;
 				break;
+			case DOWN:
+				robot.deplacement(robot.getX(),robot.getY()+1);
+				robot.setOrientation(Enum_Orientation_Robot.S);
+				retour=true;
+				break;
 			case RIGHT:
 				robot.deplacement(robot.getX()+1,robot.getY());
-				robot.setOrientation(Enum_Orientation_Robot.N);
+				robot.setOrientation(Enum_Orientation_Robot.E);
 				retour=true;
 				break;
 			case LEFT:
 				robot.deplacement(robot.getX()-1,robot.getY());
-				robot.setOrientation(Enum_Orientation_Robot.N);
+				robot.setOrientation(Enum_Orientation_Robot.W);
 				retour=true;
 				break;
 			default:
