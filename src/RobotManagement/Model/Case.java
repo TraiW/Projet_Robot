@@ -16,16 +16,34 @@ public class Case {
 	public void setEtat_case(Enum_Etat_Case etat_case){this.etat_case = etat_case;}
 	public boolean isMasquage(){return masquage;}
 	public void setMasquage(boolean masquage) {this.masquage = masquage;}
-
-	public void setRobot()
-	{
-		this.etat_case=Enum_Etat_Case.robot;
-		this.masquage=false;
-	}
+	
 	public void setParcouru()
 	{
-		this.etat_case=Enum_Etat_Case.parcouru;
+		this.setEtat_case(Enum_Etat_Case.parcouru);
+		//en théorie déjà unmasked
 	}
+	public void setRobot()
+	{
+		this.setEtat_case(Enum_Etat_Case.robot);
+		this.masquage=false;
+	}
+	
+	public boolean isVide(){
+		boolean retour=false;
+		if(this.getEtat_case()==Enum_Etat_Case.vide){retour=true;}
+		return retour;}
+	public boolean isParcouru(){
+		boolean retour=false;
+		if(this.getEtat_case()==Enum_Etat_Case.parcouru){retour=true;}
+		return retour;}
+	public boolean isRobot(){
+		boolean retour=false;
+		if(this.getEtat_case()==Enum_Etat_Case.robot){retour=true;}
+		return retour;}
+	public boolean isObstacle(){
+		boolean retour=false;
+		if(this.getEtat_case()==Enum_Etat_Case.obstacle){retour=true;}
+		return retour;}
 	
 	@Override
 	public String toString() {

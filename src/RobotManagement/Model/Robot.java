@@ -55,8 +55,8 @@ public class Robot extends Config {
 		if (x >= 0 && x <= env_decouvert.getX_plateau() && y >= 0 && y <= env_decouvert.getY_plateau()) {
 			if ( (x==this.x && (y==this.y+1 || y==this.y-1)) 
 					|| (y==this.y && (x==this.x+1 || x==this.x-1)) ) {
-				if (env_decouvert.getTableauEnv()[x][y].etat_case==Enum_Etat_Case.vide 
-						|| env_decouvert.getTableauEnv()[x][y].etat_case==Enum_Etat_Case.parcouru) {
+				if (env_decouvert.getTableauEnv()[x][y].isVide() 
+						|| env_decouvert.getTableauEnv()[x][y].isParcouru()) {
 					retour = true;
 				} else {
 					mesures.addObstaclesRencontres();
