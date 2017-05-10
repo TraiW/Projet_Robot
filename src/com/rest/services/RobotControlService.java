@@ -12,6 +12,12 @@ import javax.ws.rs.core.MediaType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import RobotManagement.Controler.RobotCtr;
+import RobotManagement.Model.Enum_Direction_Robot;
+import RobotManagement.Model.Enum_Orientation_Robot;
+import RobotManagement.Model.Env;
+import RobotManagement.Model.Robot;
+
 
 @Path("/cmd")
 public class RobotControlService {
@@ -37,12 +43,20 @@ public class RobotControlService {
 			}
 			
 		}
+		int xInit=0, yInit=0, X_plateau=4, Y_plateau=4;
+		double taux_chance=0;
+		Enum_Orientation_Robot orientationInit=Enum_Orientation_Robot.E;
+		Env environnement = new Env(X_plateau, Y_plateau, taux_chance);
+		Robot robot = new Robot(xInit, yInit, orientationInit, environnement);
+		
+		RobotCtr robotCtr = new RobotCtr(environnement, robot);
 		
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("UP")
 		public String goUp()
 				{
+			robotCtr.deplacerRobot(Enum_Direction_Robot.UP);
 			return "UP Done";
 		}
 		
@@ -51,6 +65,7 @@ public class RobotControlService {
 		@Path("DOWN")
 		public String goDown()
 				{
+			robotCtr.deplacerRobot(Enum_Direction_Robot.DOWN);
 			return "DOWN Done";
 		}
 		
@@ -59,6 +74,7 @@ public class RobotControlService {
 		@Path("RIGHT")
 		public String goRight()
 				{
+			robotCtr.deplacerRobot(Enum_Direction_Robot.RIGHT);
 			return "RIGHT Done";
 		}
 		
@@ -67,6 +83,7 @@ public class RobotControlService {
 		@Path("LEFT")
 		public String goLeft()
 				{
+			robotCtr.deplacerRobot(Enum_Direction_Robot.LEFT);
 			return "LEFT Done";
 		}
 		
