@@ -46,6 +46,46 @@ public class RobotControlService {
 			return "UP Done";
 		}
 		
+		@POST
+		@Produces(MediaType.TEXT_PLAIN)
+		@Path("DOWN")
+		public String goDown()
+				{
+			return "DOWN Done";
+		}
+		
+		@POST
+		@Produces(MediaType.TEXT_PLAIN)
+		@Path("RIGHT")
+		public String goRight()
+				{
+			return "RIGHT Done";
+		}
+		
+		@POST
+		@Produces(MediaType.TEXT_PLAIN)
+		@Path("LEFT")
+		public String goLeft()
+				{
+			return "LEFT Done";
+		}
+		
+		@POST
+		@Produces(MediaType.TEXT_PLAIN)
+		@Path("START")
+		public String goStart()
+				{
+			return "START Done";
+		}
+		
+		@POST
+		@Produces(MediaType.TEXT_PLAIN)
+		@Path("STOP")
+		public String goStop()
+				{
+			return "STOP Done";
+		}
+		
 		
 		@GET		
 		@Produces(MediaType.TEXT_HTML)
