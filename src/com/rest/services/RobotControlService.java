@@ -46,6 +46,15 @@ public class RobotControlService {
 			return "UP Done";
 		}
 		
+		
+		@GET		
+		@Produces(MediaType.TEXT_HTML)
+		@Path("test")
+		public String test(){
+			return "index-1.html";
+		}
+		
+		
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("env")
