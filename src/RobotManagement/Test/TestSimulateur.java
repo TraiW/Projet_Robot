@@ -1,12 +1,10 @@
 package RobotManagement.Test;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 import RobotManagement.Model.Case;
 import RobotManagement.Model.Env;
-
+ 
 public class TestSimulateur {
 
 	@Test
