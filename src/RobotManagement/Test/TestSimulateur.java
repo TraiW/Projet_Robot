@@ -3,7 +3,9 @@ package RobotManagement.Test;
 import org.junit.Test;
 
 import RobotManagement.Model.Case;
+import RobotManagement.Model.Enum_Orientation_Robot;
 import RobotManagement.Model.Env;
+import RobotManagement.Model.Robot;
  
 public class TestSimulateur {
 
@@ -16,10 +18,12 @@ public class TestSimulateur {
 		Env env=new Env(4,4,1);
 		env.GenerationEnv();
 		Case[][] tab=env.getTableauEnv();
+		Robot bot=new Robot(0, 0, Enum_Orientation_Robot.N, env);
 		for(i=0;i<4;i++)
 			for(j=0;j<4;j++)
-				System.out.println(tab[i][j].toString());
+				System.out.println("case["+i+"]["+j+"]"+tab[i][j].toString());
 		System.out.println("********************************************");
+
 		
 	}
 

@@ -8,16 +8,15 @@ public class Robot extends Config {
 	//private Config conf;
 	//capteur de vision ?
 	
-	public Robot(int xInit, int yInit, int x, int y,
-			Enum_Orientation_Robot orientationInit, Enum_Orientation_Robot orientation,
-				Env env_decouvert) {
+	public Robot(int xInit, int yInit,
+			Enum_Orientation_Robot orientationInit, Env env_decouvert) {
 			super();
 			this.xInit = xInit;
 			this.yInit = yInit;
-			this.x = x;
-			this.y = y;
+			this.x = xInit;
+			this.y = yInit;
 			this.orientationInit = orientationInit;
-			this.orientation = orientation;
+			this.orientation = orientationInit;
 			this.env_decouvert = env_decouvert;
 		}
 
