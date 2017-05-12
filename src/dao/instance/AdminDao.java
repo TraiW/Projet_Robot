@@ -14,6 +14,8 @@ public class AdminDao {
 	private String dB_NAME;
 	private String dB_USER;
 	private String dB_PWD;
+	//private String loginAdmin="Admin";
+	//private String pwdAdmin="Admin";
 	
 	public AdminDao(String DB_HOST,String DB_PORT, String DB_NAME,String DB_USER,String DB_PWD) {
 		dB_HOST = DB_HOST;
@@ -93,12 +95,14 @@ public class AdminDao {
 			{
 				if(rs.getString("login")==login && rs.getString("pwd")==pwd);
 				{
+				
 					admin=new AdminModelBean();
 					admin.setLastname(rs.getString("lastname"));
 					admin.setSurname(rs.getString("surname"));
 					admin.setAge(rs.getInt("age"));
 					admin.setLogin(rs.getString("login"));
 					admin.setPwd(rs.getString("pwd"));
+					
 				}
 				
 			}
