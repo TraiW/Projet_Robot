@@ -17,12 +17,13 @@ import RobotManagement.Model.Enum_Direction_Robot;
 import RobotManagement.Model.Enum_Orientation_Robot;
 import RobotManagement.Model.Env;
 import RobotManagement.Model.Robot;
+import RobotManagement.Model.RobotInit;
 
 
 @Path("/cmd")
 public class RobotControlService {
 	private final static String ROBOT_SIMULATOR_LABEL="robot_simulator";
-	
+	private Robot robot; 
 	//Inject servlet context (needed to get general context, application memory space, session memory space ...)
 	@Context
 	ServletContext context;
@@ -30,6 +31,7 @@ public class RobotControlService {
 	//After RestService construction launches init method
 		@PostConstruct
 		public void init(){
+			this.robot=RobotInit.getInstance().createRobot();
 			checkRobot();
 		}
 
@@ -41,22 +43,17 @@ public class RobotControlService {
 			}else{
 				//TODO
 			}
-			
 		}
-		int xInit=0, yInit=0, X_plateau=4, Y_plateau=4;
-		double taux_chance=0;
-		Enum_Orientation_Robot orientationInit=Enum_Orientation_Robot.E;
-		Env environnement = new Env(X_plateau, Y_plateau, taux_chance);
-		Robot robot = new Robot(xInit, yInit, orientationInit, environnement);
 		
-		RobotCtr robotCtr = new RobotCtr(environnement, robot);
-		
+		RobotCtr robotCtr = new RobotCtr(robot.getEnv_decouvert(), robot);
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("UP")
 		public String goUp()
 				{
-			robotCtr.deplacerRobot(Enum_Direction_Robot.UP);
+			boolean bool =false;
+			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.UP);
+			System.out.println(bool);
 			return "UP Done";
 		}
 		
@@ -65,7 +62,10 @@ public class RobotControlService {
 		@Path("DOWN")
 		public String goDown()
 				{
-			robotCtr.deplacerRobot(Enum_Direction_Robot.DOWN);
+			System.out.println("coucou_RCS");
+			boolean bool =false;
+			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.DOWN);
+			System.out.println(bool);			
 			return "DOWN Done";
 		}
 		
@@ -74,7 +74,9 @@ public class RobotControlService {
 		@Path("RIGHT")
 		public String goRight()
 				{
-			robotCtr.deplacerRobot(Enum_Direction_Robot.RIGHT);
+			boolean bool =false;
+			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.RIGHT);
+			System.out.println(bool);
 			return "RIGHT Done";
 		}
 		
@@ -83,7 +85,9 @@ public class RobotControlService {
 		@Path("LEFT")
 		public String goLeft()
 				{
-			robotCtr.deplacerRobot(Enum_Direction_Robot.LEFT);
+			boolean bool =false;
+			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.LEFT);
+			System.out.println(bool);
 			return "LEFT Done";
 		}
 		
