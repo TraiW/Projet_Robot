@@ -36,7 +36,7 @@ public class Robot extends Config {
 	public Env getEnv_decouvert() {return env_decouvert;}
 	public void setEnv_decouvert(Env env_decouvert) {this.env_decouvert = env_decouvert;}
 
-	public void deplacement(int x, int y){
+	public void deplacement(int x, int y, Enum_Orientation_Robot orient){
 //		mesures.addCommandes();
 		//ajouter nbr obstacles visibles
 		if (DeplacementEtreValide(x, y)) {
@@ -47,6 +47,7 @@ public class Robot extends Config {
 			setX(x);
 			setY(y);
 			tab[this.x][this.y].setRobot();
+			this.setOrientation(orient);
 		}
 	}
 	

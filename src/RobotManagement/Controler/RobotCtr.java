@@ -17,34 +17,24 @@ public class RobotCtr {
 	public Robot getRobot() {return robot;}
 	public void setRobot(Robot robot) {this.robot = robot;}
 
-	public boolean deplacerRobot(Enum_Direction_Robot dir){
-		boolean retour=false;
+	public void deplacerRobot(Enum_Direction_Robot dir){
 		switch(dir)
 		{
 			case UP:
-				robot.deplacement(robot.getX(),robot.getY()-1);
-				robot.setOrientation(Enum_Orientation_Robot.N);
-				retour=true;
+				robot.deplacement(robot.getX(),robot.getY()-1,Enum_Orientation_Robot.N);
 				break;
 			case DOWN:
-				robot.deplacement(robot.getX(),robot.getY()+1);
-				robot.setOrientation(Enum_Orientation_Robot.S);
-				retour=true;
+				robot.deplacement(robot.getX(),robot.getY()+1,Enum_Orientation_Robot.S);
 				break;
 			case RIGHT:
-				robot.deplacement(robot.getX()+1,robot.getY());
-				robot.setOrientation(Enum_Orientation_Robot.E);
-				retour=true;
+				robot.deplacement(robot.getX()+1,robot.getY(),Enum_Orientation_Robot.E);
 				break;
 			case LEFT:
-				robot.deplacement(robot.getX()-1,robot.getY());
-				robot.setOrientation(Enum_Orientation_Robot.W);
-				retour=true;
+				robot.deplacement(robot.getX()-1,robot.getY(),Enum_Orientation_Robot.W);
 				break;
 			default:
-				retour=false;
+				System.out.println("Erreur ");
 				break;
-		}
-		return retour;
+		} 
 	}
 }
