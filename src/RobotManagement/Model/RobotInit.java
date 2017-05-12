@@ -1,5 +1,9 @@
 package RobotManagement.Model;
 
+import RobotManagement.Model.Enum_Orientation_Robot;
+import RobotManagement.Model.Env;
+import RobotManagement.Model.Robot;
+
 
 
 
@@ -8,7 +12,7 @@ public class RobotInit {
 	private static volatile RobotInit instance = null;
 	
 	private int xInit=0, yInit=0, X_plateau=4, Y_plateau=4;
-	private double taux_chance=0;
+	private double taux_chance=1;
 	private Enum_Orientation_Robot orientationInit=Enum_Orientation_Robot.E;
 	private Env environnement = new Env(X_plateau, Y_plateau, taux_chance);
 	
@@ -34,6 +38,7 @@ public class RobotInit {
 	}
 	
 	public Robot createRobot() {
+		environnement.GenerationEnv();
 		Robot robot = new Robot(xInit, yInit, orientationInit, environnement);
 		return robot;
 	}

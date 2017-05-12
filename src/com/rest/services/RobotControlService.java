@@ -23,7 +23,8 @@ import RobotManagement.Model.RobotInit;
 @Path("/cmd")
 public class RobotControlService {
 	private final static String ROBOT_SIMULATOR_LABEL="robot_simulator";
-	private Robot robot; 
+	private Robot robot=RobotInit.getInstance().createRobot(); 
+	RobotCtr robotCtr = new RobotCtr(robot.getEnv_decouvert(), robot);
 	//Inject servlet context (needed to get general context, application memory space, session memory space ...)
 	@Context
 	ServletContext context;
@@ -31,7 +32,7 @@ public class RobotControlService {
 	//After RestService construction launches init method
 		@PostConstruct
 		public void init(){
-			this.robot=RobotInit.getInstance().createRobot();
+
 			checkRobot();
 		}
 
@@ -45,7 +46,6 @@ public class RobotControlService {
 			}
 		}
 		
-		RobotCtr robotCtr = new RobotCtr(robot.getEnv_decouvert(), robot);
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("UP")

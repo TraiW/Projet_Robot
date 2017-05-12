@@ -11,11 +11,12 @@ public class Env extends Config {
 	public Env(int X_plateau,int Y_plateau,double taux_chance){
 		int nbreCase= X_plateau*Y_plateau;
 		this.tableauEnv = new Case[X_plateau][Y_plateau];
-	
+		
 		setTaux_chance(taux_chance);
 		setX_plateau(X_plateau);
 		setY_plateau(Y_plateau);
-		setNbreCase_plateau(nbreCase);			
+		setNbreCase_plateau(nbreCase);		
+//		GenerationEnv();
 	}
 	/***
 	 * getter et setter sur le tableau environnement 
