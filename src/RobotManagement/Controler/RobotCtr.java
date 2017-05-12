@@ -17,24 +17,26 @@ public class RobotCtr {
 	public Robot getRobot() {return robot;}
 	public void setRobot(Robot robot) {this.robot = robot;}
 
-	public void deplacerRobot(Enum_Direction_Robot dir){
+	public boolean deplacerRobot(Enum_Direction_Robot dir){
+		boolean retour=false;
 		switch(dir)
 		{
 			case UP:
-				robot.deplacement(robot.getX(),robot.getY()-1,Enum_Orientation_Robot.N);
+				retour=robot.deplacement(robot.getX(),robot.getY()-1,Enum_Orientation_Robot.N);
 				break;
 			case DOWN:
-				robot.deplacement(robot.getX(),robot.getY()+1,Enum_Orientation_Robot.S);
+				retour=robot.deplacement(robot.getX(),robot.getY()+1,Enum_Orientation_Robot.S);
 				break;
 			case RIGHT:
-				robot.deplacement(robot.getX()+1,robot.getY(),Enum_Orientation_Robot.E);
+				retour=robot.deplacement(robot.getX()+1,robot.getY(),Enum_Orientation_Robot.E);
 				break;
 			case LEFT:
-				robot.deplacement(robot.getX()-1,robot.getY(),Enum_Orientation_Robot.W);
+				retour=robot.deplacement(robot.getX()-1,robot.getY(),Enum_Orientation_Robot.W);
 				break;
 			default:
-				System.out.println("Erreur ");
+				System.out.println("Erreur RobotCtr.deplacerRobot unexpected direction");
 				break;
 		} 
+		return retour;
 	}
 }
