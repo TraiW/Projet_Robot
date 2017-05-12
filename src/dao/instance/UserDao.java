@@ -26,7 +26,7 @@ public class UserDao {
 	}
 	
 	public AdminUserModelBean checkUser(String login, String pwd) {
-		AdminUserModelBean admin = null;
+		AdminUserModelBean user = null;
 		java.sql.Statement query;
 		try {
 			// create connection
@@ -42,12 +42,12 @@ public class UserDao {
 				if(rs.getString("login")==login && rs.getString("pwd")==pwd);
 				{
 				
-					admin=new AdminUserModelBean();
-					admin.setLastname(rs.getString("lastname"));
-					admin.setSurname(rs.getString("surname"));
-					admin.setAge(rs.getInt("age"));
-					admin.setLogin(rs.getString("login"));
-					admin.setPwd(rs.getString("pwd"));
+					user=new AdminUserModelBean();
+					user.setLastname(rs.getString("lastname"));
+					user.setSurname(rs.getString("surname"));
+					user.setAge(rs.getInt("age"));
+					user.setLogin(rs.getString("login"));
+					user.setPwd(rs.getString("pwd"));
 					
 				}
 				
@@ -58,6 +58,6 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return admin;
+		return user;
 	}
 }
