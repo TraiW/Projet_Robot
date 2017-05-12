@@ -1,6 +1,7 @@
 package dao.fabric;
 
 import dao.instance.AdminDao;
+import dao.instance.UserDao;
 
 public final class DaoFabric {
 	// L'utilisation du mot clé volatile permet, en Java version 5 et supérieur,
@@ -49,5 +50,9 @@ public final class DaoFabric {
 	public AdminDao createAdminDao() {
 		AdminDao AdminDao = new AdminDao(this.DB_HOST,this.DB_PORT,this.DB_NAME,this.DB_USER,this.DB_PWD);
 		return AdminDao;
+	}
+	public UserDao createUserDao() {
+		UserDao userDao = new UserDao(this.DB_HOST,this.DB_PORT,this.DB_NAME,this.DB_USER,this.DB_PWD);
+		return userDao;
 	}
 }

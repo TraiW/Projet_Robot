@@ -14,9 +14,7 @@ public class UserDao {
 	private String dB_NAME;
 	private String dB_USER;
 	private String dB_PWD;
-	//private String loginAdmin="Admin";
-	//private String pwdAdmin="Admin";
-	
+		
 	public UserDao(String DB_HOST,String DB_PORT, String DB_NAME,String DB_USER,String DB_PWD) {
 		dB_HOST = DB_HOST;
 		dB_PORT = DB_PORT;

@@ -21,6 +21,8 @@ public class AdminUserControlerBean {
 	
 	public AdminUserControlerBean() {
 		this.AdminDao=DaoFabric.getInstance().createAdminDao();
+		this.UserDao=DaoFabric.getInstance().createUserDao();
+
 	}
 	
 	public String checkUser(LoginBean loginBean){
@@ -42,6 +44,7 @@ public class AdminUserControlerBean {
 			}
 		}
 		else{//si on est un user
+			System.out.println(loginBean.getLogin()+" "+loginBean.getPwd());
 			AdminUserModelBean user = this.UserDao.checkUser(loginBean.getLogin(),loginBean.getPwd());
 			if(user!=null){
 				//récupère l'espace de mémoire de JSF
@@ -50,7 +53,7 @@ public class AdminUserControlerBean {
 				//place l'utilisateur dans l'espace de mémoire de JSF
 				sessionMap.put("loggedUser", user);
 				//redirect the current page
-				return "index.xhtml";
+				return "cmd.xhtml";
 			}
 			else{
 				//redirect the current page
@@ -60,5 +63,5 @@ public class AdminUserControlerBean {
 		}
 
 			
-		}
+	}
 }
