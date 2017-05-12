@@ -43,8 +43,6 @@ public class AdminUserControlerBean {
 
 			//System.out.println("USER");
 			return "cmd.xhtml";
-
-			
-		
+g
 		}
 }
