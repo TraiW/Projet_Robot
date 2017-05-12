@@ -1,20 +1,17 @@
 package RobotManagement.Model;
 
+import RobotManagement.Model.Config;
 import RobotManagement.Model.Enum_Orientation_Robot;
 import RobotManagement.Model.Env;
 import RobotManagement.Model.Robot;
 
-
-
-
-public class RobotInit {
+public class RobotInit extends Config{
 
 	private static volatile RobotInit instance = null;
 	
-	private int xInit=0, yInit=0, X_plateau=4, Y_plateau=4;
-	private double taux_chance=1;
+	private int xInit=0, yInit=0;
 	private Enum_Orientation_Robot orientationInit=Enum_Orientation_Robot.E;
-	private Env environnement = new Env(X_plateau, Y_plateau, taux_chance);
+	private Env environnement = new Env(getX_plateau(), getY_plateau(), getTaux_chance());
 	
 	public RobotInit(){
 		super();

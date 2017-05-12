@@ -2,9 +2,9 @@ package RobotManagement.Model;
 
 public abstract class Config {
 
-	private double taux_chance;
-	private int X_plateau;
-	private int Y_plateau;
+	private double taux_chance=1;
+	private int X_plateau=4;
+	private int Y_plateau=4;
 	private int nbreCase_plateau;
 	
 	/***
@@ -28,6 +28,8 @@ public abstract class Config {
 	 * 			
 	 */
 	public double getTaux_chance() {
+		if(taux_chance<=0)
+			taux_chance=1;
 		return taux_chance;
 	}
 

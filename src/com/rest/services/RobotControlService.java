@@ -62,7 +62,6 @@ public class RobotControlService {
 		@Path("DOWN")
 		public String goDown()
 				{
-			System.out.println("coucou_RCS");
 			boolean bool =false;
 			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.DOWN);
 			System.out.println(bool);			

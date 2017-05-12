@@ -1,6 +1,6 @@
 package RobotManagement.Model;
 
-public class Robot extends Config {
+public class Robot{
 	private int xInit,yInit,x,y;
 	private Enum_Orientation_Robot orientationInit, orientation;
 	private Env env_decouvert=null;
