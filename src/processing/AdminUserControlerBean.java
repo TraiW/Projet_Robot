@@ -9,10 +9,10 @@ import javax.faces.context.FacesContext;
 
 import dao.fabric.DaoFabric;
 import dao.instance.AdminDao;
+import model.AdminUserModelBean;
 import model.LoginBean;
-import model.AdminModelBean;
 
-@ManagedBean(name = "AdminControler")
+@ManagedBean(name = "AdminUserControler")
 @ApplicationScoped // Utilisation de application scope afin d'offrir un point d'entrée unique à l'ensemble des clients
 public class AdminUserControlerBean {
 	private AdminDao AdminDao;
@@ -21,12 +21,9 @@ public class AdminUserControlerBean {
 	}
 	
 	public String checkUser(LoginBean loginBean){
-		System.out.println("nom "+loginBean.getLogin()+";");
-		System.out.println("pwd "+loginBean.getPwd()+";");
-		if(loginBean.getLogin().equals("Admin"))
+		if(loginBean.getLogin().equals("Admin"))//si on est un Admin
 		{
-			System.out.println("if");
-			AdminModelBean admin = this.AdminDao.checkAdmin(loginBean.getLogin(),loginBean.getPwd());
+			AdminUserModelBean admin = this.AdminDao.checkAdmin(loginBean.getLogin(),loginBean.getPwd());
 			if(admin!=null){
 				//récupère l'espace de mémoire de JSF
 				ExternalContext externalContext =FacesContext.getCurrentInstance().getExternalContext();
@@ -37,8 +34,8 @@ public class AdminUserControlerBean {
 				return "admin.xhtml";
 			}else{
 				//redirect the current page
-				return "adminLogin.xhtml";
-		}
+				return "login.xhtml";
+			}
 		}
 
 			//System.out.println("USER");

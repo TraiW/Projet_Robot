@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import model.AdminUserModelBean;
 
 
-public class AdminDao {
+public class UserDao {
 	private Connection connection;
 	private String dB_HOST;
 	private String dB_PORT;
@@ -17,7 +17,7 @@ public class AdminDao {
 	//private String loginAdmin="Admin";
 	//private String pwdAdmin="Admin";
 	
-	public AdminDao(String DB_HOST,String DB_PORT, String DB_NAME,String DB_USER,String DB_PWD) {
+	public UserDao(String DB_HOST,String DB_PORT, String DB_NAME,String DB_USER,String DB_PWD) {
 		dB_HOST = DB_HOST;
 		dB_PORT = DB_PORT;
 		dB_NAME = DB_NAME;
@@ -25,7 +25,7 @@ public class AdminDao {
 		dB_PWD = DB_PWD;
 	}
 	
-	public AdminUserModelBean checkAdmin(String login, String pwd) {
+	public AdminUserModelBean checkUser(String login, String pwd) {
 		AdminUserModelBean admin = null;
 		java.sql.Statement query;
 		try {
