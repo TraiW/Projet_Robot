@@ -1,5 +1,7 @@
 package com.rest.services;
 
+import java.util.ArrayList;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
@@ -18,12 +20,15 @@ import RobotManagement.Model.Enum_Orientation_Robot;
 import RobotManagement.Model.Env;
 import RobotManagement.Model.Robot;
 import RobotManagement.Model.RobotInit;
+import RobotManagement.Model.Measures;
 
 
 @Path("/cmd")
 public class RobotControlService {
 	private final static String ROBOT_SIMULATOR_LABEL="robot_simulator";
 	private Robot robot=RobotInit.getInstance().createRobot(); 
+	private ArrayList<Measures>mesureList=new ArrayList<Measures>();
+	
 	RobotCtr robotCtr = new RobotCtr(robot.getEnv_decouvert(), robot);
 	//Inject servlet context (needed to get general context, application memory space, session memory space ...)
 	@Context
@@ -32,8 +37,8 @@ public class RobotControlService {
 	//After RestService construction launches init method
 		@PostConstruct
 		public void init(){
-
 			checkRobot();
+		
 		}
 
 		private void checkRobot() {
@@ -53,6 +58,9 @@ public class RobotControlService {
 				{
 			boolean bool =false;
 			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.UP);
+			mesureList.add(robotCtr.getRobot().getMeasures());
+			for(int i=0;i<mesureList.size();i++)
+				System.out.println(mesureList.get(i));
 			System.out.println(bool);
 			return "UP Done";
 		}
@@ -64,7 +72,8 @@ public class RobotControlService {
 				{
 			boolean bool =false;
 			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.DOWN);
-			System.out.println(bool);			
+			mesureList.add(robotCtr.getRobot().getMeasures());
+			System.out.println(bool);
 			return "DOWN Done";
 		}
 		
@@ -75,6 +84,7 @@ public class RobotControlService {
 				{
 			boolean bool =false;
 			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.RIGHT);
+			mesureList.add(robotCtr.getRobot().getMeasures());
 			System.out.println(bool);
 			return "RIGHT Done";
 		}
@@ -86,6 +96,7 @@ public class RobotControlService {
 				{
 			boolean bool =false;
 			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.LEFT);
+			mesureList.add(robotCtr.getRobot().getMeasures());
 			System.out.println(bool);
 			return "LEFT Done";
 		}
