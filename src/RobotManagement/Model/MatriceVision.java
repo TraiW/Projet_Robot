@@ -28,10 +28,14 @@ public class MatriceVision {
 		}
 	}
 	public MatriceVision rotation(MatriceVision matrice){
+		//TODO
 		MatriceVision retour=new MatriceVision();
-		for (int i=0;i<matrice.nbColonnes;i++)
+		for (int j=0;j<matrice.nbLignes;j++)
 		{
-			
+			for (int i=0;i<matrice.nbColonnes;i++)
+			{
+				retour.mat[i][j]=matrice.mat[j][i-1];//BIG FAKE
+			}
 		}
 		return retour;
 	}
