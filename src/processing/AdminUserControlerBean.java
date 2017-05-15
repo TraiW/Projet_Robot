@@ -6,6 +6,10 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import dao.fabric.DaoFabric;
 import dao.instance.AdminDao;
@@ -64,4 +68,13 @@ public class AdminUserControlerBean {
 
 			
 	}
+	
+	public String goStart()
+		{
+			return "cmd.xhtml";
+		}
+	public String goStop()
+		{
+			return "login.xhtml";
+		}
 }

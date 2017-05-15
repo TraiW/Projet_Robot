@@ -5,27 +5,28 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <head>
-	<title>Administrateur</title>
-	<link rel="stylesheet"	href="lib/bootstrap-3.3.5-dist/css/bootstrap.min.css"></link>
+	<title>Connection</title>
 </head>
 <body>
-	<div>
-		<h1>Administration Page</h1>
-		<ul>
-			<li>
-				<button id="ButtonStart" type="button" class="button">
-					<span class="glyphicon glyphicon-play"> </span>Start Command Launcher
-				</button>
-			</li>
-				
-			<li>
-				<button id="ButtonStop" type="button" class="button">
-					<span class="glyphicon glyphicon-pause"> </span>Stop Command Launcher
-				</button>
-			</li>
-		</ul>
-	</div>
-	<script src="lib/jquery-1.11.1.min.js"></script>
-	<script src="js/ajax_admin.js"></script>
+	<h1>Login Page</h1>
+	<h:form>
+		<table border="0">
+			<tr>
+				<td></td>
+				<td>
+				<h:commandButton value="START"
+				action="#{AdminUserControler.goStart}"/>
+				<span class="glyphicons glyphicons-play"></span>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+				<h:commandButton value="STOP"
+				action="#{AdminUserControler.goStop}"/>
+				</td>
+			</tr>
+		</table>
+	</h:form>
 </body>
 </html>

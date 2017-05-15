@@ -90,13 +90,7 @@ public class RobotControlService {
 			return "LEFT Done";
 		}
 		
-		@POST
-		@Produces(MediaType.TEXT_PLAIN)
-		@Path("START")
-		public String goStart()
-				{
-			return "START Done";
-		}
+		
 		
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
