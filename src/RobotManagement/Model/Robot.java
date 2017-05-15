@@ -5,11 +5,12 @@ public class Robot{
 	private Enum_Orientation_Robot orientationInit, orientation;
 	private Env env_decouvert=null;
 	private Measures mesures = new Measures();
+	MatriceVision matriceVision = null;
 	//private Config conf;
 	//capteur de vision ?
 	
 	public Robot(int xInit, int yInit,
-			Enum_Orientation_Robot orientationInit, Env env_decouvert) {
+			Enum_Orientation_Robot orientationInit, Env env_decouvert, MatriceVision mat) {
 			super();
 			this.xInit = xInit;
 			this.yInit = yInit;
@@ -18,6 +19,7 @@ public class Robot{
 			this.orientationInit = orientationInit;
 			this.orientation = orientationInit;
 			this.env_decouvert = env_decouvert;
+			this.matriceVision= mat;
 		}
 
 	//getters and setters
@@ -72,6 +74,33 @@ public class Robot{
 		} else {
 			System.out.println("Coordonnées hors plateau");
 		}
+		return retour;
+	}
+	
+	public boolean RemoveMask(int xRobot, int yRobot, Enum_Orientation_Robot oRobot)
+	{
+		boolean retour=false;
+		switch(oRobot)
+		{
+			case N:
+				
+				break;
+			case S:
+				
+				break;
+			case E:
+				
+				break;
+			case W:
+				
+				break;
+			default:
+				break;	
+		}
+		
+		
+		
+		
 		return retour;
 	}
 	

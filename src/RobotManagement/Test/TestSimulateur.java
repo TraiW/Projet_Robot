@@ -7,6 +7,7 @@ import RobotManagement.Model.Case;
 import RobotManagement.Model.Enum_Direction_Robot;
 import RobotManagement.Model.Enum_Orientation_Robot;
 import RobotManagement.Model.Env;
+import RobotManagement.Model.MatriceVision;
 import RobotManagement.Model.Robot;
  
 public class TestSimulateur {
@@ -14,7 +15,7 @@ public class TestSimulateur {
 	@Test
 	public void test() {
 		int x=0,y=0;
-		
+		MatriceVision mat=new MatriceVision();
 		System.out.println("********************************************");
 		System.out.println("*TEST CREATION ENV+Obstacle +déplacement robot(avec controleur)*");
 		System.out.println("********************************************");
@@ -22,7 +23,7 @@ public class TestSimulateur {
 		Env env=new Env(4,4,1);
 		env.GenerationEnv();
 		Case[][] tab=env.getTableauEnv();
-		Robot bot=new Robot(x, y, Enum_Orientation_Robot.N, env);
+		Robot bot=new Robot(x, y, Enum_Orientation_Robot.N, env, mat);
 		tab[x][y].setRobot();
 		RobotCtr botctrl=new RobotCtr(env,bot);
 		
