@@ -21,7 +21,9 @@ public class Robot{
 			this.env_decouvert = env_decouvert;
 			this.matriceVision= mat;
 		}
-
+	public Measures getMeasures(){
+		return mesures;
+	}
 	//getters and setters
 	public int getxInit() {return xInit;}
 	public void setxInit(int xInit) {this.xInit = xInit;}
