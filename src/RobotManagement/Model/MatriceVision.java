@@ -12,6 +12,9 @@ public class MatriceVision {
 				mat[i][j]=0;
 		
 		mat[0][0]=1;
+		mat[1][0]=1;
+		mat[1][1]=1;
+		mat[1][2]=1;
 		
 	}
 	public int getNbLignes() {return nbLignes;}
@@ -34,7 +37,7 @@ public class MatriceVision {
 		{
 			for (int i=0;i<matrice.nbColonnes;i++)
 			{
-				retour.mat[i][j]=matrice.mat[j][i-1];//BIG FAKE
+				retour.mat[i][matrice.nbColonnes-j]=matrice.mat[j][i];
 			}
 		}
 		return retour;
@@ -44,7 +47,8 @@ public class MatriceVision {
 		MatriceVision mat=new MatriceVision();
 		mat.printMatrix();
 		System.out.println("");
-
+		//mat.rotation(mat).printMatrix();
+		mat=mat.rotation(mat);
 		
 		mat.printMatrix();
 
