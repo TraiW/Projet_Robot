@@ -53,6 +53,6 @@ public class MatriceVision {
 		mat.printMatrix();
 
 		
-		System.out.println(mat.getNbLignes()+" lign "+mat.getNbColonnes()+" col");
+		//System.out.println(mat.getNbLignes()+" lign "+mat.getNbColonnes()+" col");
 	}
 }
