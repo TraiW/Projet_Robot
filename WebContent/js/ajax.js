@@ -4,7 +4,7 @@ $(document).ready(function(){
     		  {},
     		  function(data,status){
     		    alert("Post Done received data: " + data + "\nStatus: " + status);
-    	});    
+    		  });
   });
 
   
@@ -24,5 +24,4 @@ $(document).ready(function(){
 	  		
   		    alert("Get Done received data: " + data + "\nStatus: " + status);
   	});    
-});
 });
