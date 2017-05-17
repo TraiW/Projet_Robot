@@ -25,7 +25,12 @@ public class Env extends Config {
 	public Case[][] getTableauEnv(){return tableauEnv;}
 	public void setTableauEnv(Case[][] tableauEnv){this.tableauEnv = tableauEnv;}
 	
-	
+	public boolean coordEtreDansPlateau(int x,int y){
+		boolean retour=false;
+		if((x>=0 && x<this.getX_plateau()) && (y>=0 && y<this.getY_plateau()))
+			retour=true;
+		return retour;
+	}
 	/***
 	 * methode de génération d'environnement 
 	 * 			creation de la matrice

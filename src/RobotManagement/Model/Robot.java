@@ -92,16 +92,42 @@ public class Robot{
 			case W:
 				matriceVision=matriceVision.rotation(oRobot);
 				break;
+				
 			default:
 				break;	
-		}		
+		}	
 		for (int i=0;i<this.matriceVision.getNbLignes();i++){
 			for (int j=0;j<this.matriceVision.getNbColonnes();j++){
 				if(matriceVision.getMat()[i][j]!=0)
 				{
-					if(this.x+i<this.env_decouvert.getX_plateau() && this.y+j<this.env_decouvert.getY_plateau()
-							&& this.x-j >=0 && this.y-i >=0)
-						this.env_decouvert.getTableauEnv()[this.x+j][this.y-i+1].masquage=false;
+					switch(oRobot){
+						case N:
+							if(this.env_decouvert.coordEtreDansPlateau(this.x-1+j, this.y-i)){
+								//System.out.println("démasque NORD x: "+(this.x-1+j)+" y: "+  (this.y-i));
+								this.env_decouvert.getTableauEnv()[this.x-1+j][this.y-i].setMasquage(false);
+							}
+							break;
+						case S:
+							if(this.env_decouvert.coordEtreDansPlateau(this.x-1+j, this.y+i)){
+								//System.out.println("démasque SUD x: "+(this.x-1+j)+" y: "+  (this.y+i));
+								this.env_decouvert.getTableauEnv()[this.x-1+j][this.y+i].setMasquage(false);
+								}
+							break;
+						case E:
+							if(this.env_decouvert.coordEtreDansPlateau(this.x+j, this.y-i+1)){
+								//System.out.println("démasque EST x: "+(this.x+j)+" y: "+  (this.y-i+1));
+								this.env_decouvert.getTableauEnv()[this.x+j][this.y-i+1].setMasquage(false);
+							}
+							break;
+						case W:
+							if(this.env_decouvert.coordEtreDansPlateau(this.x-j, this.y-i+1)){
+								//System.out.println("démasque WEST x: "+(this.x-j)+" y: "+  (this.y-i+1));
+								this.env_decouvert.getTableauEnv()[this.x-j][this.y-i+1].setMasquage(false);
+							}
+							break;
+						default:
+							break;
+					}
 				}
 			}
 		}

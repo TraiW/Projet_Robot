@@ -5,7 +5,7 @@ public class Case {
 //					 masqué ou non
 
 	Enum_Etat_Case etat_case; // enum
-	boolean masquage;//true => masqué ; false => visible
+	private boolean masquage;//true => masqué ; false => visible
 	
 	public Case(Enum_Etat_Case etat_case, boolean masquage){
 		this.etat_case=etat_case;

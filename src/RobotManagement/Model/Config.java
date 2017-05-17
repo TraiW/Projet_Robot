@@ -55,7 +55,7 @@ public abstract class Config {
 	 * 			
 	 */
 	public void setX_plateau(int x_plateau) {
-		X_plateau = x_plateau;
+		this.X_plateau = x_plateau;
 	}
 
 	/***
@@ -71,7 +71,7 @@ public abstract class Config {
 	 * 			
 	 */
 	public void setY_plateau(int y_plateau) {
-		Y_plateau = y_plateau;
+		this.Y_plateau = y_plateau;
 	}
 	
 }
