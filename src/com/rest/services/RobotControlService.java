@@ -55,7 +55,7 @@ public class RobotControlService {
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("UP")
-		public String goUp()
+		public boolean goUp()
 				{
 			boolean bool =false;
 			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.UP);
@@ -63,43 +63,43 @@ public class RobotControlService {
 			for(int i=0;i<mesureList.size();i++)
 				System.out.println(mesureList.get(i));
 			System.out.println(bool);
-			return "UP Done";
+			return bool;
 		}
 		
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("DOWN")
-		public String goDown()
+		public boolean goDown()
 				{
 			boolean bool =false;
 			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.DOWN);
 			mesureList.add(robotCtr.getRobot().getMeasures());
 			System.out.println(bool);
-			return "DOWN Done";
+			return bool;
 		}
 		
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("RIGHT")
-		public String goRight()
+		public boolean goRight()
 				{
 			boolean bool =false;
 			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.RIGHT);
 			mesureList.add(robotCtr.getRobot().getMeasures());
 			System.out.println(bool);
-			return "RIGHT Done";
+			return bool;
 		}
 		
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("LEFT")
-		public String goLeft()
+		public boolean goLeft()
 				{
 			boolean bool =false;
 			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.LEFT);
 			mesureList.add(robotCtr.getRobot().getMeasures());
 			System.out.println(bool);
-			return "LEFT Done";
+			return bool;
 		}
 		
 		
