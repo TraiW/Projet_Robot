@@ -5,36 +5,345 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <head>
-	<title>Command</title>
-	<link rel="stylesheet"	href="lib/bootstrap-3.3.5-dist/css/bootstrap.min.css"></link>
+<title>Norbert</title>
+<link rel="icon" type="image/jpg"
+	href="https://image.freepik.com/vecteurs-libre/colore-conception-du-robot_1148-9.jpg" ></link>
+<meta charset="UTF-8"></meta>
+
+	<!--[if lt IE 9]><script type="text/javascript" src="js/excanvas.compiled.js"></script><![endif]-->
+	<script type="text/javascript" src="js/json2.js"></script>
+	<script type="text/javascript" src="js/oXHR.js"></script>
+	<script type="text/javascript" src="js/classes/Tileset.js"></script>
+	<script type="text/javascript" src="js/classes/Map.js"></script>
+	<script type="text/javascript" src="js/classes/Personnage.js"></script>
+
+	<script type="text/javascript" src="js/rpg.js"></script>
+
+
+
+
+
+	<script src="js/libs/modernizr.min.js"></script>
+	<script src="js/libs/jquery-1.10.0.js"></script>
+	<script src="js/libs/jquery-ui.min.js"></script>
+	<script src="js/libs/bootstrap.min.js"></script>
+	<!-- Style CSS -->
+	<link href="css/bootstrap.css" media="screen" rel="stylesheet"></link>
+<link href="style.css" media="screen" rel="stylesheet"></link>
+
+<!-- GRAPHIQUE -->
+<script src="code/highcharts.js"></script>
+<script src="code/modules/exporting.js"></script>
+<script src="js/graphique/nbreObstacle_rencontres.js"></script>
+<script src="js/graphique/nbreCommandes.js"></script>
+<script src="js/graphique/nbreObstaclesVisibles.js"></script>
+<script src="js/graphique/distance.js"></script>
+
+<script src="js/jquery.customInput.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+
+<!-- FIN GRAPHIQUE -->
+<!-- scripts -->
+<script src="js/general.js"></script>
+<!-- custom input -->
+
+<!-- range sliders -->
+<script src="js/jquery.slider.bundle.js"></script>
+<script src="js/jquery.slider.js"></script>
+<link rel="stylesheet" href="css/jslider.css"></link>
+
+
+
+
+<!-- Audio Player -->
+<link href="css/jplayer.css" rel="stylesheet"></link>
+<script src="js/jquery.jplayer.min.js"></script>
+<script src="js/jplayer.playlist.min.js"></script>
+<script type="text/javascript">
+	//<![CDATA[
+	$(document)
+			.ready(
+					function() {
+
+						new jPlayerPlaylist(
+								{
+									jPlayer : "#jquery_jplayer_1",
+									cssSelectorAncestor : "#jp_container_1"
+								},
+								[
+										{
+											title : "<div class='item-song'>test</div><div class='item-artist'>own</div> ",
+											mp3 : "http://www.podsnack.com/ValentinWiart/avp3wnmm",
+										},
+										{
+											title : "<div class='item-song'>I saw you dancing</div><div class='item-artist'>Yaki Da</div><img src='images/temp/music-player5.jpg' alt='' />",
+											mp3 : "http://www.jplayer.org/audio/mp3/TSP-07-Cybersonnet.mp3",
+											oga : "http://www.jplayer.org/audio/ogg/TSP-07-Cybersonnet.ogg"
+										},
+										{
+											title : "<div class='item-song'>Sands of Time</div><div class='item-artist'>Pandora</div><img src='images/temp/music-player6.jpg' alt='' />",
+											mp3 : "http://www.jplayer.org/audio/mp3/Miaow-07-Bubble.mp3",
+											oga : "http://www.jplayer.org/audio/ogg/Miaow-07-Bubble.ogg"
+										} ], {
+									swfPath : "js",
+									supplied : "oga, mp3",
+									wmode : "window",
+									smoothPlayBar : false,
+									keyEnabled : false
+								});
+					});
+	//]]>
+</script>
+
+<script src="lib/jquery-1.11.1.min.js"></script>
+<script src="js/ajax_cmd.js"></script>
+
+<link rel="stylesheet"
+	href="lib/bootstrap-3.3.5-dist/css/bootstrap.min.css"></link>
+
+
+
+
 </head>
+
+
+
 <body>
-	<div>
-		<h1>Command Page</h1>
-		<ul>
-			<li>
-				<button id="ButtonUp" type="button" class="button">
-					<span class="glyphicon glyphicon-arrow-up"> </span>UP
-				</button>
-			</li>
-			<li>
-				<button id="ButtonDown" type="button" class="button">
-					<span class="glyphicon glyphicon-arrow-down"> </span>DOWN
-				</button>
-			</li>
-			<li>
-				<button id="ButtonLeft" type="button" class="button">
-					<span class="glyphicon glyphicon-arrow-left"> </span>LEFT
-				</button>
-			</li>
-			<li>
-				<button id="ButtonRight" type="button" class="button">
-					<span class="glyphicon glyphicon-arrow-right"> </span>RIGHT
-				</button>
-			</li>	
+
+
+
+	<!-- Website Menu -->
+	<div id="topmenu">
+		<ul class="dropdown clearfix boxed">
+			<li class="menu-level-0"><a href="#"><i
+					class="icon-menu icon-menu5"></i><span>Connexion</span><sup
+					class="note">: )</sup></a></li>
+			<li class="menu-level-0"><a href="#"><i
+					class="icon-menu icon-menu2"></i><span>a propos</span></a></li>
+			<li class="menu-level-0"><a href="#"><i
+					class="icon-menu icon-menu3"></i><span>Mon Profil</span></a>
+				<ul class="submenu-1">
+					<li class="menu-level-1"><a href="#">Informations Perso</a></li>
+					<li class="menu-level-1"><a href="#">Partager</a></li>
+					<li class="menu-level-1"><a href="#">Se Desinscrire</a></li>
+				</ul></li>
+			<li class="menu-level-0 "><a href="#"><i
+					class="icon-menu icon-menu4"></i><span>Parametres</span></a></li>
+			<li class="menu-level-0 "><a href="#"><i
+					class="icon-menu icon-menu4 "></i><span>Robot : running....</span></a></li>
 		</ul>
 	</div>
-	<script src="lib/jquery-1.11.1.min.js"></script>
-	<script src="js/ajax_cmd.js"></script>
+
+
+
+	<!-- TEST -->
+	<div class="row">
+
+
+		<div class="col-sm-5">
+
+			<!-- Avatar Placeholder -->
+
+			<div class="widget-container widget_avatar boxed">
+				<div class="inner clearfix">
+					<div class="avatar">
+						<img
+							src="https://image.freepik.com/vecteurs-libre/colore-conception-du-robot_1148-9.jpg"
+							alt="petit robot mignon" />
+					</div>
+					<h5>Norbert le robot</h5>
+					<span class="subtitle">Bonjour je m'appelle Norbert</span>
+				</div>
+			</div>
+
+			<!--/ Avatar Placeholder -->
+			<div class="widget-container">
+				<!-- <div class="box2">lol</div> -->
+				<canvas id="canvas">TEST</canvas>
+				<!-- <div class="box2">lol</div> -->
+
+			</div>
+		</div>
+
+		<div class="col-sm-2">
+
+
+
+			<div class="widget-container boxed">
+				<h3 class="widget-title">Affichages</h3>
+				<div class="inner">
+					<!-- Controls -->
+					<div class="controls boxed line-top">
+
+ 						<div class="inner clearfix">
+
+							<div class="input_styled checklist pull-left">
+<!-- <div class="input_styled checklist pull-left"><div class="rowCheckbox checkbox-large "><input name="signup5" type="checkbox" checked id="signup5" value="signup5"><label for="signup5">Automapping</label></div></div>
+ -->							
+								<div class="rowCheckbox checkbox-large ">
+									<label for="signup5">Automapping</label><input name="signup5" type="checkbox" id="signup5"
+										value="signup5"></input>
+								</div>
+							</div>
+							<div class="clear"></div>
+											<div class="input_styled checklist pull-left">
+											<div class="rowCheckbox checkbox-large ">
+												<label for="signup8">Par25415cours</label><input name="signup8" type="checkbox" id="signup8"
+													value="signup8"></input>
+											</div>
+										</div>
+				
+							<div class="clear"></div>
+							<div class="input_styled checklist pull-left">
+								<div class="rowCheckbox checkbox-large ">
+									<label for="signup7">Brouillard</label><input name="signup7" type="checkbox" id="signup7"
+										value="signup7"></input>
+								</div>
+							</div>
+						</div> 
+					</div>
+					<!--/ Controls -->
+				</div>
+			</div>
+			<div class="widget-container">
+				<h3 class="widget-title">Commandes</h3>
+				<div class="inner">
+					<div class="controls boxed line-top">
+						<div class="inner clearfix">
+							<div class="row">
+								<div class="col-lg-1 col-lg-offset-3">
+									<button id="ButtonUp" type="button" class="button">
+										<span class="glyphicon glyphicon-arrow-up"> </span>UP
+									</button>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-1 col-lg-offset-1">
+									<button id="ButtonDown" type="button" class="button">
+										<span class="glyphicon glyphicon-arrow-down"> </span>DOWN
+									</button>
+								</div>
+
+								<div class="col-lg-1 col-lg-offset-1">
+									<button id="ButtonLeft" type="button" class="button">
+										<span class="glyphicon glyphicon-arrow-left"> </span>LEFT
+									</button>
+								</div>
+
+								<div class="col-lg-1 col-lg-offset-1">
+									<button id="ButtonRight" type="button" class="button">
+										<span class="glyphicon glyphicon-arrow-right"> </span>RIGHT
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="col-sm-5">
+			<div id="graphique">
+				<div class="widget-container boxed">
+
+					<!-- GRAPHIQUE -->
+					<div id="nbreObstacle_rencontres"
+						style="min-width: 150px; height: 180px; margin-right: 1%"></div>
+					<div id="nbreCommandes"
+						style="min-width: 150px; height: 180px; margin-right: 1%"></div>
+					<div id="nbreObstaclesVisibles"
+						style="min-width: 150px; height: 180px; margin-right: 1%"></div>
+					<div id="distance"
+						style="min-width: 150px; height: 180px; margin-right: 1%"></div>
+
+					<!-- FIN GRAPHIQUE -->
+				</div>
+			</div>
+
+
+
+
+		</div>
+
+	</div>
+	<!-- BAS -->
+
+	<div id="bas">
+
+
+		<!-- <div class="col-sm-7">
+					 <div class="widget-container boxed">
+			 				<h3 class="widget-title">Commandes</h3>
+			 				<div class="inner">
+								<div class="controls boxed line-top">
+										<div class="inner clearfix">
+													  <div class="row">
+													    <div class="col-lg-1 col-lg-offset-2"><a href="#" class="btn btn-green "><span>U</span></a></div>
+													  </div>
+													  <div class="row">
+													    <div class="col-lg-1 col-lg-offset-1"><a href="#" class="btn btn-green "><span>L</span></a></div>
+													    <div class="col-lg-1 "><a href="#" class="btn btn-green "><span>D</span></a></div>
+													    <div class="col-lg-1 "><a href="#" class="btn btn-green "><span>U</span></a></div>
+													 </div>
+			 						</div>
+			 	 	     </div>
+				     </div>
+	      	</div>
+       </div> -->
+
+		<!-- <div class="col-sm-5">
+					 <div class="widget-container boxed">
+			 		    <h3 class="widget-title">Affichages</h3>
+			 		    <div class="inner">
+
+			 					<div class="controls boxed line-top">
+			 							<div class="inner clearfix">
+
+			 									<div class="input_styled checklist pull-left"><div class="rowCheckbox checkbox-large "><input name="signup5" type="checkbox" checked id="signup5" value="signup5"><label for="signup5">Automapping</label></div></div>
+			 									<div class="clear"></div>
+			      						<div class="input_styled checklist pull-left"><div class="rowCheckbox checkbox-large "><input name="signup6" type="checkbox" checked id="signup6" value="signup6"><label for="signup6">Robot</label></div></div>
+			 									<div class="clear"></div>
+			 									<div class="input_styled checklist pull-left"><div class="rowCheckbox checkbox-large "><input name="signup7" type="checkbox" checked id="signup7" value="signup7"><label for="signup7">Brouillard</label></div></div>
+			 							</div>
+			 					</div>
+
+			 		    	</div>
+			 			</div>
+
+				 </div> -->
+
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
