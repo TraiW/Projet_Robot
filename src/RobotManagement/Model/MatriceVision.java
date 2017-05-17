@@ -10,13 +10,13 @@ public class MatriceVision {
 		for (int i=0;i<mat.length;i++)
 			for(int j=0;j<mat[i].length;j++)
 				mat[i][j]=0;
-		
-		mat[0][0]=1;
+		mat[0][1]=2;
 		mat[1][0]=1;
 		mat[1][1]=1;
 		mat[1][2]=1;
-		
 	}
+	
+	public int[][] getMat(){return this.mat;}
 	public int getNbLignes() {return nbLignes;}
 	public int getNbColonnes() {return nbColonnes;}
 	
@@ -30,14 +30,24 @@ public class MatriceVision {
 			System.out.println("");
 		}
 	}
-	public MatriceVision rotation(MatriceVision matrice){
-		//TODO
+	
+	public MatriceVision rotation(Enum_Orientation_Robot orient){
+		MatriceVision matrice=new MatriceVision();
+		matrice.mat=this.mat;
+		matrice=this.rot90(matrice);
+		if (orient==Enum_Orientation_Robot.N ||orient==Enum_Orientation_Robot.E){
+			matrice=this.rot90(matrice);
+			if (orient==Enum_Orientation_Robot.E)
+				matrice=this.rot90(matrice);
+		}
+		return matrice;
+	}
+	
+	private MatriceVision rot90(MatriceVision matrice){
 		MatriceVision retour=new MatriceVision();
-		for (int j=0;j<matrice.nbLignes;j++)
-		{
-			for (int i=0;i<matrice.nbColonnes;i++)
-			{
-				retour.mat[i][matrice.nbColonnes-j]=matrice.mat[j][i];
+		for (int j=0;j<matrice.nbLignes;j++){
+			for (int i=0;i<matrice.nbColonnes;i++){
+				retour.mat[i][matrice.nbColonnes-1-j]=matrice.mat[j][i];
 			}
 		}
 		return retour;
@@ -45,14 +55,14 @@ public class MatriceVision {
 	
 	public static void main(String[] args){
 		MatriceVision mat=new MatriceVision();
+		mat.mat[0][1]=2;
+		mat.mat[1][0]=1;
+		mat.mat[1][1]=1;
+		mat.mat[1][2]=1;
 		mat.printMatrix();
 		System.out.println("");
 		//mat.rotation(mat).printMatrix();
-		mat=mat.rotation(mat);
-		
+		mat=mat.rotation(Enum_Orientation_Robot.E);
 		mat.printMatrix();
-
-		
-		//System.out.println(mat.getNbLignes()+" lign "+mat.getNbColonnes()+" col");
 	}
 }

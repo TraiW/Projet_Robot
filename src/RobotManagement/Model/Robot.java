@@ -79,44 +79,39 @@ public class Robot{
 		return retour;
 	}
 	
-	public boolean RemoveMask(int xRobot, int yRobot, Enum_Orientation_Robot oRobot)
+	public void RemoveMask(Enum_Orientation_Robot oRobot)
 	{
-		boolean retour=false;
 		switch(oRobot)
-		{
+		{	//de base orientation sud
 			case N:
-				
-				break;
-			case S:
-				
+				matriceVision=matriceVision.rotation(oRobot);
 				break;
 			case E:
-				
+				matriceVision=matriceVision.rotation(oRobot);
 				break;
 			case W:
-				
+				matriceVision=matriceVision.rotation(oRobot);
 				break;
 			default:
 				break;	
+		}		
+		for (int i=0;i<this.matriceVision.getNbLignes();i++){
+			for (int j=0;j<this.matriceVision.getNbColonnes();j++){
+				if(matriceVision.getMat()[i][j]!=0)
+				{
+					if(this.x+i<this.env_decouvert.getX_plateau() && this.y+j<this.env_decouvert.getY_plateau()
+							&& this.x-j >=0 && this.y-i >=0)
+						this.env_decouvert.getTableauEnv()[this.x+j][this.y-i+1].masquage=false;
+				}
+			}
 		}
-		
-		
-		
-		
-		return retour;
+
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Measures mesures1 = new Measures();
-
-		int i=0;
-		for(i=0;i<10;i++)
-		{
-			mesures1.addCommandes();
-
-		}
-		System.out.println("addCommandes : "+mesures1.getNbrCommandes()+";" );
+		//Measures mesures1 = new Measures();
+		//System.out.println("addCommandes : "+mesures1.getNbrCommandes()+";" );
+		
 	}
 	
 }

@@ -23,15 +23,23 @@ public class RobotCtr {
 		{
 			case UP:
 				retour=robot.deplacement(robot.getX(),robot.getY()-1,Enum_Orientation_Robot.N);
+				if(retour==true)
+					robot.RemoveMask(Enum_Orientation_Robot.N);
 				break;
 			case DOWN:
 				retour=robot.deplacement(robot.getX(),robot.getY()+1,Enum_Orientation_Robot.S);
+				if(retour==true)
+					robot.RemoveMask(Enum_Orientation_Robot.S);
 				break;
 			case RIGHT:
 				retour=robot.deplacement(robot.getX()+1,robot.getY(),Enum_Orientation_Robot.E);
+				if(retour==true)
+					robot.RemoveMask(Enum_Orientation_Robot.E);
 				break;
 			case LEFT:
 				retour=robot.deplacement(robot.getX()-1,robot.getY(),Enum_Orientation_Robot.W);
+				if(retour==true)
+					robot.RemoveMask(Enum_Orientation_Robot.W);
 				break;
 			default:
 				System.out.println("Erreur RobotCtr.deplacerRobot unexpected direction");
