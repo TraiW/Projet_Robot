@@ -60,8 +60,9 @@ public class RobotControlService {
 			boolean bool =false;
 			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.UP);
 			mesureList.add(robotCtr.getRobot().getMeasures());
+			System.out.println("-------------------");
 			for(int i=0;i<mesureList.size();i++)
-				System.out.println(mesureList.get(i));
+				System.out.println(mesureList.get(i).getObstaclesRencontres());
 			System.out.println(bool);
 			return bool;
 		}

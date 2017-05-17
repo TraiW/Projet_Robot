@@ -23,11 +23,13 @@ public class Measures {
 	public void addDistanceParcourue(){distanceParcourue += 1;}
 	public int getDistanceParcourue(){return distanceParcourue;}
 	
+	
 	public void razMesures(){
 		nbrCommandes = 0;
 		nbrObstaclesRencontres = 0;
 		nbrObstaclesVisibles = 0;
 		distanceParcourue = 0;
 	}
+	
 	
 }

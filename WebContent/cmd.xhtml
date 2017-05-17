@@ -10,6 +10,11 @@
 	href="https://image.freepik.com/vecteurs-libre/colore-conception-du-robot_1148-9.jpg" ></link>
 <meta charset="UTF-8"></meta>
 
+
+
+
+<script src="lib/jquery-1.11.1.min.js"></script>
+<script src="js/ajax_cmd.js"></script>
 	<!--[if lt IE 9]><script type="text/javascript" src="js/excanvas.compiled.js"></script><![endif]-->
 	<script type="text/javascript" src="js/json2.js"></script>
 	<script type="text/javascript" src="js/oXHR.js"></script>
@@ -95,8 +100,6 @@
 	//]]>
 </script>
 
-<script src="lib/jquery-1.11.1.min.js"></script>
-<script src="js/ajax_cmd.js"></script>
 
 <link rel="stylesheet"
 	href="lib/bootstrap-3.3.5-dist/css/bootstrap.min.css"></link>
@@ -212,26 +215,27 @@
 						<div class="inner clearfix">
 							<div class="row">
 								<div class="col-lg-1 col-lg-offset-3">
-									<button id="ButtonUp" type="button" class="button">
+									<button id="ButtonUp" name="Button" type="button" class="button">
 										<span class="glyphicon glyphicon-arrow-up"> </span>UP
 									</button>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-lg-1 col-lg-offset-1">
-									<button id="ButtonDown" type="button" class="button">
-										<span class="glyphicon glyphicon-arrow-down"> </span>DOWN
-									</button>
-								</div>
 
-								<div class="col-lg-1 col-lg-offset-1">
-									<button id="ButtonLeft" type="button" class="button">
+									<button id="ButtonLeft" name="Button" type="button" class="button">
 										<span class="glyphicon glyphicon-arrow-left"> </span>LEFT
 									</button>
 								</div>
 
 								<div class="col-lg-1 col-lg-offset-1">
-									<button id="ButtonRight" type="button" class="button">
+									<button id="ButtonDown" name="Button" type="button" class="button">
+										<span class="glyphicon glyphicon-arrow-down"> </span>DOWN
+									</button>
+								</div>
+
+								<div class="col-lg-1 col-lg-offset-1">
+									<button id="ButtonRight" name="Button" type="button" class="button">
 										<span class="glyphicon glyphicon-arrow-right"> </span>RIGHT
 									</button>
 								</div>
