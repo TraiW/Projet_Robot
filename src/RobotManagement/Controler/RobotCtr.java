@@ -28,6 +28,7 @@ public class RobotCtr {
 				break;
 			case DOWN:
 				retour=robot.deplacement(robot.getX(),robot.getY()+1,Enum_Orientation_Robot.S);
+
 				if(retour==true)
 					robot.RemoveMask(Enum_Orientation_Robot.S);
 				break;

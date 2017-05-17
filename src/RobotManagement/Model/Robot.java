@@ -53,6 +53,7 @@ public class Robot{
 			setY(y);
 			tab[this.x][this.y].setRobot();
 			this.setOrientation(orient);
+
 			retour=true;
 		}
 		return retour;
@@ -81,24 +82,27 @@ public class Robot{
 	
 	public void RemoveMask(Enum_Orientation_Robot oRobot)
 	{
+		MatriceVision mat=new MatriceVision();
 		switch(oRobot)
 		{	//de base orientation sud
 			case N:
-				matriceVision=matriceVision.rotation(oRobot);
+				mat=matriceVision.rotation(oRobot);
 				break;
 			case E:
-				matriceVision=matriceVision.rotation(oRobot);
+				mat=matriceVision.rotation(oRobot);
 				break;
 			case W:
-				matriceVision=matriceVision.rotation(oRobot);
+				mat=matriceVision.rotation(oRobot);
 				break;
-				
+//			case S:
+//				this.matriceVision=matriceVision.rotation(oRobot);
+//				break;
 			default:
 				break;	
-		}	
-		for (int i=0;i<this.matriceVision.getNbLignes();i++){
-			for (int j=0;j<this.matriceVision.getNbColonnes();j++){
-				if(matriceVision.getMat()[i][j]!=0)
+		}
+		for (int i=0;i<mat.getNbLignes();i++){
+			for (int j=0;j<mat.getNbColonnes();j++){
+				if(mat.getMat()[i][j]!=0)
 				{
 					switch(oRobot){
 						case N:
