@@ -3,7 +3,7 @@ $(document).ready(function(){
 	  	$.post("rest/cmd/UP",
     		  {},
     		  function(data,status){
-    		    alert("Post Done received data: " + data + "\nStatus: " + status);
+    		    alert("Post Done 4received data: " + data + "\nStatus: " + status);
     		  });
   });
 

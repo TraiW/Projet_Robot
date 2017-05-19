@@ -30,6 +30,13 @@ public class Measures {
 		nbrObstaclesVisibles = 0;
 		distanceParcourue = 0;
 	}
+	@Override
+	public String toString() {
+		return "Measures [nbrCommandes=" + nbrCommandes
+				+ ", nbrObstaclesRencontres=" + nbrObstaclesRencontres
+				+ ", nbrObstaclesVisibles=" + nbrObstaclesVisibles
+				+ ", distanceParcourue=" + distanceParcourue + "]";
+	}
 	
 	
 }
