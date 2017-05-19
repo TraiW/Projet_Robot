@@ -48,6 +48,12 @@ public class TestSimulateur {
 //		botctrl.deplacerRobot(Enum_Direction_Robot.DOWN);
 		System.out.println("RIGHT");
 		botctrl.deplacerRobot(Enum_Direction_Robot.RIGHT);
+		System.out.println("RIGHT");
+		botctrl.deplacerRobot(Enum_Direction_Robot.RIGHT);System.out.println("RIGHT");
+		botctrl.deplacerRobot(Enum_Direction_Robot.RIGHT);System.out.println("RIGHT");
+		botctrl.deplacerRobot(Enum_Direction_Robot.RIGHT);
+		System.out.println("DOWN");
+		botctrl.deplacerRobot(Enum_Direction_Robot.DOWN);
 //		System.out.println("LEFT");
 //		botctrl.deplacerRobot(Enum_Direction_Robot.LEFT);	
 //		System.out.println("UP");

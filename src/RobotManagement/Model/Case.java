@@ -4,7 +4,7 @@ public class Case {
 //	structure avec : état de la case
 //					 masqué ou non
 
-	Enum_Etat_Case etat_case; // enum
+	private Enum_Etat_Case etat_case; // enum
 	private boolean masquage;//true => masqué ; false => visible
 	
 	public Case(Enum_Etat_Case etat_case, boolean masquage){
