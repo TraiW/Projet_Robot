@@ -51,8 +51,10 @@ public class Env extends Config {
 		}
 		
 		for(i=0;i<nbreObstacle;i++){
-			x=aleatoire.nextInt(getX_plateau());
-			y=aleatoire.nextInt(getY_plateau());
+			do{
+				x=aleatoire.nextInt(getX_plateau());}while(x<=1);
+			do{
+				y=aleatoire.nextInt(getY_plateau());}while(x<=1);
 			this.tableauEnv[x][y].setEtat_case(Enum_Etat_Case.obstacle);				
 		}
 	}
@@ -61,6 +63,7 @@ public class Env extends Config {
 	 * methode permettant d'afficher ma matrice sous forme ASCII  
 	 * 			
 	 */
+	@SuppressWarnings("resource")
 	public static String printMatrix(Case[][] matrix,int sizeX,int sizeY) {
 		StringBuilder sb = new StringBuilder();
 		Formatter formatter = new Formatter(sb, Locale.FRENCH);

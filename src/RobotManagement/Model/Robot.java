@@ -38,8 +38,11 @@ public class Robot{
 	public Enum_Orientation_Robot getOrientation() {return orientation;}
 	public void setOrientation(Enum_Orientation_Robot orientation) {this.orientation = orientation;}
 	public Env getEnv_decouvert() {return env_decouvert;}
-	public void setEnv_decouvert(Env env_decouvert) {this.env_decouvert = env_decouvert;}
-
+	public void setEnv_decouvert(Env env_decouvert) {
+		this.env_decouvert = env_decouvert;
+		this.RemoveMask();
+	}
+	
 	public boolean deplacement(int x, int y, Enum_Orientation_Robot orient){
 		boolean retour=false;
 //		mesures.addCommandes();
@@ -80,19 +83,19 @@ public class Robot{
 		return retour;
 	}
 	
-	public void RemoveMask(Enum_Orientation_Robot oRobot)
+	public void RemoveMask()
 	{
-		MatriceVision mat=new MatriceVision();
-		switch(oRobot)
+		MatriceVision mat=this.matriceVision;
+		switch(this.orientation)
 		{	//de base orientation sud
 			case N:
-				mat=matriceVision.rotation(oRobot);
+				mat=matriceVision.rotation(this.orientation);
 				break;
 			case E:
-				mat=matriceVision.rotation(oRobot);
+				mat=matriceVision.rotation(this.orientation);
 				break;
 			case W:
-				mat=matriceVision.rotation(oRobot);
+				mat=matriceVision.rotation(this.orientation);
 				break;
 			default:
 				break;	
@@ -101,7 +104,7 @@ public class Robot{
 			for (int j=0;j<mat.getNbColonnes();j++){
 				if(mat.getMat()[i][j]!=0)
 				{
-					switch(oRobot){
+					switch(this.orientation){
 						case N:
 							if(this.env_decouvert.coordEtreDansPlateau(this.x-1+j, this.y-i)){
 								this.env_decouvert.getTableauEnv()[this.x-1+j][this.y-i].setMasquage(false);
@@ -128,7 +131,14 @@ public class Robot{
 				}
 			}
 		}
-
+	}
+	
+	@Override
+	public String toString() {
+		return "Robot [xInit=" + this.xInit + ", yInit=" + this.yInit + ", x=" + this.x
+				+ ", y=" + this.y + ", orientationInit=" + this.orientationInit
+				+ ", orientation=" + this.orientation + ", env_decouvert="
+				+ this.env_decouvert + ", matriceVision=" + this.matriceVision + "]";
 	}
 	
 	public static void main(String[] args) {
