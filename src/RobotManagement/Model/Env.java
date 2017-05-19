@@ -58,6 +58,10 @@ public class Env extends Config {
 			this.tableauEnv[x][y].setEtat_case(Enum_Etat_Case.obstacle);				
 		}
 	}
+	//TODO
+	public int CountMask(){
+		return 0;
+	}
 
 	/***
 	 * methode permettant d'afficher ma matrice sous forme ASCII  

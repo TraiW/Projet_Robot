@@ -1,8 +1,6 @@
 package com.rest.services;
 
 import java.util.ArrayList;
-import java.util.Stack;
-
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
@@ -12,16 +10,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-
-
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import RobotManagement.Controler.RobotCtr;
 import RobotManagement.Model.Enum_Direction_Robot;
-import RobotManagement.Model.Enum_Orientation_Robot;
-import RobotManagement.Model.Env;
 import RobotManagement.Model.Robot;
 import RobotManagement.Model.RobotInit;
 import RobotManagement.Model.Measures;

@@ -1,7 +1,7 @@
 package RobotManagement.Controler;
 
-import projet_majeure.Robot.Orientation;
 import RobotManagement.Model.*;
+
 
 public class RobotCtr {
 
@@ -57,9 +57,15 @@ public class RobotCtr {
 		Enum_Direction_Robot dir=Enum_Direction_Robot.DOWN;
 		Enum_Direction_Robot prochaineDir=Enum_Direction_Robot.DOWN;
 		
-		if(xRobot<=(env_percu.getX_plateau()/2)){
-			
-		}
+		if(xRobot<=(env_percu.getX_plateau()/2))
+			dir=Enum_Direction_Robot.LEFT;
+		else
+			dir=Enum_Direction_Robot.RIGHT;
+		if(yRobot<=(env_percu.getY_plateau()/2))
+			prochaineDir=Enum_Direction_Robot.UP;
+		else
+			prochaineDir=Enum_Direction_Robot.DOWN;
+		
 		
 		
 	}
