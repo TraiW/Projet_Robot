@@ -14,12 +14,24 @@ $(document).ready(function () {
                 load: function () {
 
                     // set up the updating of the chart each second
-                    var series = this.series[0];
-                    setInterval(function () {
+                   var series = this.series[0];
+                   /* setInterval(function () {
                         var x = (new Date()).getTime(), // current time
                             y = Math.random();
                         series.addPoint([x, y], true, true);
-                    }, 1000);
+                    }, 1000);*/
+                    
+                    setInterval(function(){
+                		$.get("rest/cmd/measure",function(data) {
+                			console.log("Graph Mesure Obstacle Visible"); 
+                			var x = (new Date()).getTime(); // current time
+                			var y;
+                			y = data.mesuresGraphes[2].value;
+                			console.log("y : ",y);
+                            series.addPoint([x, y], true, true);
+                		});
+                		console.log('FIN MesuresGraph Obstacle Visible');
+                	},5000);
                 }
             }
         },
@@ -64,7 +76,7 @@ $(document).ready(function () {
                 for (i = -19; i <= 0; i += 1) {
                     data.push({
                         x: time + i * 1000,
-                        y: Math.random()
+                        y: 0,
                     });
                 }
                 return data;

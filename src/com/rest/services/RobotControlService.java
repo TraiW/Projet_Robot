@@ -188,5 +188,48 @@ public class RobotControlService {
 			//ALTERNATIVE send direct a json String
 			//return "{\"data\":[{\"x\":0,\"y\":0,\"val\":\"FREE\"},{\"x\":0,\"y\":1,\"val\":\"WALL\"},{\"x\":1,\"y\":1,\"val\":\"ROBOT\"}]}";
 		}
+		
+		@GET
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("measure")
+		public String getMesure()
+				{
+			//create Json container Object
+			JSONObject objContainerData = new JSONObject();
+			
+			//create set of json objects
+			JSONObject objVal_NbreCommande = new JSONObject();
+			objVal_NbreCommande.put("name", new String("Nombre de Commandes"));
+			objVal_NbreCommande.put("value", new Integer(this.robotCtr.getRobot().getMeasures().getNbrCommandes()));
+
+			JSONObject objVal_ObstaclesRencontres = new JSONObject();
+			objVal_ObstaclesRencontres.put("name", new String("Nombre d obstacles rencontres"));
+			objVal_ObstaclesRencontres.put("value", new Integer(this.robotCtr.getRobot().getMeasures().getObstaclesRencontres()));
+
+			JSONObject objVal_ObstaclesVisibles = new JSONObject();
+			objVal_ObstaclesVisibles.put("name", new String("Nombre d obstacles visibles"));
+			objVal_ObstaclesVisibles.put("value", new Integer(this.robotCtr.getRobot().getMeasures().getObstaclesVisibles()));
+
+			JSONObject objVal_DistancesParcourue = new JSONObject();
+			objVal_DistancesParcourue.put("name", new String("Distance parcourue"));
+			objVal_DistancesParcourue.put("value",new Integer(this.robotCtr.getRobot().getMeasures().getDistanceParcourue()));
+			
+			//create a json list
+			JSONArray listData = new JSONArray();
+			//add json objects to jsonlist
+			
+			listData.add(objVal_NbreCommande);
+			listData.add(objVal_ObstaclesRencontres);
+			listData.add(objVal_ObstaclesVisibles);			
+			listData.add(objVal_DistancesParcourue);
+			
+			//add jsonlist to json container
+			objContainerData.put("mesuresGraphes", listData);
+
+			//return json string of the json container
+			return objContainerData.toJSONString();
+		}
+		
+		
 
 }
