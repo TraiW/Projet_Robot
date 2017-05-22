@@ -84,6 +84,32 @@ public class Env extends Config {
 		}
 		return nbrMask;
 	}
+	
+	public boolean isLigneParcourue(int x){
+		boolean retour=false;
+		int count=0;
+		for(int i=1;i<this.getX_plateau()-1;i++)
+		{
+			if(this.getTableauEnv()[x][i].isParcouru())
+				count+=1;
+		}
+		if (count>=this.getX_plateau()-2)
+			retour=true;
+		return retour;
+	}
+	
+	public boolean isColonneParcourue(int y){
+		boolean retour=false;
+		int count=0;
+		for(int i=1;i<this.getX_plateau()-1;i++)
+		{
+			if(this.getTableauEnv()[i][y].isParcouru())
+				count+=1;
+		}
+		if (count>=this.getY_plateau()-2)
+			retour=true;
+		return retour;
+	}
 
 	/***
 	 * methode permettant d'afficher ma matrice sous forme ASCII  

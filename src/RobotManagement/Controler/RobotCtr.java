@@ -52,37 +52,55 @@ public class RobotCtr {
 	
 	public void autoMappingSimple(){
 		Env env_percu=this.robot.getEnv_decouvert();
-		int xRobot=this.robot.getX();
-		int yRobot=this.robot.getY();
+		int[] tabCoord={this.robot.getX(),this.robot.getY()};
+		int indiceCoord=0;//indiceCoord=0 -> tabCoord de X, si 1 -> tabCoord de Y
+		boolean retour=false;
 		Enum_Direction_Robot dir=Enum_Direction_Robot.DOWN;
 		Enum_Direction_Robot prochaineDir=Enum_Direction_Robot.DOWN;
 		
 		while(this.robot.getEnv_decouvert().CountMask()!=0)
 		{
-			if(env_percu.isBordureEnvX(xRobot)){
-				if(xRobot==0)
+			indiceCoord=0;
+			if(env_percu.isBordureEnvX(tabCoord[indiceCoord])){
+				if(tabCoord[indiceCoord]==0)
 					dir=Enum_Direction_Robot.RIGHT;
 				else
 					dir=Enum_Direction_Robot.LEFT;
 			}else{
-				if(xRobot<=(env_percu.getX_plateau()/2))
+				if(tabCoord[indiceCoord]<=(env_percu.getX_plateau()/2))
 					dir=Enum_Direction_Robot.LEFT;
 				else
 					dir=Enum_Direction_Robot.RIGHT;
 			}
-			if(env_percu.isBordureEnvY(yRobot)){
-				if(yRobot==0)
+			indiceCoord=1;
+			if(env_percu.isBordureEnvY(tabCoord[indiceCoord])){
+				if(tabCoord[indiceCoord]==0)
 					prochaineDir=Enum_Direction_Robot.DOWN;
 				else
 					prochaineDir=Enum_Direction_Robot.UP;
 			}else{
-				if(yRobot<=(env_percu.getY_plateau()/2))
+				if(tabCoord[indiceCoord]<=(env_percu.getY_plateau()/2))
 					prochaineDir=Enum_Direction_Robot.UP;
 				else
 					prochaineDir=Enum_Direction_Robot.DOWN; 
 			}
 			
-			
+			do{
+				if(!this.deplacerRobot(dir))
+				{
+					if(indiceCoord==0)
+						retour=this.robot.getEnv_decouvert().isLigneParcourue(tabCoord[indiceCoord]);
+					else
+						retour=this.robot.getEnv_decouvert().isColonneParcourue(tabCoord[indiceCoord]);
+					
+					if(retour)
+					{
+						
+					}
+					this.deplacerRobot(dir);
+				}
+				
+			}while(!env_percu.isBordureEnvX(tabCoord[indiceCoord]));//pb here
 		
 		}
 		
