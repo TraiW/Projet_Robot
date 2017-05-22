@@ -70,17 +70,22 @@ public class RobotCtr {
 				else
 					dir=Enum_Direction_Robot.RIGHT;
 			}
+			if(env_percu.isBordureEnvY(yRobot)){
+				if(yRobot==0)
+					prochaineDir=Enum_Direction_Robot.DOWN;
+				else
+					prochaineDir=Enum_Direction_Robot.UP;
+			}else{
+				if(yRobot<=(env_percu.getY_plateau()/2))
+					prochaineDir=Enum_Direction_Robot.UP;
+				else
+					prochaineDir=Enum_Direction_Robot.DOWN; 
+			}
 			
 			
-			if(yRobot<=(env_percu.getY_plateau()/2))
-				prochaineDir=Enum_Direction_Robot.UP;
-			else
-				prochaineDir=Enum_Direction_Robot.DOWN;
-		
-			
-		
 		
 		}
+		
 	}
 	/*	public void AutoMapping(){
 		robot.updateEnvironnement();		
