@@ -49,7 +49,6 @@ public class Robot{
 	
 	public boolean deplacement(int x, int y, Enum_Orientation_Robot orient){
 		boolean retour=false;
-		System.out.println(this.mesures);
 		this.mesures.addCommandes();
 		//ajouter nbr obstacles visibles
 		if (DeplacementEtreValide(x, y)) {

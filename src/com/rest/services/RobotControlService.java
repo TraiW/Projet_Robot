@@ -25,7 +25,6 @@ import RobotManagement.Model.Measures;
 public class RobotControlService {
 	private final static String ROBOT_SIMULATOR_LABEL="robot_simulator";
 	private Robot robot=RobotInit.getInstance().createRobot(); 
-	private ArrayList<Measures>mesureList=new ArrayList<Measures>();
 	RobotCtr robotCtr = new RobotCtr(robot.getEnv_decouvert(), robot);
 	//Inject servlet context (needed to get general context, application memory space, session memory space ...)
 	@Context
@@ -82,7 +81,6 @@ public class RobotControlService {
 				{
 			boolean bool =false;
 			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.DOWN);
-////			mesureList.add(robotCtr.getRobot().getMeasures());
 ////			System.out.println(bool);
 ////			return bool;
 //			//create Json container Object
@@ -113,10 +111,6 @@ public class RobotControlService {
 				{
 			boolean bool =false;
 			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.RIGHT);
-			mesureList.add(robotCtr.getRobot().getMeasures());
-			for(int i=0;i<mesureList.size();i++){
-				System.out.println(mesureList.get(i));
-			}
 			System.out.println(bool);
 			return bool;
 		}
@@ -128,7 +122,6 @@ public class RobotControlService {
 				{
 			boolean bool =false;
 			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.LEFT);
-			mesureList.add(robotCtr.getRobot().getMeasures());
 			System.out.println(bool);
 			return bool;
 		}

@@ -9,26 +9,26 @@ public class Measures {
 	 *  Distance parcouru par le robot depuis le lancement du simulateur
 	 *  */
 	
-	private int nbrCommandes = 0;
-	private int nbrObstaclesRencontres = 0;
-	private int nbrObstaclesVisibles = 0;
-	private int distanceParcourue = 0;
+	private static int nbrCommandes = 0;
+	private static int nbrObstaclesRencontres = 0;
+	private static int nbrObstaclesVisibles = 0;
+	private static int distanceParcourue = 0;
 	
-	public void addCommandes(){this.nbrCommandes += 1;}
+	public void addCommandes(){Measures.nbrCommandes += 1;}
 	public int getNbrCommandes(){return nbrCommandes;}
-	public void addObstaclesRencontres(){this.nbrObstaclesRencontres += 1;}	 
+	public void addObstaclesRencontres(){Measures.nbrObstaclesRencontres += 1;}	 
 	public int getObstaclesRencontres(){return nbrObstaclesRencontres;}	
-	public void addObstaclesVisibles(){this.nbrObstaclesVisibles += 1;}
+	public void addObstaclesVisibles(){Measures.nbrObstaclesVisibles += 1;}
 	public int getObstaclesVisibles(){return nbrObstaclesVisibles;}	
-	public void addDistanceParcourue(){this.distanceParcourue += 1;}
+	public void addDistanceParcourue(){Measures.distanceParcourue += 1;}
 	public int getDistanceParcourue(){return distanceParcourue;}
 	
 	
 	public void razMesures(){
-		this.nbrCommandes = 0;
-		this.nbrObstaclesRencontres = 0;
-		this.nbrObstaclesVisibles = 0;
-		this.distanceParcourue = 0;
+		Measures.nbrCommandes = 0;
+		Measures.nbrObstaclesRencontres = 0;
+		Measures.nbrObstaclesVisibles = 0;
+		Measures.distanceParcourue = 0;
 	}
 	@Override
 	public String toString() {
