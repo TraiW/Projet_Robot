@@ -29,6 +29,7 @@ public class TestSimulateur {
 			}
 			System.out.println("");
 		}
+		//System.out.println("mask " + bot.getEnv_decouvert().CountMask());
 		System.out.println("DOWN");
 		botctrl.deplacerRobot(Enum_Direction_Robot.DOWN);
 		
@@ -42,8 +43,6 @@ public class TestSimulateur {
 		System.out.println("DOWN");
 		botctrl.deplacerRobot(Enum_Direction_Robot.DOWN);
 
-//		System.out.println("DOWN");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.DOWN);
 		System.out.println("RIGHT");
 		botctrl.deplacerRobot(Enum_Direction_Robot.RIGHT);
 		System.out.println("RIGHT");

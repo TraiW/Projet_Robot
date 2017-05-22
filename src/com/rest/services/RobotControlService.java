@@ -56,6 +56,7 @@ public class RobotControlService {
 				{
 			boolean bool =false;
 			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.UP);
+			System.out.println(bool);
 			//create Json container Object
 			JSONObject objContainer = new JSONObject();
 			

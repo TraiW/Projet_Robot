@@ -9,13 +9,12 @@ public class Env extends Config {
 	private Case[][]tableauEnv;
 	
 	public Env(int X_plateau,int Y_plateau,double taux_chance){
-		int nbreCase= X_plateau*Y_plateau;
 		this.tableauEnv = new Case[X_plateau][Y_plateau];
 		
 		setTaux_chance(taux_chance);
 		setX_plateau(X_plateau);
 		setY_plateau(Y_plateau);
-		setNbreCase_plateau(nbreCase);		
+		setNbreCase_plateau(X_plateau*Y_plateau);		
 //		GenerationEnv();
 	}
 	/***
@@ -58,9 +57,32 @@ public class Env extends Config {
 			this.tableauEnv[x][y].setEtat_case(Enum_Etat_Case.obstacle);				
 		}
 	}
-	//TODO
+	
+	public boolean isBordureEnvX(int x)
+	{
+		boolean retour=false;
+	    if((x==0 || x==this.getX_plateau()-1))
+	        retour=true;
+	    return retour;
+	}
+	
+	public boolean isBordureEnvY(int y)
+	{
+		boolean retour=false;
+	    if((y==0 || y==this.getX_plateau()-1))
+	        retour=true;
+	    return retour;
+	}
+	
 	public int CountMask(){
-		return 0;
+		int nbrMask=0;
+		for(int i=0;i<getX_plateau();i++){
+			for(int j=0;j<getY_plateau();j++){
+				if(this.getTableauEnv()[i][j].isMasquage())
+					nbrMask+=1;
+			}
+		}
+		return nbrMask;
 	}
 
 	/***

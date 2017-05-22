@@ -50,24 +50,37 @@ public class RobotCtr {
 		return retour;
 	}
 	
-	public void autoMapping(){
-		Env env_percu=robot.getEnv_decouvert();
-		int xRobot=robot.getX();
-		int yRobot=robot.getY();
+	public void autoMappingSimple(){
+		Env env_percu=this.robot.getEnv_decouvert();
+		int xRobot=this.robot.getX();
+		int yRobot=this.robot.getY();
 		Enum_Direction_Robot dir=Enum_Direction_Robot.DOWN;
 		Enum_Direction_Robot prochaineDir=Enum_Direction_Robot.DOWN;
 		
-		if(xRobot<=(env_percu.getX_plateau()/2))
-			dir=Enum_Direction_Robot.LEFT;
-		else
-			dir=Enum_Direction_Robot.RIGHT;
-		if(yRobot<=(env_percu.getY_plateau()/2))
-			prochaineDir=Enum_Direction_Robot.UP;
-		else
-			prochaineDir=Enum_Direction_Robot.DOWN;
+		while(this.robot.getEnv_decouvert().CountMask()!=0)
+		{
+			if(env_percu.isBordureEnvX(xRobot)){
+				if(xRobot==0)
+					dir=Enum_Direction_Robot.RIGHT;
+				else
+					dir=Enum_Direction_Robot.LEFT;
+			}else{
+				if(xRobot<=(env_percu.getX_plateau()/2))
+					dir=Enum_Direction_Robot.LEFT;
+				else
+					dir=Enum_Direction_Robot.RIGHT;
+			}
+			
+			
+			if(yRobot<=(env_percu.getY_plateau()/2))
+				prochaineDir=Enum_Direction_Robot.UP;
+			else
+				prochaineDir=Enum_Direction_Robot.DOWN;
+		
+			
 		
 		
-		
+		}
 	}
 	/*	public void AutoMapping(){
 		robot.updateEnvironnement();		

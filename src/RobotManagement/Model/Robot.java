@@ -45,10 +45,10 @@ public class Robot{
 	
 	public boolean deplacement(int x, int y, Enum_Orientation_Robot orient){
 		boolean retour=false;
-//		mesures.addCommandes();
+		mesures.addCommandes();
 		//ajouter nbr obstacles visibles
 		if (DeplacementEtreValide(x, y)) {
-//			mesures.addDistanceParcourue();					
+			mesures.addDistanceParcourue();					
 			
 			Case[][] tab=env_decouvert.getTableauEnv();
 			tab[this.x][this.y].setParcouru();

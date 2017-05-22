@@ -14,21 +14,21 @@ public class Measures {
 	private int nbrObstaclesVisibles = 0;
 	private int distanceParcourue = 0;
 	
-	public void addCommandes(){nbrCommandes += 1;}
+	public void addCommandes(){this.nbrCommandes += 1;}
 	public int getNbrCommandes(){return nbrCommandes;}
-	public void addObstaclesRencontres(){nbrObstaclesRencontres += 1;}	 
+	public void addObstaclesRencontres(){this.nbrObstaclesRencontres += 1;}	 
 	public int getObstaclesRencontres(){return nbrObstaclesRencontres;}	
-	public void addObstaclesVisibles(){nbrObstaclesVisibles += 1;}
+	public void addObstaclesVisibles(){this.nbrObstaclesVisibles += 1;}
 	public int getObstaclesVisibles(){return nbrObstaclesVisibles;}	
-	public void addDistanceParcourue(){distanceParcourue += 1;}
+	public void addDistanceParcourue(){this.distanceParcourue += 1;}
 	public int getDistanceParcourue(){return distanceParcourue;}
 	
 	
 	public void razMesures(){
-		nbrCommandes = 0;
-		nbrObstaclesRencontres = 0;
-		nbrObstaclesVisibles = 0;
-		distanceParcourue = 0;
+		this.nbrCommandes = 0;
+		this.nbrObstaclesRencontres = 0;
+		this.nbrObstaclesVisibles = 0;
+		this.distanceParcourue = 0;
 	}
 	@Override
 	public String toString() {
