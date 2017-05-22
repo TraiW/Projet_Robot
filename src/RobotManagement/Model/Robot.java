@@ -4,7 +4,7 @@ public class Robot{
 	private int xInit,yInit,x,y;
 	private Enum_Orientation_Robot orientationInit, orientation;
 	private Env env_decouvert=null;
-	private Measures mesures = new Measures();
+	private Measures mesures = null;
 	MatriceVision matriceVision = null;
 	//private Config conf;
 	//capteur de vision ?
@@ -20,9 +20,13 @@ public class Robot{
 			this.orientation = orientationInit;
 			this.env_decouvert = env_decouvert;
 			this.matriceVision= mat;
+			this.mesures = new Measures();
 		}
 	public Measures getMeasures(){
-		return mesures;
+		return this.mesures;
+	}
+	public void setMeasures(Measures mes){
+		this.mesures=mes;
 	}
 	//getters and setters
 	public int getxInit() {return xInit;}
@@ -45,10 +49,11 @@ public class Robot{
 	
 	public boolean deplacement(int x, int y, Enum_Orientation_Robot orient){
 		boolean retour=false;
-		mesures.addCommandes();
+		System.out.println(this.mesures);
+		this.mesures.addCommandes();
 		//ajouter nbr obstacles visibles
 		if (DeplacementEtreValide(x, y)) {
-			mesures.addDistanceParcourue();					
+			this.mesures.addDistanceParcourue();					
 			
 			Case[][] tab=env_decouvert.getTableauEnv();
 			tab[this.x][this.y].setParcouru();
