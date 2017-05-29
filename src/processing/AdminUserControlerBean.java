@@ -30,7 +30,7 @@ public class AdminUserControlerBean {
 	}
 	
 	public String checkUser(LoginBean loginBean){
-		if(loginBean.getLogin().equals("Admin"))//si on est un Admin
+		if(loginBean.getLogin().equals("Admin")||loginBean.getLogin().equals("admin"))//si on est un Admin
 		{
 			AdminUserModelBean admin = this.AdminDao.checkAdmin(loginBean.getLogin(),loginBean.getPwd());
 			if(admin!=null){
