@@ -51,6 +51,58 @@ public class RobotCtr {
 	}
 	
 	public void autoMappingSimple(){
+		//robot.updateEnvironnement();		
+		Enum_Orientation_Robot [] Tab = Enum_Orientation_Robot.values();
+		int i = (int) (Math.random() * 4);		
+		robot.setOrientation(Tab[i]);
+		while(this.robot.getEnv_decouvert().CountMask()!=0)
+		{
+			Enum_Orientation_Robot orientation=robot.getOrientation();		
+			switch (orientation){
+				case N :
+					if(robot.deplacement(robot.getX(),robot.getY()-1,orientation)){}
+					else {
+						if((int)(Math.random()+0.5)==1)
+							robot.setOrientation(Enum_Orientation_Robot.E);
+						else
+							robot.setOrientation(Enum_Orientation_Robot.W);
+					}
+					break;
+				case S :
+					if(robot.deplacement(robot.getX(),robot.getY()+1,orientation)){}
+					else {
+						if((int)(Math.random()+0.5)==1)
+							robot.setOrientation(Enum_Orientation_Robot.W);
+						else
+							robot.setOrientation(Enum_Orientation_Robot.E);
+					}
+					break;
+				case E :
+					if(robot.deplacement(robot.getX()+1,robot.getY(),orientation)){}
+					else {
+						if((int)(Math.random()+0.5)==1)
+							robot.setOrientation(Enum_Orientation_Robot.S);
+						else
+							robot.setOrientation(Enum_Orientation_Robot.N);
+					}
+					break;
+				case W :
+					if(robot.deplacement(robot.getX()-1,robot.getY(),orientation)){}
+					else {
+						if((int)(Math.random()+0.5)==1)
+							robot.setOrientation(Enum_Orientation_Robot.N);
+						else
+							robot.setOrientation(Enum_Orientation_Robot.S);
+					}
+					break;
+				 default :
+					break;
+			}
+		}
+	}
+	
+	
+	public void autoMappingHard(){
 		Env env_percu=this.robot.getEnv_decouvert();
 		int[] tabCoord={this.robot.getX(),this.robot.getY()};
 		int indiceCoord=0;//indiceCoord=0 -> tabCoord de X, si 1 -> tabCoord de Y
@@ -101,65 +153,7 @@ public class RobotCtr {
 				}
 				
 			}while(!env_percu.isBordureEnvX(tabCoord[indiceCoord]));//pb here
-		
 		}
-		
 	}
-	/*	public void AutoMapping(){
-		robot.updateEnvironnement();		
-		Orientation [] Tab = Orientation.values();
-		int i = (int) (Math.random() * 4);		
-		robot.ChangerOrientation(Tab[i]);
-		
-		String orientation=robot.getCapteurRobot().getOrientation();
-				
-		switch (orientation){
-		case "N" :
-			if(robot.DeplacementEtreValide(robot.getX(), robot.getY()-1)){
-				robot.Deplacement(robot.getX(), robot.getY()-1);
-			}
-			else {
-				if((int)(Math.random()+0.5)==1)
-					robot.ChangerOrientation(Orientation.E);
-				else
-					robot.ChangerOrientation(Orientation.W);
-			}
-			break;
-		case "S" :
-			if(robot.DeplacementEtreValide(robot.getX(), robot.getY()+1)){
-				robot.Deplacement(robot.getX(), robot.getY()+1);
-			}
-			else {
-				if((int)(Math.random()+0.5)==1)
-					robot.ChangerOrientation(Orientation.W);
-				else
-					robot.ChangerOrientation(Orientation.E);
-			}
-			break;
-		case "E" :
-			if(robot.DeplacementEtreValide(robot.getX()+1, robot.getY())){
-				robot.Deplacement(robot.getX()+1, robot.getY());
-			}
-			else {
-				if((int)(Math.random()+0.5)==1)
-					robot.ChangerOrientation(Orientation.S);
-				else
-					robot.ChangerOrientation(Orientation.N);
-			}
-			break;
-		case "W" :
-			if(robot.DeplacementEtreValide(robot.getX()-1, robot.getY())){
-				robot.Deplacement(robot.getX()-1, robot.getY());
-			}
-			else {
-				if((int)(Math.random()+0.5)==1)
-					robot.ChangerOrientation(Orientation.N);
-				else
-					robot.ChangerOrientation(Orientation.S);
-			}
-			break;
-		 default :
-			break;
-		}
-	}*/
+	
 }

@@ -54,7 +54,7 @@ public class Robot{
 		//ajouter nbr obstacles visibles
 		if (DeplacementEtreValide(x, y)) {
 			this.mesures.addDistanceParcourue();
-			System.out.println("X = "+x + " Y = "+y);
+			//System.out.println("X = "+x + " Y = "+y);
 			Case[][] tab=env_decouvert.getTableauEnv();
 			tab[this.x][this.y].setParcouru();
 			setX(x);
@@ -62,7 +62,7 @@ public class Robot{
 			tab[this.x][this.y].setRobot();
 			this.setOrientation(orient);
 
-			System.out.println("Xapres= "+this.x + " Y = "+this.y);
+			//System.out.println("Xapres= "+this.x + " Y = "+this.y);
 
 			retour=true;
 		}
