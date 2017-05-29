@@ -21,6 +21,7 @@ public class Robot{
 			this.env_decouvert = env_decouvert;
 			this.matriceVision= mat;
 			this.mesures = new Measures();
+			this.mesures.razMesures();
 		}
 	public Measures getMeasures(){
 		return this.mesures;
