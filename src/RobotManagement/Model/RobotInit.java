@@ -11,7 +11,7 @@ public class RobotInit extends Config{
 	
 	private int xInit=0, yInit=0;
 	private Enum_Orientation_Robot orientationInit=Enum_Orientation_Robot.E;
-	private Env environnement = new Env(getX_plateau(), getY_plateau(), getTaux_chance());
+	private  Env environnement = new Env();
 	private MatriceVision matriceVision=new MatriceVision();
 	
 	public RobotInit(){

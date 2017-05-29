@@ -3,9 +3,9 @@ package RobotManagement.Model;
 public abstract class Config {
 
 	private double taux_chance=1;
-	private int X_plateau=4;
-	private int Y_plateau=4;
-	private int nbreCase_plateau;
+	private int X_plateau=20;
+	private int Y_plateau=20;
+	private int nbreCase_plateau=20*20;
 	
 	/***
 	 * Getter sur le nbre de case du plateau 

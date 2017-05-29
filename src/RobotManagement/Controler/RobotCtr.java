@@ -24,6 +24,7 @@ public class RobotCtr {
 		{
 			case UP:
 				retour=robot.deplacement(robot.getX(),robot.getY()-1,Enum_Orientation_Robot.N);
+				System.out.println("Xu = "+robot.getX()+"Y = "+robot.getY());
 				if(retour!=true)
 					this.robot.setOrientation(Enum_Orientation_Robot.N);
 				break;

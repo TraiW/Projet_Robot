@@ -8,13 +8,13 @@ public class Env extends Config {
 	
 	private Case[][]tableauEnv;
 	
-	public Env(int X_plateau,int Y_plateau,double taux_chance){
-		this.tableauEnv = new Case[X_plateau][Y_plateau];
+	public Env(){
+		this.tableauEnv = new Case[getX_plateau()][getY_plateau()];
 		
-		setTaux_chance(taux_chance);
-		setX_plateau(X_plateau);
-		setY_plateau(Y_plateau);
-		setNbreCase_plateau(X_plateau*Y_plateau);		
+		setTaux_chance(getTaux_chance());
+		setX_plateau(getX_plateau());
+		setY_plateau(getY_plateau());
+		setNbreCase_plateau(getNbreCase_plateau());		
 //		GenerationEnv();
 	}
 	/***
@@ -40,7 +40,7 @@ public class Env extends Config {
 		int nbreObstacle=0;
 		Case c;
 		Random aleatoire=new Random();
-		nbreObstacle=aleatoire.nextInt((int) (getNbreCase_plateau()*getTaux_chance()));
+		nbreObstacle=aleatoire.nextInt((int) (getNbreCase_plateau()*(getTaux_chance()/100)));
 		
 		for(i=0;i<getX_plateau();i++){
 			for(j=0;j<getY_plateau();j++){

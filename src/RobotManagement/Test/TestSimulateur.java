@@ -13,9 +13,10 @@ public class TestSimulateur {
 	@Test
 	public void test() {
 		int i=0,j=0;
-		int xEnv=10,yEnv=10;
-		Env enviro=new Env(xEnv,yEnv,1);
+		int xEnv=20,yEnv=20;
+		Env enviro=new Env();
 		enviro.GenerationEnv();
+		System.out.println(enviro.getX_plateau()+enviro.getX_plateau());
 		//enviro.getTableauEnv()[0][1].setEtat_case(Enum_Etat_Case.obstacle);
 		Robot bot=RobotInit.getInstance().createRobot(); 
 		bot.setEnv_decouvert(enviro);
@@ -76,7 +77,8 @@ public class TestSimulateur {
 				System.out.print(bot.getEnv_decouvert().getTableauEnv()[j][i].isMasquage()+" ");
 			System.out.println("");
 		}
-		
+		System.out.println(enviro.getX_plateau()+""+enviro.getX_plateau());
+
 	}
 
 }

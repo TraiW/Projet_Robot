@@ -53,14 +53,16 @@ public class Robot{
 		this.mesures.addCommandes();
 		//ajouter nbr obstacles visibles
 		if (DeplacementEtreValide(x, y)) {
-			this.mesures.addDistanceParcourue();					
-			
+			this.mesures.addDistanceParcourue();
+			System.out.println("X = "+x + " Y = "+y);
 			Case[][] tab=env_decouvert.getTableauEnv();
 			tab[this.x][this.y].setParcouru();
 			setX(x);
 			setY(y);
 			tab[this.x][this.y].setRobot();
 			this.setOrientation(orient);
+
+			System.out.println("Xapres= "+this.x + " Y = "+this.y);
 
 			retour=true;
 		}
@@ -77,10 +79,10 @@ public class Robot{
 					retour = true;
 				} else {
 					mesures.addObstaclesRencontres();
-					System.out.println("Déplacment impossible : Obstacle");
+					System.out.println("Déplacement impossible : Obstacle");
 				}
 			}else{
-				System.out.println("Déplacment impossible : 1 case par 1 case");
+				System.out.println("Déplacement impossible : 1 case par 1 case");
 			}
 		} else {
 			System.out.println("Coordonnées hors plateau");

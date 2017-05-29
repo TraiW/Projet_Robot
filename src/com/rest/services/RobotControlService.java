@@ -24,7 +24,7 @@ import RobotManagement.Model.Measures;
 @Path("/cmd")
 public class RobotControlService {
 	private final static String ROBOT_SIMULATOR_LABEL="robot_simulator";
-	private Robot robot=RobotInit.getInstance().createRobot(); 
+	private static Robot robot=RobotInit.getInstance().createRobot(); 
 	RobotCtr robotCtr = new RobotCtr(robot.getEnv_decouvert(), robot);
 	//Inject servlet context (needed to get general context, application memory space, session memory space ...)
 	@Context
@@ -54,8 +54,10 @@ public class RobotControlService {
 		public boolean goUp()
 				{
 			boolean bool =false;
-			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.RIGHT);
-			System.out.println("Bool UP : " + bool);
+			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.UP);
+			robot = robotCtr.getRobot();
+			System.out.println(bool);
+			System.out.println("Xu = "+ robot.getX() + " Y = "+robot.getY());
 			return bool;
 		}
 		
@@ -65,8 +67,10 @@ public class RobotControlService {
 		public boolean goDown()
 				{
 			boolean bool =false;
-			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.RIGHT);
+			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.DOWN);
+			robot = robotCtr.getRobot();
 			System.out.println(bool);
+			System.out.println("Xd = "+ robot.getX() + " Y = "+robot.getY());
 			return bool;
 		}
 		
@@ -77,7 +81,9 @@ public class RobotControlService {
 				{
 			boolean bool =false;
 			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.RIGHT);
+			robot = robotCtr.getRobot();
 			System.out.println(bool);
+			System.out.println("Xr = "+ robot.getX() + " Y = "+robot.getY());
 			return bool;
 		}
 		
@@ -88,7 +94,9 @@ public class RobotControlService {
 				{
 			boolean bool =false;
 			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.LEFT);
+			robot = robotCtr.getRobot();
 			System.out.println(bool);
+			System.out.println("Xl = "+ robot.getX() + " Y = "+robot.getY());
 			return bool;
 		}
 		
