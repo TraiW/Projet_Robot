@@ -49,59 +49,25 @@ public class RobotControlService {
 		}
 		
 		@POST
-		@Produces(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.TEXT_PLAIN)
 		@Path("UP")
-		public String goUp()
+		public boolean goUp()
 				{
 			boolean bool =false;
-			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.UP);
-			System.out.println(bool);
-			//create Json container Object
-			JSONObject objContainer = new JSONObject();
-			
-			//create set of json objects
-			JSONObject objVal1 = new JSONObject();
-			objVal1.put("UP",true);
-			
-			//create a json list
-			JSONArray list = new JSONArray();
-			//add json objects to jsonlist
-			list.add(objVal1);
-			
-			//add jsonlist to json container
-			objContainer.put("data", list);
-			//return json string of the json container
-			return objContainer.toJSONString();
+			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.RIGHT);
+			System.out.println("Bool UP : " + bool);
+			return bool;
 		}
 		
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("DOWN")
-		public String goDown()
+		public boolean goDown()
 				{
 			boolean bool =false;
-			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.DOWN);
-////			System.out.println(bool);
-////			return bool;
-//			//create Json container Object
-//			JSONObject objContainer = new JSONObject();
-//			
-//			//create set of json objects
-//			JSONObject objVal1 = new JSONObject();
-//			objVal1.put("UP",true);
-//			
-//			//create a json list
-//			JSONArray list = new JSONArray();
-//			//add json objects to jsonlist
-//			list.add(objVal1);
-//			
-//			//add jsonlist to json container
-//			objContainer.put("data", list);
-//			//return json string of the json container
-//			return objContainer.toJSONString();
+			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.RIGHT);
 			System.out.println(bool);
-			if(bool==true)return "DOWN OK";
-			else return "DOWN KO";
+			return bool;
 		}
 		
 		@POST

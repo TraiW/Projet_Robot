@@ -95,7 +95,7 @@ Personnage.prototype.getCoordonneesAdjacentes = function(direction) {
 
 Personnage.prototype.deplacer = function(direction, map) {
 //	    var m="Post Done received data: " ;//+ data + "\nStatus: " + status;
-//var m="mon texte";
+//		var m="mon texte";
 	// On ne peut pas se déplacer si un mouvement est déjà en cours !
 	if(this.etatAnimation >= 0) {
 		return false;
