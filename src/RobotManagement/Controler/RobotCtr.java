@@ -51,17 +51,22 @@ public class RobotCtr {
 	}
 	
 	public void autoMappingSimple(){
-		//robot.updateEnvironnement();		
+		//robot.updateEnvironnement();	
+		System.out.println("going in");
+
 		Enum_Orientation_Robot [] Tab = Enum_Orientation_Robot.values();
 		int i = (int) (Math.random() * 4);		
 		robot.setOrientation(Tab[i]);
 		while(this.robot.getEnv_decouvert().CountMask()!=0)
 		{
+			System.out.println("while");
 			Enum_Orientation_Robot orientation=robot.getOrientation();		
 			switch (orientation){
 				case N :
-					if(robot.deplacement(robot.getX(),robot.getY()-1,orientation)){}
-					else {
+					System.out.println("Switch N");
+					if(!robot.deplacement(robot.getX(),robot.getY()-1,orientation)){
+						System.out.println("Switch Nbis");
+
 						if((int)(Math.random()+0.5)==1)
 							robot.setOrientation(Enum_Orientation_Robot.E);
 						else
@@ -69,8 +74,10 @@ public class RobotCtr {
 					}
 					break;
 				case S :
-					if(robot.deplacement(robot.getX(),robot.getY()+1,orientation)){}
-					else {
+					System.out.println("Switch S");
+					if(!robot.deplacement(robot.getX(),robot.getY()+1,orientation)){
+						System.out.println("Switch Sbis");
+
 						if((int)(Math.random()+0.5)==1)
 							robot.setOrientation(Enum_Orientation_Robot.W);
 						else
@@ -78,8 +85,10 @@ public class RobotCtr {
 					}
 					break;
 				case E :
-					if(robot.deplacement(robot.getX()+1,robot.getY(),orientation)){}
-					else {
+					System.out.println("Switch E");
+					if(!robot.deplacement(robot.getX()+1,robot.getY(),orientation)){
+						System.out.println("Switch Ebis");
+
 						if((int)(Math.random()+0.5)==1)
 							robot.setOrientation(Enum_Orientation_Robot.S);
 						else
@@ -87,8 +96,10 @@ public class RobotCtr {
 					}
 					break;
 				case W :
-					if(robot.deplacement(robot.getX()-1,robot.getY(),orientation)){}
-					else {
+					System.out.println("Switch W");
+					if(!robot.deplacement(robot.getX()-1,robot.getY(),orientation)){
+						System.out.println("Switch Wbis");
+
 						if((int)(Math.random()+0.5)==1)
 							robot.setOrientation(Enum_Orientation_Robot.N);
 						else
@@ -96,8 +107,10 @@ public class RobotCtr {
 					}
 					break;
 				 default :
+					 System.out.println("Switch DEF");
 					break;
 			}
+			System.out.println("while -> fin switch");
 		}
 	}
 	
