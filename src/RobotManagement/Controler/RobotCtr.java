@@ -7,6 +7,11 @@ public class RobotCtr {
 
 	private Env environnement;
 	private Robot robot;
+	private int autoCall=0;
+	private int xInit=-1;
+	private int yInit=-1;
+	private Enum_Orientation_Robot dir=null, prochDir=null;
+	
 	
 	public RobotCtr(Env environnement, Robot robot) {
 		this.environnement = environnement;
@@ -17,7 +22,9 @@ public class RobotCtr {
 	public void setEnvironnement(Env environnement) {this.environnement = environnement;}
 	public Robot getRobot() {return robot;}
 	public void setRobot(Robot robot) {this.robot = robot;}
-
+	public void incAutoCall(){this.autoCall+=1;}
+	public int getAutocall(){return this.autoCall;}
+	
 	public boolean deplacerRobot(Enum_Direction_Robot dir){
 		boolean retour=false;
 		switch(dir)
@@ -51,12 +58,37 @@ public class RobotCtr {
 	}
 	
 	public void autoMappingSimple(){
-		Enum_Orientation_Robot [] Tab = Enum_Orientation_Robot.values();
-		int i = (int) (Math.random() * 4);		
-		robot.setOrientation(Tab[i]);
-		while(this.robot.getEnv_decouvert().CountMask()!=0)
-		{
-			Enum_Orientation_Robot orientation=robot.getOrientation();		
+		this.incAutoCall();
+		int move=0;
+		
+		if(this.getAutocall()==1){
+			this.dir=Enum_Orientation_Robot.E;
+			this.xInit=this.robot.getX();
+			this.yInit=this.robot.getY();
+			if(yInit<=(this.robot.getEnv_decouvert().getY_plateau()-1)/2)
+				this.prochDir=Enum_Orientation_Robot.S;
+			else
+				this.prochDir=Enum_Orientation_Robot.N;
+		}
+			
+		do{
+			if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(dir))){
+				move=1;
+			}else{
+				if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(prochDir))){
+					
+				}
+				
+			}
+						
+		}while(move!=1);
+		
+//		Enum_Orientation_Robot [] Tab = Enum_Orientation_Robot.values();
+//		int i = (int) (Math.random() * 4);		
+//		robot.setOrientation(Tab[i]);
+		//while(this.robot.getEnv_decouvert().CountMask()!=0)
+		
+//			Enum_Orientation_Robot orientation=robot.getOrientation();		
 			//do{
 //				switch (orientation){
 //					case N :
@@ -111,7 +143,7 @@ public class RobotCtr {
 //						break;
 //				}
 			//}while(this.robot.getEnv_decouvert().);
-		}
+		
 	}
 	
 	

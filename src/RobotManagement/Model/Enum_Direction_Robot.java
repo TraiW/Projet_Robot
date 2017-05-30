@@ -3,7 +3,7 @@ package RobotManagement.Model;
 public enum Enum_Direction_Robot {
 	UP,DOWN,RIGHT,LEFT;
 	
-	 public Enum_Direction_Robot getOpposite(Enum_Direction_Robot dir){
+	 public static Enum_Direction_Robot getOpposite(Enum_Direction_Robot dir){
 		 Enum_Direction_Robot retour=Enum_Direction_Robot.LEFT;
 		 switch(dir)
 		 {
