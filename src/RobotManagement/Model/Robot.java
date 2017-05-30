@@ -72,7 +72,7 @@ public class Robot{
 	
 	public boolean DeplacementEtreValide(int x, int y) {
 		boolean retour=false;
-		if (x >= 0 && x <= this.env_decouvert.getX_plateau() && y >= 0 && y <= this.env_decouvert.getY_plateau()) {
+		if (x >= 0 && x < this.env_decouvert.getX_plateau() && y >= 0 && y < this.env_decouvert.getY_plateau()) {
 			if ( (x==this.x && (y==this.y+1 || y==this.y-1)) 
 					|| (y==this.y && (x==this.x+1 || x==this.x-1)) ) {
 				if (this.env_decouvert.getTableauEnv()[x][y].isVide() 
@@ -89,6 +89,7 @@ public class Robot{
 		} else {
 			System.out.println("Coordonnées hors plateau");
 		}
+		System.out.println("depl is valide retour");
 		return retour;
 	}
 	
