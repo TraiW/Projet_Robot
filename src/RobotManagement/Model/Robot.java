@@ -54,6 +54,7 @@ public class Robot{
 		//ajouter nbr obstacles visibles
 		if (DeplacementEtreValide(x, y)) {
 			this.mesures.addDistanceParcourue();
+			this.mesures.RAZObstaclesVisibles();
 			//System.out.println("X = "+x + " Y = "+y);
 			Case[][] tab=env_decouvert.getTableauEnv();
 			tab[this.x][this.y].setParcouru();
@@ -115,21 +116,29 @@ public class Robot{
 						case N:
 							if(this.env_decouvert.coordEtreDansPlateau(this.x-1+j, this.y-i)){
 								this.env_decouvert.getTableauEnv()[this.x-1+j][this.y-i].setMasquage(false);
+								if(this.env_decouvert.getTableauEnv()[this.x-1+j][this.y-i].isObstacle())
+									this.mesures.addObstaclesVisibles();
 							}
 							break;
 						case S:
 							if(this.env_decouvert.coordEtreDansPlateau(this.x-1+j, this.y+i)){
 								this.env_decouvert.getTableauEnv()[this.x-1+j][this.y+i].setMasquage(false);
+								if(this.env_decouvert.getTableauEnv()[this.x-1+j][this.y+i].isObstacle())
+									this.mesures.addObstaclesVisibles();
 								}
 							break;
 						case E:
 							if(this.env_decouvert.coordEtreDansPlateau(this.x+j, this.y-i+1)){
 								this.env_decouvert.getTableauEnv()[this.x+j][this.y-i+1].setMasquage(false);
+								if(this.env_decouvert.getTableauEnv()[this.x+j][this.y-i+1].isObstacle())
+									this.mesures.addObstaclesVisibles();
 							}
 							break;
 						case W:
 							if(this.env_decouvert.coordEtreDansPlateau(this.x-j, this.y-i+1)){
 								this.env_decouvert.getTableauEnv()[this.x-j][this.y-i+1].setMasquage(false);
+								if(this.env_decouvert.getTableauEnv()[this.x-j][this.y-i+1].isObstacle())
+									this.mesures.addObstaclesVisibles();
 							}
 							break;
 						default:
