@@ -58,46 +58,58 @@ public class RobotCtr {
 		{
 			Enum_Orientation_Robot orientation=robot.getOrientation();		
 			//do{
-				switch (orientation){
-					case N :
-						System.out.println("Switch N");
-						if(!robot.deplacement(robot.getX(),robot.getY()-1,orientation)){
-							if((int)(Math.random()+0.5)==1)
-								robot.setOrientation(Enum_Orientation_Robot.E);
-							else
-								robot.setOrientation(Enum_Orientation_Robot.W);
-						}
-						break;
-					case S :
-						System.out.println("Switch S");
-						if(!robot.deplacement(robot.getX(),robot.getY()+1,orientation)){
-							if((int)(Math.random()+0.5)==1)
-								robot.setOrientation(Enum_Orientation_Robot.W);
-							else
-								robot.setOrientation(Enum_Orientation_Robot.E);
-						}
-						break;
-					case E :
-						System.out.println("Switch E");
-						if(!robot.deplacement(robot.getX()+1,robot.getY(),orientation)){
-							if((int)(Math.random()+0.5)==1)
-								robot.setOrientation(Enum_Orientation_Robot.S);
-							else
-								robot.setOrientation(Enum_Orientation_Robot.N);
-						}
-						break;
-					case W :
-						System.out.println("Switch W");
-						if(!robot.deplacement(robot.getX()-1,robot.getY(),orientation)){
-							if((int)(Math.random()+0.5)==1)
-								robot.setOrientation(Enum_Orientation_Robot.N);
-							else
-								robot.setOrientation(Enum_Orientation_Robot.S);
-						}
-						break;
-					 default :
-						break;
-				}
+//				switch (orientation){
+//					case N :
+//						System.out.println("Switch N");
+//						if(!robot.getEnv_decouvert().isBordureEnvY(robot.getY()+1))
+//						{
+//							if(!robot.deplacement(robot.getX(),robot.getY()-1,orientation)){
+//								if((int)(Math.random()+0.5)==1)
+//									robot.setOrientation(Enum_Orientation_Robot.E);
+//								else
+//									robot.setOrientation(Enum_Orientation_Robot.W);
+//							}
+//						}
+//						break;
+//					case S :
+//						System.out.println("Switch S");
+//						if(!robot.getEnv_decouvert().isBordureEnvY(robot.getY()-1))
+//						{
+//							if(!robot.deplacement(robot.getX(),robot.getY()+1,orientation)){
+//								if((int)(Math.random()+0.5)==1)
+//									robot.setOrientation(Enum_Orientation_Robot.W);
+//								else
+//									robot.setOrientation(Enum_Orientation_Robot.E);
+//							}
+//						}
+//						break;
+//					case E :
+//						System.out.println("Switch E");
+//						if(!robot.getEnv_decouvert().isBordureEnvX(robot.getX()+1))
+//						{
+//							if(!robot.deplacement(robot.getX()+1,robot.getY(),orientation)){
+//								if((int)(Math.random()+0.5)==1)
+//									robot.setOrientation(Enum_Orientation_Robot.S);
+//								else
+//									robot.setOrientation(Enum_Orientation_Robot.N);
+//							}
+//						}
+//						break;
+//					case W :
+//						System.out.println("Switch W");
+//						if(!robot.getEnv_decouvert().isBordureEnvX(robot.getX()-1))
+//						{
+//							if(!robot.deplacement(robot.getX()-1,robot.getY(),orientation)){
+//								if((int)(Math.random()+0.5)==1)
+//									robot.setOrientation(Enum_Orientation_Robot.N);
+//								else
+//									robot.setOrientation(Enum_Orientation_Robot.S);
+//							}
+//						}
+//						break;
+//					 default :
+//						break;
+//				}
 			//}while(this.robot.getEnv_decouvert().);
 		}
 	}
