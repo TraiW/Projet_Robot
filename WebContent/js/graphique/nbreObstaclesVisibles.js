@@ -5,7 +5,7 @@ $(document).ready(function () {
         }
     });
 
-    Highcharts.chart('nbreObstacle_rencontres', {
+    Highcharts.chart('nbreObstaclesVisibles', {
         chart: {
             type: 'spline',
             animation: Highcharts.svg, // don't animate in old IE
@@ -23,20 +23,20 @@ $(document).ready(function () {
                     
                     setInterval(function(){
                 		$.get("rest/cmd/measure",function(data) {
-                			console.log("Graph Mesure Obstacle Rencontre"); 
+                			console.log("Graph Mesure Obstacle Visible"); 
                 			var x = (new Date()).getTime(); // current time
                 			var y;
-                			y = data.mesuresGraphes[2].value;
+                			y = data.mesuresGraphes[1].value;
                 			console.log("y : ",y);
                             series.addPoint([x, y], true, true);
                 		});
-                		console.log('FIN MesuresGraph Obstacle Rencontre');
+                		console.log('FIN MesuresGraph Obstacle Visible');
                 	},5000);
                 }
             }
         },
         title: {
-            text: 'Nombre d obstacles Rencontres par le robot depuis le lancement du simulateur'
+            text: 'Nombre d obstacles visibles par le robot'
         },
         xAxis: {
             type: 'datetime',
@@ -44,7 +44,7 @@ $(document).ready(function () {
         },
         yAxis: {
             title: {
-                text: 'Nombre d obstacles Rencontres'
+                text: 'Nombre d obstacles visibles'
             },
             plotLines: [{
                 value: 0,
@@ -66,7 +66,7 @@ $(document).ready(function () {
             enabled: false
         },
         series: [{
-            name: 'Nombre d obstacles Rencontres par le robot',
+            name: 'Nombre d obstacles visibles par le robot',
             data: (function () {
                 // generate an array of random data
                 var data = [],

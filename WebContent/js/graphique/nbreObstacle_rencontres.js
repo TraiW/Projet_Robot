@@ -7,7 +7,7 @@ Highcharts.setOptions({
     }
 });
 
-Highcharts.chart('nbreObstaclesVisibles', {
+Highcharts.chart('nbreObstacle_rencontres', {
     chart: {
         type: 'spline',
         animation: Highcharts.svg, // don't animate in old IE
@@ -25,20 +25,20 @@ Highcharts.chart('nbreObstaclesVisibles', {
                 
                 setInterval(function(){
             		$.get("rest/cmd/measure",function(data) {
-            			console.log("Graph Mesure Obstacle Visible"); 
+            			console.log("Graph Mesure Obstacle Rencontre"); 
             			var x = (new Date()).getTime(); // current time
             			var y;
-            			y = data.mesuresGraphes[1].value;
+            			y = data.mesuresGraphes[2].value;
             			console.log("y : ",y);
                         series.addPoint([x, y], true, true);
             		});
-            		console.log('FIN MesuresGraph Obstacle Visible');
+            		console.log('FIN MesuresGraph Obstacle Rencontre');
             	},5000);
             }
         }
     },
     title: {
-        text: 'Nombre d obstacles Visible par le robot'
+        text: 'Nombre d obstacles rencontrés par le robot depuis le lancement du simulateur'
     },
     xAxis: {
         type: 'datetime',
@@ -46,7 +46,7 @@ Highcharts.chart('nbreObstaclesVisibles', {
     },
     yAxis: {
         title: {
-            text: 'Nombre d obstacles Visible'
+            text: 'Nombre d obstacles rencontrés'
         },
         plotLines: [{
             value: 0,
@@ -68,7 +68,7 @@ Highcharts.chart('nbreObstaclesVisibles', {
         enabled: false
     },
     series: [{
-        name: 'Nombre d obstacles Visible par le robot',
+        name: 'Nombre d obstacles rencontrés par le robot',
         data: (function () {
             // generate an array of random data
             var data = [],
