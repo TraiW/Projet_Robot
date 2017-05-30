@@ -3,8 +3,8 @@ package RobotManagement.Model;
 public abstract class Config {
 
 	private double taux_chance=10;
-	private int X_plateau=10;
-	private int Y_plateau=10;
+	private int X_plateau=20;
+	private int Y_plateau=20;
 	private int nbreCase_plateau=X_plateau*Y_plateau;
 	
 	/***
