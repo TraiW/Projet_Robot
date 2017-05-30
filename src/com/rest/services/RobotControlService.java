@@ -15,17 +15,20 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import RobotManagement.Controler.RobotCtr;
+import RobotManagement.Model.Case;
 import RobotManagement.Model.Enum_Direction_Robot;
+import RobotManagement.Model.Env;
 import RobotManagement.Model.Robot;
 import RobotManagement.Model.RobotInit;
 import RobotManagement.Model.Measures;
-
 
 @Path("/cmd")
 public class RobotControlService {
 	private final static String ROBOT_SIMULATOR_LABEL="robot_simulator";
 	private static Robot robot=RobotInit.getInstance().createRobot(); 
 	RobotCtr robotCtr = new RobotCtr(robot.getEnv_decouvert(), robot);
+	private Case[][]tabEnv = null;
+	
 	//Inject servlet context (needed to get general context, application memory space, session memory space ...)
 	@Context
 	ServletContext context;
@@ -34,7 +37,6 @@ public class RobotControlService {
 		@PostConstruct
 		public void init(){
 			checkRobot();
-		
 		}
 		
 
@@ -118,39 +120,125 @@ public class RobotControlService {
 			return "index-1.html";
 		}
 		
+		@SuppressWarnings("unchecked")
+		@GET
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("env")
+		public String RecupObstacle()
+				{
+			
+			JSONObject objContainer = new JSONObject();
+			JSONObject objVal1 = new JSONObject();
+			
+			ArrayList<Integer>CX=new ArrayList<Integer>();
+			ArrayList<Integer>CY=new ArrayList<Integer>();
+			ArrayList<JSONObject>Ob=new ArrayList<JSONObject>();
+
+			tabEnv=RobotInit.getInstance().getEnvironnement().getTableauEnv();
+			int i=0,j=0;
+			int cpt=0;
+			int nbreObstacle=0;
+			
+			for(j=0;j<RobotInit.getInstance().getX_plateau();j++){
+				for(i=0;i<RobotInit.getInstance().getY_plateau();i++){
+					if(tabEnv[i][j].isObstacle()==true){
+						CX.add(cpt, i);
+						CY.add(cpt, j);
+						cpt+=1;
+					}
+				}
+			}
+			nbreObstacle=cpt;
+			objVal1.put("x", CX);
+			//IMPOSSIBLE IMBRIQUER LES OBJETS JSONS
+			JSONObject objVal2 = new JSONObject();
+			objVal2.put("y", CY);
+			
+			JSONObject objVal3 = new JSONObject();
+			objVal3.put("nbreObstacle", cpt);
+			
+			JSONArray list1 = new JSONArray();
+			Ob.add(objVal1);
+			list1.add(objVal2);
+			list1.add(objVal3);
+			JSONObject objVal4 = new JSONObject();
+			objVal3.put("terrain", Ob);
+
+			JSONArray list = new JSONArray();
+			//add json objects to jsonlist
+			
+			list.add(objVal4);
+			
+			//add jsonlist to json container
+			objContainer.put("env", list);
+			
+			return objContainer.toJSONString();
+		}		
 		
+			
+/*		// METHODE : Envoie objet JSON avec les infos sur l'herbe et sur les obstacles	
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("env")
 		public String getEnv()
 				{
-			//create Json container Object
-			JSONObject objContainer = new JSONObject();
+			tabEnv=RobotInit.getInstance().getEnvironnement().getTableauEnv();
+			int i=0,j=0;
+			String[] Env_converti=new String[RobotInit.getInstance().getX_plateau()*RobotInit.getInstance().getY_plateau()+40];
+			String debut ="[";
+			String fin ="]";
+			String obstacle="1";
+			String herbe="2";
+			int cpt=0;
 			
+			for(j=0;j<RobotInit.getInstance().getX_plateau();j++){
+				Env_converti[cpt]=debut;
+				cpt+=1;
+				for(i=0;i<RobotInit.getInstance().getY_plateau();i++){
+					if(tabEnv[i][j].isVide()==true){
+						if(Env_converti[cpt]==debut){
+							Env_converti[cpt]=debut+herbe;
+						}
+						else if(i==RobotInit.getInstance().getX_plateau()-1){
+							Env_converti[cpt]=herbe+fin;
+						}
+						else{
+							Env_converti[cpt]=herbe;
+						}	
+					}
+					else if(tabEnv[i][j].isObstacle()==true){
+						if(i==RobotInit.getInstance().getX_plateau()-1){
+							Env_converti[cpt]=obstacle+fin;
+						}
+						else{
+							Env_converti[cpt]=obstacle;
+						}
+					}
+					cpt+=1;	
+					//System.out.println(Env_converti[cpt]);
+				}
+			}
+			
+			JSONObject objContainer = new JSONObject();
 			//create set of json objects
 			JSONObject objVal1 = new JSONObject();
-			objVal1.put("x",new Integer(0));
-			objVal1.put("y",new Integer(0));
-			objVal1.put("val","FREE");
-			JSONObject objVal2 = new JSONObject();
-			objVal2.put("x",new Integer(0));
-			objVal2.put("y",new Integer(1));
-			objVal2.put("val","WALL");
-			JSONObject objVal3 = new JSONObject();
-			objVal3.put("x",new Integer(1));
-			objVal3.put("y",new Integer(1));
-			objVal3.put("val","ROBOT");
-			
 			
 			//create a json list
 			JSONArray list = new JSONArray();
+			JSONArray list1 = new JSONArray();
+			
 			//add json objects to jsonlist
-			list.add(objVal1);
-			list.add(objVal2);
-			list.add(objVal3);
+			list.add("chemin.png");
+			for(i=0;i<Env_converti.length;i++){
+				//System.out.println(Env_converti[i]);
+
+					list1.add(Env_converti[i]);
+			}
 			
 			//add jsonlist to json container
-			objContainer.put("data", list);
+			objContainer.put("terrain", list1);
+			objContainer.put("tileset", list);
+			
 			System.out.println(objContainer.toString());
 			//return json string of the json container
 			return objContainer.toJSONString();
@@ -159,7 +247,7 @@ public class RobotControlService {
 			//ALTERNATIVE send direct a json String
 			//return "{\"data\":[{\"x\":0,\"y\":0,\"val\":\"FREE\"},{\"x\":0,\"y\":1,\"val\":\"WALL\"},{\"x\":1,\"y\":1,\"val\":\"ROBOT\"}]}";
 		}
-		
+*/
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("measure")
@@ -200,6 +288,7 @@ public class RobotControlService {
 			//return json string of the json container
 			return objContainerData.toJSONString();
 		}
+		
 		
 		
 
