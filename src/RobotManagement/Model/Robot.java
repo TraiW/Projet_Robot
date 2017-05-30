@@ -72,11 +72,11 @@ public class Robot{
 	
 	public boolean DeplacementEtreValide(int x, int y) {
 		boolean retour=false;
-		if (x >= 0 && x <= env_decouvert.getX_plateau() && y >= 0 && y <= env_decouvert.getY_plateau()) {
+		if (x >= 0 && x <= this.env_decouvert.getX_plateau() && y >= 0 && y <= this.env_decouvert.getY_plateau()) {
 			if ( (x==this.x && (y==this.y+1 || y==this.y-1)) 
 					|| (y==this.y && (x==this.x+1 || x==this.x-1)) ) {
-				if (env_decouvert.getTableauEnv()[x][y].isVide() 
-						|| env_decouvert.getTableauEnv()[x][y].isParcouru()) {
+				if (this.env_decouvert.getTableauEnv()[x][y].isVide() 
+						|| this.env_decouvert.getTableauEnv()[x][y].isParcouru()) {
 					retour = true;
 				} else {
 					mesures.addObstaclesRencontres();
@@ -84,6 +84,7 @@ public class Robot{
 				}
 			}else{
 				System.out.println("Déplacement impossible : 1 case par 1 case");
+				System.out.println("***************************On ne devrait pas rentrer là !***************************");
 			}
 		} else {
 			System.out.println("Coordonnées hors plateau");

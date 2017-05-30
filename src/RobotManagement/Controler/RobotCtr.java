@@ -51,8 +51,7 @@ public class RobotCtr {
 	}
 	
 	public void autoMappingSimple(){
-		//robot.updateEnvironnement();	
-		System.out.println("going in");
+		//System.out.println("going in");
 
 		Enum_Orientation_Robot [] Tab = Enum_Orientation_Robot.values();
 		int i = (int) (Math.random() * 4);		
@@ -61,56 +60,58 @@ public class RobotCtr {
 		{
 			System.out.println("while");
 			Enum_Orientation_Robot orientation=robot.getOrientation();		
-			switch (orientation){
-				case N :
-					System.out.println("Switch N");
-					if(!robot.deplacement(robot.getX(),robot.getY()-1,orientation)){
-						System.out.println("Switch Nbis");
-
-						if((int)(Math.random()+0.5)==1)
-							robot.setOrientation(Enum_Orientation_Robot.E);
-						else
-							robot.setOrientation(Enum_Orientation_Robot.W);
-					}
-					break;
-				case S :
-					System.out.println("Switch S");
-					if(!robot.deplacement(robot.getX(),robot.getY()+1,orientation)){
-						System.out.println("Switch Sbis");
-
-						if((int)(Math.random()+0.5)==1)
-							robot.setOrientation(Enum_Orientation_Robot.W);
-						else
-							robot.setOrientation(Enum_Orientation_Robot.E);
-					}
-					break;
-				case E :
-					System.out.println("Switch E");
-					if(!robot.deplacement(robot.getX()+1,robot.getY(),orientation)){
-						System.out.println("Switch Ebis");
-
-						if((int)(Math.random()+0.5)==1)
-							robot.setOrientation(Enum_Orientation_Robot.S);
-						else
-							robot.setOrientation(Enum_Orientation_Robot.N);
-					}
-					break;
-				case W :
-					System.out.println("Switch W");
-					if(!robot.deplacement(robot.getX()-1,robot.getY(),orientation)){
-						System.out.println("Switch Wbis");
-
-						if((int)(Math.random()+0.5)==1)
-							robot.setOrientation(Enum_Orientation_Robot.N);
-						else
-							robot.setOrientation(Enum_Orientation_Robot.S);
-					}
-					break;
-				 default :
-					 System.out.println("Switch DEF");
-					break;
-			}
-			System.out.println("while -> fin switch");
+			//do{
+				switch (orientation){
+					case N :
+						System.out.println("Switch N");
+						if(!robot.deplacement(robot.getX(),robot.getY()-1,orientation)){
+							System.out.println("Switch Nbis");
+	
+							if((int)(Math.random()+0.5)==1)
+								robot.setOrientation(Enum_Orientation_Robot.E);
+							else
+								robot.setOrientation(Enum_Orientation_Robot.W);
+						}
+						break;
+					case S :
+						System.out.println("Switch S");
+						if(!robot.deplacement(robot.getX(),robot.getY()+1,orientation)){
+							System.out.println("Switch Sbis");
+	
+							if((int)(Math.random()+0.5)==1)
+								robot.setOrientation(Enum_Orientation_Robot.W);
+							else
+								robot.setOrientation(Enum_Orientation_Robot.E);
+						}
+						break;
+					case E :
+						System.out.println("Switch E");
+						if(!robot.deplacement(robot.getX()+1,robot.getY(),orientation)){
+							System.out.println("Switch Ebis");
+	
+							if((int)(Math.random()+0.5)==1)
+								robot.setOrientation(Enum_Orientation_Robot.S);
+							else
+								robot.setOrientation(Enum_Orientation_Robot.N);
+						}
+						break;
+					case W :
+						System.out.println("Switch W");
+						if(!robot.deplacement(robot.getX()-1,robot.getY(),orientation)){
+							System.out.println("Switch Wbis");
+	
+							if((int)(Math.random()+0.5)==1)
+								robot.setOrientation(Enum_Orientation_Robot.N);
+							else
+								robot.setOrientation(Enum_Orientation_Robot.S);
+						}
+						break;
+					 default :
+						 System.out.println("Switch DEF");
+						break;
+				}
+				System.out.println("while -> fin switch");
+			//}while(this.robot.getEnv_decouvert().);
 		}
 	}
 	
