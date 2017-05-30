@@ -1,5 +1,5 @@
 var map = new Map("premiere");
-
+var brouillard = new Map("seconde");
 var joueur = new Personnage("exemple.png", 1, 1, DIRECTION.BAS);
 map.addPersonnage(joueur);
 
@@ -12,6 +12,7 @@ window.onload = function() {
 
 	setInterval(function() {
 		map.dessinerMap(ctx);
+		brouillard.dessinerMap(ctx);
 	}, 40);
 
 	// Gestion du clavier
