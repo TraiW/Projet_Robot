@@ -35,6 +35,10 @@ public class RobotInit extends Config{
 		return RobotInit.instance;
 	}
 	
+	public Env getEnvironnement() {
+		return environnement;
+	}
+
 	public Robot createRobot() {
 		environnement.GenerationEnv();
 		Robot robot = new Robot(xInit, yInit, orientationInit, environnement, matriceVision);
