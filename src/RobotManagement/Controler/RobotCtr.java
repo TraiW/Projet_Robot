@@ -7,11 +7,12 @@ public class RobotCtr {
 
 	private Env environnement;
 	private Robot robot;
-	private int autoCall=0;
-	private int xInit=-1;
-	private int yInit=-1;
-	private boolean xy=false; // false = x true = y
-	private Enum_Orientation_Robot[] dir={null,null};
+	private static int autoCall=0;
+	private static int xInit=-1;
+	private static int yInit=-1;
+	private static Enum_Orientation_Robot[] dir={null,null};
+	private static int indiceDir=0;
+	private static int contournement=0;
 	
 	
 	public RobotCtr(Env environnement, Robot robot) {
@@ -25,6 +26,7 @@ public class RobotCtr {
 	public void setRobot(Robot robot) {this.robot = robot;}
 	public void incAutoCall(){this.autoCall+=1;}
 	public int getAutocall(){return this.autoCall;}
+	public void RAZAutoCall(){this.autoCall=0;}
 	
 	public boolean deplacerRobot(Enum_Direction_Robot dir){
 		boolean retour=false;
@@ -59,36 +61,72 @@ public class RobotCtr {
 	}
 	
 	public void autoMappingSimple(){
+		//TODO penser au RAZAutoCall(); lorsqu'on désactive l'automapping
 		this.incAutoCall();
 		int move=0;
 		if(this.getAutocall()==1){
-			this.dir[0]=Enum_Orientation_Robot.E;
-			this.xy=false; // false = x true = y
-			this.xInit=this.robot.getX();
-			this.yInit=this.robot.getY();
-			if(yInit<=(this.robot.getEnv_decouvert().getY_plateau()-1)/2)
-				this.dir[1]=Enum_Orientation_Robot.S;
-			else
-				this.dir[1]=Enum_Orientation_Robot.N;
+			indiceDir=0;
+			dir[indiceDir]=Enum_Orientation_Robot.E;
+			//RobotCtr.xy=false; // false = x true = y
+			xInit=this.robot.getX();
+			yInit=this.robot.getY();
+//			if(yInit<=(this.robot.getEnv_decouvert().getY_plateau()-1)/2)
+//				RobotCtr.dir[1]=Enum_Orientation_Robot.S;
+//			else
+//				RobotCtr.dir[1]=Enum_Orientation_Robot.N;
 		}
 			
 		do{
-			if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(dir[0]))){
-				move+=1;
-			}else{
-				xy=!xy;
-				if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(dir[1]))){
+			if(!robot.getEnv_decouvert().isBordureEnvDir(this.robot.getX(), this.robot.getY(), dir[indiceDir]) 
+					&& robot.getEnv_decouvert().isBordureEnvDirMoinsUn(this.robot.getX(), this.robot.getY(), dir[indiceDir]))
+			{
+				if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(dir[0]))){
 					move+=1;
+				}else{
+					if(indiceDir==0)
+						indiceDir=1;
+					else
+						indiceDir=0;
+					
+					if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(dir[1]))){
+						move+=1;
+					}
+					
 				}
-				
 			}
 			if(move==1)
 			{
 				if(xy && robot.getEnv_decouvert().isBordureEnvY(this.robot.getY()))
-				dir[0]=dir[1];
+					RobotCtr.dir[0]=RobotCtr.dir[1];
 				
 			}
 						
+		}while(move!=1);
+		
+		do{
+			//SI n'est pas en bordure ou ne le sera pas si deplacement dans la direction initiale et si contournement==0
+			//		SI deplacement possible
+			//			do it (sens de base here)
+			//		SINON
+			//			contournement+=1
+			//			SI possible turn90right
+			//			SINON si possible turn90left
+			//			SINON getopposite
+			//				contournement+=1;
+			//				autre traitement de merde à faire
+			//
+			//SINON SI n'est pas en bordure dans le sens de deplacement de base && deplacement possible && contournement !=0
+			//		deplacement dans le sens de base
+			//SINON
+			//		continuer dans direction de contour 
+			//				
+			//
+			//
+			//
+			
+			
+			
+			
 		}while(move!=1);
 		
 //		Enum_Orientation_Robot [] Tab = Enum_Orientation_Robot.values();
