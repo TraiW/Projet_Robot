@@ -123,7 +123,7 @@ public class RobotControlService {
 		@SuppressWarnings("unchecked")
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
-		@Path("env")
+		@Path("obstacle")
 		public String RecupObstacle()
 				{
 			
@@ -132,7 +132,7 @@ public class RobotControlService {
 			
 			ArrayList<Integer>CX=new ArrayList<Integer>();
 			ArrayList<Integer>CY=new ArrayList<Integer>();
-			ArrayList<JSONObject>Ob=new ArrayList<JSONObject>();
+			//ArrayList<JSONObject>Ob=new ArrayList<JSONObject>();
 
 			tabEnv=RobotInit.getInstance().getEnvironnement().getTableauEnv();
 			int i=0,j=0;
@@ -150,31 +150,113 @@ public class RobotControlService {
 			}
 			nbreObstacle=cpt;
 			objVal1.put("x", CX);
-			//IMPOSSIBLE IMBRIQUER LES OBJETS JSONS
 			JSONObject objVal2 = new JSONObject();
 			objVal2.put("y", CY);
 			
 			JSONObject objVal3 = new JSONObject();
 			objVal3.put("nbreObstacle", cpt);
 			
-			JSONArray list1 = new JSONArray();
-			Ob.add(objVal1);
-			list1.add(objVal2);
-			list1.add(objVal3);
-			JSONObject objVal4 = new JSONObject();
-			objVal3.put("terrain", Ob);
+			//JSONArray list1 = new JSONArray();
+			//Ob.add(objVal1);
+			//list1.add(objVal2);
+			//list1.add(objVal3);
+			//JSONObject objVal4 = new JSONObject();
+			//objVal3.put("terrain", Ob);
 
 			JSONArray list = new JSONArray();
 			//add json objects to jsonlist
-			
-			list.add(objVal4);
+			list.add(objVal1);
+			list.add(objVal2);
+			list.add(objVal3);
+			//list.add(objVal4);
 			
 			//add jsonlist to json container
-			objContainer.put("env", list);
+			//objContainer.put("env", list);
+			objContainer.put("terrain", list);
+
+			return objContainer.toJSONString();
+		}		
+		@SuppressWarnings("unchecked")
+		@GET
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("masquage")
+		public String RecupMasquage()
+				{
 			
+			JSONObject objContainer = new JSONObject();
+			JSONObject objVal1 = new JSONObject();
+			
+			ArrayList<Integer>CX=new ArrayList<Integer>();
+			ArrayList<Integer>CY=new ArrayList<Integer>();
+
+			tabEnv=RobotInit.getInstance().getEnvironnement().getTableauEnv();
+			int i=0,j=0;
+			int cpt=0;
+			
+			for(j=0;j<RobotInit.getInstance().getX_plateau();j++){
+				for(i=0;i<RobotInit.getInstance().getY_plateau();i++){
+					if(tabEnv[i][j].isMasquage()==true){
+						CX.add(cpt, i);
+						CY.add(cpt, j);
+						cpt+=1;
+					}
+				}
+			}
+			objVal1.put("x", CX);
+			JSONObject objVal2 = new JSONObject();
+			objVal2.put("y", CY);
+			
+			JSONArray list = new JSONArray();
+			//add json objects to jsonlist
+			list.add(objVal1);
+			list.add(objVal2);
+			
+			//add jsonlist to json container
+			objContainer.put("masquage", list);
+
 			return objContainer.toJSONString();
 		}		
 		
+		@SuppressWarnings("unchecked")
+		@GET
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("parcouru")
+		public String RecupCheminParcouru()
+				{
+			
+			JSONObject objContainer = new JSONObject();
+			JSONObject objVal1 = new JSONObject();
+			
+			ArrayList<Integer>CX=new ArrayList<Integer>();
+			ArrayList<Integer>CY=new ArrayList<Integer>();
+
+			tabEnv=RobotInit.getInstance().getEnvironnement().getTableauEnv();
+			int i=0,j=0;
+			int cpt=0;
+			
+			for(j=0;j<RobotInit.getInstance().getX_plateau();j++){
+				for(i=0;i<RobotInit.getInstance().getY_plateau();i++){
+					if(tabEnv[i][j].isParcouru()==true){
+						CX.add(cpt, i);
+						CY.add(cpt, j);
+						cpt+=1;
+					}
+				}
+			}
+			objVal1.put("x", CX);
+			JSONObject objVal2 = new JSONObject();
+			objVal2.put("y", CY);
+			
+			JSONArray list = new JSONArray();
+			//add json objects to jsonlist
+			list.add(objVal1);
+			list.add(objVal2);
+			
+			//add jsonlist to json container
+			objContainer.put("parcouru", list);
+
+			return objContainer.toJSONString();
+		}		
 			
 /*		// METHODE : Envoie objet JSON avec les infos sur l'herbe et sur les obstacles	
 		@GET
@@ -248,6 +330,7 @@ public class RobotControlService {
 			//return "{\"data\":[{\"x\":0,\"y\":0,\"val\":\"FREE\"},{\"x\":0,\"y\":1,\"val\":\"WALL\"},{\"x\":1,\"y\":1,\"val\":\"ROBOT\"}]}";
 		}
 */
+		@SuppressWarnings("unchecked")
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("measure")
