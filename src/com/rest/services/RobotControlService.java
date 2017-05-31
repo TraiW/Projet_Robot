@@ -29,7 +29,7 @@ public class RobotControlService {
 	RobotCtr robotCtr = new RobotCtr(robot.getEnv_decouvert(), robot);
 	private Case[][]tabEnv = null;
 	private String[]tabAutoMapping=null;
-	private boolean unlock;
+	private static boolean unlock=true;
 	//Inject servlet context (needed to get general context, application memory space, session memory space ...)
 	@Context
 	ServletContext context;
@@ -137,7 +137,7 @@ public class RobotControlService {
 		{
 			this.unlock = true;
 			System.out.println("goStart : " + unlock);
-			return "cmd.xhtml";
+			return "login.xhtml";
 		}
 
 		@POST
@@ -147,7 +147,7 @@ public class RobotControlService {
 		{
 			this.unlock=false;
 			System.out.println("goStop : " + unlock);
-			return "cmd.xhtml";
+			return "login.xhtml";
 		}
 		
 		
