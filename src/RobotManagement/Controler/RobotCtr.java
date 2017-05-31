@@ -13,7 +13,7 @@ public class RobotCtr {
 	private static Enum_Orientation_Robot[] dir={null,null};
 	private static int indiceDir=0;
 	private static int contournement=0;
-	
+	private static int[] autoDeplList= new int[10000];
 	
 	public RobotCtr(Env environnement, Robot robot) {
 		this.environnement = environnement;
@@ -24,9 +24,13 @@ public class RobotCtr {
 	public void setEnvironnement(Env environnement) {this.environnement = environnement;}
 	public Robot getRobot() {return robot;}
 	public void setRobot(Robot robot) {this.robot = robot;}
-	public void incAutoCall(){this.autoCall+=1;}
-	public int getAutocall(){return this.autoCall;}
-	public void RAZAutoCall(){this.autoCall=0;}
+	public void incAutoCall(){RobotCtr.autoCall+=1;}
+	public void decAutoCall(){RobotCtr.autoCall-=1;}
+	public int getAutocall(){return RobotCtr.autoCall;}
+	public void RAZAutoCall(){RobotCtr.autoCall=0;}
+	public int[] getAutoDeplList(){return RobotCtr.autoDeplList;}
+	public void setAutoDeplList(int val,int indice){RobotCtr.autoDeplList[indice]=val;}
+	public void RAZAutoDeplList(){for(int i=0;i<(RobotCtr.autoCall+1);i++){RobotCtr.autoDeplList[i]=-1;}}
 	
 	public boolean deplacerRobot(Enum_Direction_Robot dir){
 		boolean retour=false;
@@ -60,14 +64,18 @@ public class RobotCtr {
 		return retour;
 	}
 	
-	public void autoMappingSimple(){
+	/*public void autoMappingHard(){
 		//TODO penser au RAZAutoCall(); lorsqu'on désactive l'automapping
 		this.incAutoCall();
 		int move=0;
 		int countblock=0;
+		int start=0;
+		boolean horizont=false;
 		if(this.getAutocall()==1){
 			System.out.println("######init du bordel");
 			indiceDir=0;
+			start+=1;
+			System.out.println("start fin init = " + start);
 			dir[indiceDir]=Enum_Orientation_Robot.E;
 			//RobotCtr.xy=false; // false = x true = y
 			//xInit=this.robot.getX();
@@ -80,7 +88,7 @@ public class RobotCtr {
 		}
 			
 		do{
-			System.out.println("we're in !");
+				System.out.println("we're in !");
 				if(!robot.getEnv_decouvert().isBordureEnvDir(this.robot.getX(), this.robot.getY(), dir[indiceDir]) 
 						&& !robot.getEnv_decouvert().isBordureEnvDirMoinsUn(this.robot.getX(), this.robot.getY(), dir[indiceDir]))
 				{
@@ -109,31 +117,52 @@ public class RobotCtr {
 						}
 				}else{//changement direction
 						System.out.println("bordure 1");
+						System.out.println("start avant traitement = " + start);
+						if(start==1){
+								if(deplacerRobot(Enum_Direction_Robot.DOWN)){
+									System.out.println("deplacement du start 1 OK");
+									move+=1;
+								}
+								start+=1;
+						}else if(start==2){
+							if(deplacerRobot(Enum_Direction_Robot.RIGHT)){
+								System.out.println("deplacement du start 2 OK");
+								move+=1;
+							}
+							start=0;
+						}
+						System.out.println("start après traitement = " + start);
+						
+						
 						if(indiceDir==0)
 							indiceDir=1;
 						else
 							indiceDir=0;
 						countblock+=1;
 						System.out.println("Countblock = " + countblock);
-						if(countblock>2)
-							dir[0]=Enum_Orientation_Robot.getOpposite(dir[0]);
+						if(countblock>2){
+							indiceDir=0;
+							dir[indiceDir]=Enum_Orientation_Robot.getOpposite(dir[indiceDir]);
+						}
 				}
 				
 				if(move==1)
 				{
-						indiceDir=1;
-						move=0;
 						System.out.println("move DONE -> modifs prochaines dir");
-						if(!robot.getEnv_decouvert().isBordureEnvDir(this.robot.getX(), this.robot.getY(), dir[indiceDir]) 
-								&& !robot.getEnv_decouvert().isBordureEnvDirMoinsUn(this.robot.getX(), this.robot.getY(), dir[indiceDir]))
-							dir[0]=dir[1];
+						horizont=Enum_Orientation_Robot.isHorizontal(dir[indiceDir]);
 						
+						if(horizont && robot.getEnv_decouvert().isLigneParcourue(this.robot.getX())
+								|| !horizont && robot.getEnv_decouvert().isColonneParcourue(this.robot.getY()))
+						{//cas ou ligne ou colonne parcourue
+								dir[0]=Enum_Orientation_Robot.turn90R(dir[0]);
+								dir[1]=Enum_Orientation_Robot.turn90R(dir[0]);
+						}
 						indiceDir=0;
-						
 				}	
 				System.out.println("Fin condition");
 		}while(move!=1);
-		System.out.println("END");
+		move=0;
+		System.out.println("*******************END*********************");
 		
 			//SI n'est pas en bordure ou ne le sera pas si deplacement dans la direction initiale et si contournement==0
 			//		SI deplacement possible
@@ -220,10 +249,121 @@ public class RobotCtr {
 		
 	}
 	
-	
-	public void autoMappingHard(){//DOESN'T WORK
+	*/
+	public void autoMappingSimple(){
+			
+		Enum_Orientation_Robot [] Tab = Enum_Orientation_Robot.values();
+		this.incAutoCall();
+		if(this.getAutocall()==1){
+			int i = (int) (Math.random() * 4);		
+			robot.setOrientation(Tab[i]);
+		}
+		
+		Enum_Orientation_Robot orientation=robot.getOrientation();
+				
+		switch (orientation){
+		case N :
+			if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(orientation))){
+				autoDeplList[this.getAutocall()]=1;
+				if(robot.getEnv_decouvert().coordEtreDansPlateau(robot.getX(), robot.getY()-1)){
+					if(robot.getEnv_decouvert().getTableauEnv()[robot.getX()][robot.getY()-1].isParcouru()){
+						if((int)(Math.random()+0.5)==1)
+							robot.setOrientation(Enum_Orientation_Robot.E);
+						else
+							robot.setOrientation(Enum_Orientation_Robot.W);
+					}
+				}
+			}else {
+				this.decAutoCall();
+				if((int)(Math.random()+0.5)==1)
+					robot.setOrientation(Enum_Orientation_Robot.E);
+				else
+					robot.setOrientation(Enum_Orientation_Robot.W);
+			}
+			break;
+		case S :
+			if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(orientation))){
+				autoDeplList[this.getAutocall()]=2;
+				if(robot.getEnv_decouvert().coordEtreDansPlateau(robot.getX(), robot.getY()+1)){
+					if(robot.getEnv_decouvert().getTableauEnv()[robot.getX()][robot.getY()+1].isParcouru()){
+						if((int)(Math.random()+0.5)==1)
+							robot.setOrientation(Enum_Orientation_Robot.W);
+						else
+							robot.setOrientation(Enum_Orientation_Robot.E);
+					}
+				}
+			}
+			else {
+				this.decAutoCall();
+				if((int)(Math.random()+0.5)==1)
+					robot.setOrientation(Enum_Orientation_Robot.W);
+				else
+					robot.setOrientation(Enum_Orientation_Robot.E);
+			}
+			break;
+		case E :
+			if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(orientation))){
+				autoDeplList[this.getAutocall()]=3;
+				if(robot.getEnv_decouvert().coordEtreDansPlateau(robot.getX()+1, robot.getY())){
+					if(robot.getEnv_decouvert().getTableauEnv()[robot.getX()+1][robot.getY()].isParcouru()){
+						if((int)(Math.random()+0.5)==1)
+							robot.setOrientation(Enum_Orientation_Robot.S);
+						else
+							robot.setOrientation(Enum_Orientation_Robot.N);
+					}
+				}
+			}
+			else {				
+				this.decAutoCall();
+				if((int)(Math.random()+0.5)==1)
+					robot.setOrientation(Enum_Orientation_Robot.S);
+				else
+					robot.setOrientation(Enum_Orientation_Robot.N);
+			}
+			break;
+		case W :
+			if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(orientation))){
+				autoDeplList[this.getAutocall()]=4;
+				if(robot.getEnv_decouvert().coordEtreDansPlateau(robot.getX()-1, robot.getY())){
+					if(robot.getEnv_decouvert().getTableauEnv()[robot.getX()-1][robot.getY()].isParcouru()){
+						if((int)(Math.random()+0.5)==1)
+							robot.setOrientation(Enum_Orientation_Robot.N);
+						else
+							robot.setOrientation(Enum_Orientation_Robot.S);
+					}
+				}
+			}
+			else {
+				this.decAutoCall();
+				if((int)(Math.random()+0.5)==1)
+					robot.setOrientation(Enum_Orientation_Robot.N);
+				else
+					robot.setOrientation(Enum_Orientation_Robot.S);
+			}
+			break;
+		 default :
+			break;
+		}
+	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		//TODO
-		Env env_percu=this.robot.getEnv_decouvert();
+		/*Env env_percu=this.robot.getEnv_decouvert();
 		int[] tabCoord={this.robot.getX(),this.robot.getY()};
 		int indiceCoord=0;//indiceCoord=0 -> tabCoord de X, si 1 -> tabCoord de Y
 		boolean retour=false;
@@ -273,7 +413,7 @@ public class RobotCtr {
 				}
 				
 			}while(!env_percu.isBordureEnvX(tabCoord[indiceCoord]));//pb here
-		}
-	}
+		}*/
+	
 	
 }

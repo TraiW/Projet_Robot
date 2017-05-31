@@ -13,7 +13,7 @@ public class TestSimulateur {
 	@Test
 	public void test() {
 		int i=0,j=0;
-		int xEnv=10,yEnv=10;
+		int xEnv=20,yEnv=20;
 		Env enviro=new Env();
 		enviro.GenerationEnv();
 		//enviro.getTableauEnv()[0][1].setEtat_case(Enum_Etat_Case.obstacle);
@@ -29,55 +29,48 @@ public class TestSimulateur {
 			}
 			System.out.println("");
 		}
-		//System.out.println("mask " + bot.getEnv_decouvert().CountMask());
-//		System.out.println("DOWN");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.DOWN);
-//		
-//		System.out.println("DOWN");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.DOWN);
-//		
-//		System.out.println("DOWN");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.DOWN);
-//		
-//		
-//		System.out.println("DOWN");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.DOWN);
-//
-//		System.out.println("RIGHT");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.RIGHT);
-//		System.out.println("RIGHT");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.RIGHT);
-//		System.out.println("RIGHT");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.RIGHT);
-//		System.out.println("RIGHT");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.RIGHT);
-//		System.out.println("DOWN");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.DOWN);
-//		System.out.println("DOWN");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.DOWN);
-//		System.out.println("UP");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.UP);
-//		System.out.println("UP");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.UP);
-//		System.out.println("UP");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.UP);
-//		System.out.println("UP");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.UP);
-//		System.out.println("UP");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.UP);
-//		System.out.println("LEFT");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.LEFT);	
-//		System.out.println("UP");
-//		botctrl.deplacerRobot(Enum_Direction_Robot.UP);	
-		//System.out.println("**************END******************");
-		botctrl.autoMappingSimple();
+		int count=0;
+		do
+		{
+			botctrl.autoMappingSimple();
+			count+=1;
+		}while(botctrl.getRobot().getEnv_decouvert().CountMask()!=0);
+		
+		botctrl.setAutoDeplList(botctrl.getAutocall(),0);//place en première case le nombre de déplacement total
+		
 		for(i=0;i<xEnv;i++)
 		{
 			for(j=0;j<yEnv;j++)
-				System.out.print(bot.getEnv_decouvert().getTableauEnv()[j][i].isMasquage()+" ");
+			{
+				if(bot.getEnv_decouvert().getTableauEnv()[j][i].isObstacle())
+					System.out.print("Obs ");
+				else if(bot.getEnv_decouvert().getTableauEnv()[j][i].isVide())
+					System.out.print("vid ");
+				else if(bot.getEnv_decouvert().getTableauEnv()[j][i].isRobot())
+					System.out.print("BOT ");
+				else if(bot.getEnv_decouvert().getTableauEnv()[j][i].isParcouru())
+					System.out.print(" 0  ");
+			}	
 			System.out.println("");
 		}
-		System.out.println(enviro.getX_plateau()+""+enviro.getY_plateau());
+		System.out.println("BOT en x:"+bot.getX()+" y:"+bot.getY());
+		System.out.println("parcouru en "+count+" itération");
+		System.out.println("parcouru en "+botctrl.getAutocall()+" déplacements réels");
+		System.out.println("");
+		
+		for(i=0;i<xEnv;i++)
+		{
+			for(j=0;j<yEnv;j++)
+			{
+				System.out.print(bot.getEnv_decouvert().getTableauEnv()[j][i].isMasquage()+" ");
+			}
+			System.out.println("");
+		}
+		for(i=0;i<botctrl.getAutocall();i++)
+		{
+			System.out.println(botctrl.getAutoDeplList()[i]);
+		}
+		//System.out.println(enviro.getX_plateau()+" par "+enviro.getY_plateau());
 
 	}
 

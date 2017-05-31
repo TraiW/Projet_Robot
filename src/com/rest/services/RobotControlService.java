@@ -28,7 +28,7 @@ public class RobotControlService {
 	private static Robot robot=RobotInit.getInstance().createRobot(); 
 	RobotCtr robotCtr = new RobotCtr(robot.getEnv_decouvert(), robot);
 	private Case[][]tabEnv = null;
-	private String[]tabAutoMapping=null;
+	private int[]tabAutoMapping=null;
 	private static boolean unlock=false;
 	//Inject servlet context (needed to get general context, application memory space, session memory space ...)
 	@Context
@@ -423,28 +423,30 @@ public class RobotControlService {
 			
 			JSONObject objContainer = new JSONObject();
 			JSONObject objVal1 = new JSONObject();
-			JSONObject objVal2 = new JSONObject();
 
-			ArrayList<String>AutoMappingString=new ArrayList<String>();
-
-			tabAutoMapping=//RobotInit.getInstance().getEnvironnement().getTableauEnv();
+			ArrayList<Integer>AutoMappingString=new ArrayList<Integer>();
+			robotCtr.RAZAutoDeplList();
+			robotCtr.RAZAutoCall();//Attention a ne pas faire avant le RAZAutoDeplList !!
+			do
+			{
+				robotCtr.autoMappingSimple();
+			}while(robotCtr.getRobot().getEnv_decouvert().CountMask()!=0);
+			robotCtr.setAutoDeplList(robotCtr.getAutocall(),0);
+			
+			tabAutoMapping=robotCtr.getAutoDeplList();
 			int i=0;
 			int cpt=0;
-			int TailleAutoMapping=0;
 			
-			for(i=0;i<RobotInit.getInstance().getX_plateau();i++){
+			for(i=0;i<tabAutoMapping[0]+1;i++){
 				AutoMappingString.add(cpt,tabAutoMapping[i]);
 				cpt+=1;		
 			}
-			TailleAutoMapping=cpt;
 			
 			objVal1.put("AutoMappingString", AutoMappingString);
-			objVal2.put("TailleAutoMapping", TailleAutoMapping);
 			
 			JSONArray list = new JSONArray();
 			//add json objects to jsonlist
 			list.add(objVal1);
-			list.add(objVal2);
 
 			//add jsonlist to json container
 			objContainer.put("Automapping", list);

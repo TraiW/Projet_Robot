@@ -46,4 +46,64 @@ public enum Enum_Orientation_Robot {
 		 }
 		 return retour;
 	  }
+	 
+	 public static boolean isHorizontal(Enum_Orientation_Robot dir){
+		 boolean retour=false;
+		 switch(dir)
+		 {
+		 	case E:
+		 		retour=true;
+		 		break;
+		 	case W:
+		 		retour=true;
+		 		break;
+	 		default:
+	 			break;
+		 }
+		 return retour;
+	  }
+	 
+	 public static Enum_Orientation_Robot turn90R(Enum_Orientation_Robot dir){
+		 Enum_Orientation_Robot retour=Enum_Orientation_Robot.W;
+		 switch(dir)
+		 {
+		 	case N:
+		 		retour=Enum_Orientation_Robot.E;
+		 		break;
+		 	case S:
+		 		retour=Enum_Orientation_Robot.W;
+		 		break;
+		 	case E:
+		 		retour=Enum_Orientation_Robot.S;
+		 		break;
+		 	case W:
+		 		retour=Enum_Orientation_Robot.N;
+		 		break;
+	 		default:
+	 			break;
+		 }
+		 return retour;
+	  }
+	 
+	 public static Enum_Orientation_Robot turn90L(Enum_Orientation_Robot dir){
+		 Enum_Orientation_Robot retour=Enum_Orientation_Robot.W;
+		 switch(dir)
+		 {
+		 	case N:
+		 		retour=Enum_Orientation_Robot.W;
+		 		break;
+		 	case S:
+		 		retour=Enum_Orientation_Robot.E;
+		 		break;
+		 	case E:
+		 		retour=Enum_Orientation_Robot.N;
+		 		break;
+		 	case W:
+		 		retour=Enum_Orientation_Robot.S;
+		 		break;
+	 		default:
+	 			break;
+		 }
+		 return retour;
+	  }
 }
