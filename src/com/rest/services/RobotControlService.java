@@ -28,6 +28,7 @@ public class RobotControlService {
 	private static Robot robot=RobotInit.getInstance().createRobot(); 
 	RobotCtr robotCtr = new RobotCtr(robot.getEnv_decouvert(), robot);
 	private Case[][]tabEnv = null;
+	private String[]tabAutoMapping=null;
 	
 	//Inject servlet context (needed to get general context, application memory space, session memory space ...)
 	@Context
@@ -187,7 +188,7 @@ public class RobotControlService {
 			
 			for(j=0;j<RobotInit.getInstance().getX_plateau();j++){
 				for(i=0;i<RobotInit.getInstance().getY_plateau();i++){
-					if(tabEnv[j][i].isMasquage()==true){
+					if(tabEnv[j][i].isMasquage()==false){
 						CX.add(cpt, i);
 						CY.add(cpt, j);
 						cpt+=1;
@@ -376,6 +377,43 @@ public class RobotControlService {
 			return objContainerData.toJSONString();
 		}
 		
+		@SuppressWarnings("unchecked")
+		@GET
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("automapping")
+		public String RecupAutoMapping()
+				{
+			
+			JSONObject objContainer = new JSONObject();
+			JSONObject objVal1 = new JSONObject();
+			JSONObject objVal2 = new JSONObject();
+
+			ArrayList<String>AutoMappingString=new ArrayList<String>();
+
+			tabAutoMapping=//RobotInit.getInstance().getEnvironnement().getTableauEnv();
+			int i=0;
+			int cpt=0;
+			int TailleAutoMapping=0;
+			
+			for(i=0;i<RobotInit.getInstance().getX_plateau();i++){
+				AutoMappingString.add(cpt,tabAutoMapping[i]);
+				cpt+=1;		
+			}
+			TailleAutoMapping=cpt;
+			
+			objVal1.put("AutoMappingString", AutoMappingString);
+			objVal2.put("TailleAutoMapping", TailleAutoMapping);
+			
+			JSONArray list = new JSONArray();
+			//add json objects to jsonlist
+			list.add(objVal1);
+			list.add(objVal2);
+
+			//add jsonlist to json container
+			objContainer.put("Automapping", list);
+
+			return objContainer.toJSONString();
+		}	
 		
 		
 
