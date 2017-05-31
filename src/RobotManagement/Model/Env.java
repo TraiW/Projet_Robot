@@ -8,6 +8,7 @@ public class Env extends Config {
 	
 	private Case[][]tableauEnv;
 	
+	
 	public Env(){
 		this.tableauEnv = new Case[getX_plateau()][getY_plateau()];
 		

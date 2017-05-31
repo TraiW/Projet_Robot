@@ -96,7 +96,7 @@ public class RobotCtr {
 			}
 			if(move==1)
 			{
-				if(xy && robot.getEnv_decouvert().isBordureEnvY(this.robot.getY()))
+				if(robot.getEnv_decouvert().isBordureEnvY(this.robot.getY()))
 					RobotCtr.dir[0]=RobotCtr.dir[1];
 				
 			}
