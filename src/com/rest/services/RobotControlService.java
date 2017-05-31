@@ -132,7 +132,6 @@ public class RobotControlService {
 			
 			ArrayList<Integer>CX=new ArrayList<Integer>();
 			ArrayList<Integer>CY=new ArrayList<Integer>();
-			//ArrayList<JSONObject>Ob=new ArrayList<JSONObject>();
 
 			tabEnv=RobotInit.getInstance().getEnvironnement().getTableauEnv();
 			int i=0,j=0;
@@ -141,7 +140,7 @@ public class RobotControlService {
 			
 			for(j=0;j<RobotInit.getInstance().getX_plateau();j++){
 				for(i=0;i<RobotInit.getInstance().getY_plateau();i++){
-					if(tabEnv[i][j].isObstacle()==true){
+					if(tabEnv[j][i].isObstacle()==true){
 						CX.add(cpt, i);
 						CY.add(cpt, j);
 						cpt+=1;
@@ -154,28 +153,20 @@ public class RobotControlService {
 			objVal2.put("y", CY);
 			
 			JSONObject objVal3 = new JSONObject();
-			objVal3.put("nbreObstacle", cpt);
+			objVal3.put("nbreObstacle", nbreObstacle);
 			
-			//JSONArray list1 = new JSONArray();
-			//Ob.add(objVal1);
-			//list1.add(objVal2);
-			//list1.add(objVal3);
-			//JSONObject objVal4 = new JSONObject();
-			//objVal3.put("terrain", Ob);
-
 			JSONArray list = new JSONArray();
 			//add json objects to jsonlist
 			list.add(objVal1);
 			list.add(objVal2);
 			list.add(objVal3);
-			//list.add(objVal4);
 			
 			//add jsonlist to json container
-			//objContainer.put("env", list);
 			objContainer.put("terrain", list);
 
 			return objContainer.toJSONString();
-		}		
+		}
+		
 		@SuppressWarnings("unchecked")
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
@@ -192,25 +183,31 @@ public class RobotControlService {
 			tabEnv=RobotInit.getInstance().getEnvironnement().getTableauEnv();
 			int i=0,j=0;
 			int cpt=0;
+			int nbreMasquage=0; 
 			
 			for(j=0;j<RobotInit.getInstance().getX_plateau();j++){
 				for(i=0;i<RobotInit.getInstance().getY_plateau();i++){
-					if(tabEnv[i][j].isMasquage()==true){
+					if(tabEnv[j][i].isMasquage()==true){
 						CX.add(cpt, i);
 						CY.add(cpt, j);
 						cpt+=1;
 					}
 				}
 			}
+			nbreMasquage=cpt;
+
 			objVal1.put("x", CX);
 			JSONObject objVal2 = new JSONObject();
 			objVal2.put("y", CY);
+			JSONObject objVal3 = new JSONObject();
+			objVal3.put("nbreMasquage", nbreMasquage);
 			
 			JSONArray list = new JSONArray();
 			//add json objects to jsonlist
 			list.add(objVal1);
 			list.add(objVal2);
-			
+			list.add(objVal3);
+
 			//add jsonlist to json container
 			objContainer.put("masquage", list);
 
@@ -233,25 +230,32 @@ public class RobotControlService {
 			tabEnv=RobotInit.getInstance().getEnvironnement().getTableauEnv();
 			int i=0,j=0;
 			int cpt=0;
-			
+			int nbreParcouru=0; 
+
 			for(j=0;j<RobotInit.getInstance().getX_plateau();j++){
 				for(i=0;i<RobotInit.getInstance().getY_plateau();i++){
-					if(tabEnv[i][j].isParcouru()==true){
+					if(tabEnv[j][i].isParcouru()==true){
 						CX.add(cpt, i);
 						CY.add(cpt, j);
 						cpt+=1;
 					}
 				}
 			}
+			nbreParcouru=cpt;
+			
 			objVal1.put("x", CX);
 			JSONObject objVal2 = new JSONObject();
 			objVal2.put("y", CY);
+			
+			JSONObject objVal3 = new JSONObject();
+			objVal3.put("nbreParcouru", nbreParcouru);
 			
 			JSONArray list = new JSONArray();
 			//add json objects to jsonlist
 			list.add(objVal1);
 			list.add(objVal2);
-			
+			list.add(objVal3);
+
 			//add jsonlist to json container
 			objContainer.put("parcouru", list);
 

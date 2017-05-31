@@ -1,3 +1,4 @@
+var test
 function Map(nom) {
 	// Création de l'objet XmlHttpRequest
 	var xhr = getXMLHttpRequest();
@@ -17,6 +18,38 @@ function Map(nom) {
 	// Liste des personnages présents sur le terrain.
 	this.personnages = new Array();
 }
+Map.prototype.recupMap=function(){	
+
+var wait=0;
+var xinter=0;
+var yinter=0;
+test=this.terrain;
+console.log("test0 : "+test);
+
+	$.get("rest/cmd/obstacle",function(data) {
+	//	console.log("DEBUT DATA CARTE =>"); 
+
+	//	console.log("nbr :"+data.terrain[2].nbreObstacle);
+
+		for(var i=0;i<data.terrain[2].nbreObstacle;i++)
+		{
+			xinter=data.terrain[0].x[i];
+			yinter = data.terrain[1].y[i];
+//			console.log("--------------------------------");
+//			console.log("xinter : "+xinter);
+//			console.log("yinter : "+yinter);
+//			console.log("--------------------------------");
+
+			test[xinter][yinter]=1;
+		}
+
+	//	console.log("test1 : "+test);
+
+	});
+
+	
+}
+
 
 // Pour récupérer la taille (en tiles) de la carte
 Map.prototype.getHauteur = function() {
@@ -29,6 +62,9 @@ Map.prototype.getLargeur = function() {
 // Pour ajouter un personnage
 Map.prototype.addPersonnage = function(perso) {
 	this.personnages.push(perso);
+}
+Map.prototype.removePersonnage = function(perso){
+	this.personnages.pop()
 }
 
 Map.prototype.dessinerMap = function(context) {

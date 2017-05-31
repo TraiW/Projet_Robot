@@ -1,6 +1,12 @@
 var map = new Map("premiere");
 var brouillard = new Map("seconde");
+var brou =1;
+var perso =1;
+map.recupMap();
+//map.modifMap();
+
 var joueur = new Personnage("exemple.png", 0, 0, DIRECTION.BAS);
+
 map.addPersonnage(joueur);
 
 window.onload = function() {
@@ -11,10 +17,53 @@ window.onload = function() {
 	canvas.height = map.getHauteur() * 32;
 
 	setInterval(function() {
-		map.dessinerMap(ctx);
-//		brouillard.dessinerMap(ctx);
-	}, 40);
+				
+		
+				$('#signup7').change(function() {
+					   if($(this).is(":checked")) {
+							brou=1;
+//							alert("Coché"+brou);		
+						   return;
+					   }
+					   brou=0;
+//					alert("Decoché"+brou);	
+					});
+				$('#signup8').change(function() {
+					   if($(this).is(":checked")) {
+						   perso=1;
+//							alert("Coché"+perso);		
+						   return;
+					   }
+					   perso=0;
+//					alert("Decoché"+perso);	
+					});
+				
+				if(brou==1){
+				map.dessinerMap(ctx);
+				//brouillard.dessinerMap(ctx);
+				}
+				else
+				{
+					map.dessinerMap(ctx);
+				}
+					
+			}, 40);
 
+
+	
+//	setInterval(function() {
+//	map.dessinerMap(ctx);
+//	brouillard.dessinerMap(ctx);
+//}, 40);
+
+
+		
+
+	
+//	
+
+	
+	
 	// Gestion du clavier
 	window.onkeydown = function(event) {
 
@@ -22,44 +71,6 @@ window.onload = function() {
 		var e = event || window.event;
 		var key = e.which || e.keyCode;
 
-//		$(document).ready(function(){
-//			var test = [];
-//		  $("#ButtonUp").click(function(){
-//			  	$.post("rest/cmd/UP",
-//		    		  {},
-//		    		  function(data,status){
-//		      		    alert("Post Done received data: " + data + "\nStatus: " + status);
-//		      			joueur.deplacer(DIRECTION.UP, map);
-//		    		  });    
-//		  });
-//
-//		  $("#ButtonDown").click(function(){
-//			  	$.post("rest/cmd/DOWN",
-//		  		  {},
-//		  		function(data,status){
-//		    		    alert("Post Done received data: " + data + "\nStatus: " + status);
-//		      			joueur.deplacer(DIRECTION.DOWN, map);
-//
-//		  		  });
-//		  });
-//		  
-//		  $("#ButtonRight").click(function(){
-//			  	$.post("rest/cmd/RIGHT",
-//		  		  {},
-//		  		function(data,status){
-//		    		    alert("Post Done received data: " + data + "\nStatus: " + status);
-//		  		  });    
-//		  });
-//		  
-//		  $("#ButtonLeft").click(function(){
-//			  	$.post("rest/cmd/LEFT",
-//		  		  {},
-//		  		function(data,status){
-//		    		    alert("Post Done received data: " + data + "\nStatus: " + status);
-//		  		  });    
-//		  });
-//
-//		});
 		
 		
 		switch(key) {

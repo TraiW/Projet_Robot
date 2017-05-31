@@ -23,14 +23,14 @@ $(document).ready(function () {
                     
                     setInterval(function(){
                 		$.get("rest/cmd/measure",function(data) {
-                			console.log("Graph Mesure Commande"); 
+                			//console.log("Graph Mesure Commande"); 
                 			var x = (new Date()).getTime(); // current time
                 			var y;
                 			y = data.mesuresGraphes[0].value;
-                			console.log("y : ",y);
+                			//console.log("y : ",y);
                             series.addPoint([x, y], true, true);
                 		});
-                		console.log('FIN MesuresGraph Commande');
+                		//console.log('FIN MesuresGraph Commande');
                 	},5000);
                 }
             }
