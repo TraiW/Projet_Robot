@@ -10,7 +10,8 @@ public class RobotCtr {
 	private int autoCall=0;
 	private int xInit=-1;
 	private int yInit=-1;
-	private Enum_Orientation_Robot dir=null, prochDir=null;
+	private boolean xy=false; // false = x true = y
+	private Enum_Orientation_Robot[] dir={null,null};
 	
 	
 	public RobotCtr(Env environnement, Robot robot) {
@@ -60,24 +61,31 @@ public class RobotCtr {
 	public void autoMappingSimple(){
 		this.incAutoCall();
 		int move=0;
-		
 		if(this.getAutocall()==1){
-			this.dir=Enum_Orientation_Robot.E;
+			this.dir[0]=Enum_Orientation_Robot.E;
+			this.xy=false; // false = x true = y
 			this.xInit=this.robot.getX();
 			this.yInit=this.robot.getY();
 			if(yInit<=(this.robot.getEnv_decouvert().getY_plateau()-1)/2)
-				this.prochDir=Enum_Orientation_Robot.S;
+				this.dir[1]=Enum_Orientation_Robot.S;
 			else
-				this.prochDir=Enum_Orientation_Robot.N;
+				this.dir[1]=Enum_Orientation_Robot.N;
 		}
 			
 		do{
-			if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(dir))){
-				move=1;
+			if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(dir[0]))){
+				move+=1;
 			}else{
-				if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(prochDir))){
-					
+				xy=!xy;
+				if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(dir[1]))){
+					move+=1;
 				}
+				
+			}
+			if(move==1)
+			{
+				if(xy && robot.getEnv_decouvert().isBordureEnvY(this.robot.getY()))
+				dir[0]=dir[1];
 				
 			}
 						

@@ -151,6 +151,32 @@ public class Robot{
 		}
 	}
 	
+	public boolean isFrontMasked(Enum_Orientation_Robot orient){
+		boolean retour=false;
+		switch (orient){
+			case N:
+				if(this.env_decouvert.coordEtreDansPlateau(this.x, this.y-1))
+					retour=this.env_decouvert.getTableauEnv()[this.x][this.y-1].isMasquage();
+				break;
+			case S:
+				if(this.env_decouvert.coordEtreDansPlateau(this.x, this.y+1))
+					retour=this.env_decouvert.getTableauEnv()[this.x][this.y+1].isMasquage();
+				break;
+			case E:
+				if(this.env_decouvert.coordEtreDansPlateau(this.x+1, this.y))
+					retour=this.env_decouvert.getTableauEnv()[this.x+1][this.y].isMasquage();
+				break;
+			case W:
+				if(this.env_decouvert.coordEtreDansPlateau(this.x-1, this.y))
+					retour=this.env_decouvert.getTableauEnv()[this.x-1][this.y].isMasquage();
+				break;
+				
+			default:
+				break;	
+		}
+		return retour;
+	}
+	
 	@Override
 	public String toString() {
 		return "Robot [xInit=" + this.xInit + ", yInit=" + this.yInit + ", x=" + this.x
