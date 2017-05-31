@@ -8,8 +8,8 @@ public class RobotCtr {
 	private Env environnement;
 	private Robot robot;
 	private static int autoCall=0;
-	private static int xInit=-1;
-	private static int yInit=-1;
+//	private static int xInit=-1;
+//	private static int yInit=-1;
 	private static Enum_Orientation_Robot[] dir={null,null};
 	private static int indiceDir=0;
 	private static int contournement=0;
@@ -68,39 +68,49 @@ public class RobotCtr {
 			indiceDir=0;
 			dir[indiceDir]=Enum_Orientation_Robot.E;
 			//RobotCtr.xy=false; // false = x true = y
-			xInit=this.robot.getX();
-			yInit=this.robot.getY();
-//			if(yInit<=(this.robot.getEnv_decouvert().getY_plateau()-1)/2)
-//				RobotCtr.dir[1]=Enum_Orientation_Robot.S;
-//			else
-//				RobotCtr.dir[1]=Enum_Orientation_Robot.N;
+			//xInit=this.robot.getX();
+			//yInit=this.robot.getY();
+			contournement=0;
+			if(this.robot.getY()<=(this.robot.getEnv_decouvert().getY_plateau()-1)/2)
+				dir[1]=Enum_Orientation_Robot.S;
+			else
+				dir[1]=Enum_Orientation_Robot.N;
 		}
 			
 		do{
-			if(!robot.getEnv_decouvert().isBordureEnvDir(this.robot.getX(), this.robot.getY(), dir[indiceDir]) 
-					&& robot.getEnv_decouvert().isBordureEnvDirMoinsUn(this.robot.getX(), this.robot.getY(), dir[indiceDir]))
-			{
-				if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(dir[0]))){
-					move+=1;
-				}else{
-					if(indiceDir==0)
-						indiceDir=1;
-					else
-						indiceDir=0;
+				if(!robot.getEnv_decouvert().isBordureEnvDir(this.robot.getX(), this.robot.getY(), dir[indiceDir]) 
+						&& robot.getEnv_decouvert().isBordureEnvDirMoinsUn(this.robot.getX(), this.robot.getY(), dir[indiceDir]))
+				{
+						if(contournement==0)
+						{
+									if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(dir[indiceDir]))){
+										move+=1;
+										contournement=0;
+									}else{
+											if(indiceDir==0)
+												indiceDir=1;
+											else
+												indiceDir=0;
 					
-					if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(dir[1]))){
-						move+=1;
-					}
+											contournement+=1;
+									}
+						}else{//coutournement!=0
+							if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(dir[indiceDir])))
+								move+=1;
+							
+						}
+				}else{
 					
 				}
-			}
-			if(move==1)
-			{
-				if(robot.getEnv_decouvert().isBordureEnvY(this.robot.getY()))
-					RobotCtr.dir[0]=RobotCtr.dir[1];
 				
-			}
-						
+				
+				
+				if(move==1)
+				{
+					if(robot.getEnv_decouvert().isBordureEnvY(this.robot.getY()))
+						RobotCtr.dir[0]=RobotCtr.dir[1];
+					
+				}	
 		}while(move!=1);
 		
 		do{
