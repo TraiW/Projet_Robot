@@ -8,25 +8,16 @@
 	<title>Connection</title>
 </head>
 <body>
-	<h1>Login Page</h1>
-	<h:form>
-		<table border="0">
-			<tr>
-				<td></td>
-				<td>
-				<h:commandButton value="START"
-				action="#{AdminUserControler.goStart}"/>
-				<span class="glyphicons glyphicons-play"></span>
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>
-				<h:commandButton value="STOP"
-				action="#{AdminUserControler.goStop}"/>
-				</td>
-			</tr>
-		</table>
-	</h:form>
+	<h1>Page Administrateur</h1>
+	
+	
+<button id="ButtonStart" type="button"> <span class="glyphicon  
+glyphicon-star"> </span>START</button>
+<button id="ButtonStop" type="button"><span class="glyphicon  
+glyphicon-cloud"> </span>STOP</button>
+
+<script src="lib/jquery-1.11.1.min.js"></script>
+<script src="js/ajax_cmd.js"></script>
 </body>
 </html>
+

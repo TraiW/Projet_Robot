@@ -74,3 +74,23 @@ $(document).ready(function(){
   });
 
 });
+
+
+$("#ButtonStart").click(function(){
+	  $.post("rest/cmd/START",
+	 {},
+	function(data,status){
+	alert("Post Done data: " + data + "\nStatus: " + status);
+	document.location.href=data;
+
+	});
+});
+
+$("#ButtonStop").click(function(){
+$.post("rest/cmd/STOP",
+{},
+function(data,status){
+alert("Post Done data: " + data + "\nStatus: " + status);
+document.location.href=data;
+});
+});

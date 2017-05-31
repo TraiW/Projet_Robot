@@ -29,7 +29,7 @@ public class RobotControlService {
 	RobotCtr robotCtr = new RobotCtr(robot.getEnv_decouvert(), robot);
 	private Case[][]tabEnv = null;
 	private String[]tabAutoMapping=null;
-	
+	private boolean unlock;
 	//Inject servlet context (needed to get general context, application memory space, session memory space ...)
 	@Context
 	ServletContext context;
@@ -55,62 +55,99 @@ public class RobotControlService {
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("UP")
 		public boolean goUp()
-				{
+		{
 			boolean bool =false;
-			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.UP);
-			robot = robotCtr.getRobot();
-			System.out.println(bool);
-			System.out.println("Xu = "+ robot.getX() + " Y = "+robot.getY());
-			return bool;
+			if(unlock ==false)
+			{
+				bool = false;
+			}
+			else
+			{
+				bool = robotCtr.deplacerRobot(Enum_Direction_Robot.UP);
+				robot = robotCtr.getRobot();
+				System.out.println(bool);
+				System.out.println("Xu = "+ robot.getX() + " Y = "+robot.getY());
+			}
+				return bool;
 		}
 		
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("DOWN")
 		public boolean goDown()
-				{
+		{
 			boolean bool =false;
-			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.DOWN);
-			robot = robotCtr.getRobot();
-			System.out.println(bool);
-			System.out.println("Xd = "+ robot.getX() + " Y = "+robot.getY());
+			if(unlock==false)
+			{
+				bool = false;
+			}
+			else{
+				bool = robotCtr.deplacerRobot(Enum_Direction_Robot.DOWN);
+				robot = robotCtr.getRobot();
+				System.out.println(bool);
+				System.out.println("Xd = "+ robot.getX() + " Y = "+robot.getY());
+			}
 			return bool;
+
 		}
 		
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("RIGHT")
 		public boolean goRight()
-				{
+		{
 			boolean bool =false;
-			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.RIGHT);
-			robot = robotCtr.getRobot();
-			System.out.println(bool);
-			System.out.println("Xr = "+ robot.getX() + " Y = "+robot.getY());
+			if(unlock==false)
+			{
+				bool = false;
+			}
+			else{
+				bool = robotCtr.deplacerRobot(Enum_Direction_Robot.RIGHT);
+				robot = robotCtr.getRobot();
+				System.out.println(bool);
+				System.out.println("Xr = "+ robot.getX() + " Y = "+robot.getY());
+			}
 			return bool;
 		}
-		
+
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("LEFT")
 		public boolean goLeft()
-				{
+		{
 			boolean bool =false;
+		if(unlock==false)
+		{
+			bool = false;
+		}
+		else{
 			bool = robotCtr.deplacerRobot(Enum_Direction_Robot.LEFT);
 			robot = robotCtr.getRobot();
 			System.out.println(bool);
 			System.out.println("Xl = "+ robot.getX() + " Y = "+robot.getY());
+			}
 			return bool;
 		}
-		
-		
-		
+
+
+		@POST
+		@Produces(MediaType.TEXT_PLAIN)
+		@Path("START")
+		public String goStart()
+		{
+			this.unlock = true;
+			System.out.println("goStart : " + unlock);
+			return "cmd.xhtml";
+		}
+
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("STOP")
 		public String goStop()
-				{
-			return "STOP Done";
+		{
+			this.unlock=false;
+			System.out.println("goStop : " + unlock);
+			return "cmd.xhtml";
 		}
 		
 		
