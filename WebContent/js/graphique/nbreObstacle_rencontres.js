@@ -25,14 +25,14 @@ Highcharts.chart('nbreObstacle_rencontres', {
                 
                 setInterval(function(){
             		$.get("rest/cmd/measure",function(data) {
-            			console.log("Graph Mesure Obstacle Rencontre"); 
+            			//console.log("Graph Mesure Obstacle Rencontre"); 
             			var x = (new Date()).getTime(); // current time
             			var y;
             			y = data.mesuresGraphes[2].value;
-            			console.log("y : ",y);
+            			//console.log("y : ",y);
                         series.addPoint([x, y], true, true);
             		});
-            		console.log('FIN MesuresGraph Obstacle Rencontre');
+            		//console.log('FIN MesuresGraph Obstacle Rencontre');
             	},5000);
             }
         }
