@@ -11,7 +11,6 @@ $(document).ready(function(){
     			 }
     			  else{ alert("Déplacement impossible");}
     			  
-    			  	console.log("data_interieur : "+data);
 
     		  });  
 
