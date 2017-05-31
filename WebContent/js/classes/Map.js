@@ -1,4 +1,6 @@
-var test
+var var_terrain;
+var var_parcouru;
+var var_brouillard;
 function Map(nom) {
 	// Création de l'objet XmlHttpRequest
 	var xhr = getXMLHttpRequest();
@@ -14,7 +16,10 @@ function Map(nom) {
 	var mapData = JSON.parse(mapJsonData);
 	this.tileset = new Tileset(mapData.tileset);
 	this.terrain = mapData.terrain;
+	this.parcouru = mapData.terrain;
+	this.brouillard = mapData.terrain;
 
+	
 	// Liste des personnages présents sur le terrain.
 	this.personnages = new Array();
 }
@@ -23,8 +28,7 @@ Map.prototype.recupMap=function(){
 var wait=0;
 var xinter=0;
 var yinter=0;
-test=this.terrain;
-console.log("test0 : "+test);
+var_terrain=this.terrain;
 
 	$.get("rest/cmd/obstacle",function(data) {
 	//	console.log("DEBUT DATA CARTE =>"); 
@@ -40,7 +44,7 @@ console.log("test0 : "+test);
 //			console.log("yinter : "+yinter);
 //			console.log("--------------------------------");
 
-			test[xinter][yinter]=1;
+			var_terrain[xinter][yinter]=1;
 		}
 
 	//	console.log("test1 : "+test);
@@ -49,6 +53,61 @@ console.log("test0 : "+test);
 
 	
 }
+Map.prototype.parcouruMap=function(){	
+	var xinter=0;
+	var yinter=0;
+	var_parcouru=this.parcouru;
+//	console.log("parcouru : "+this.parcouru);
+	$.get("rest/cmd/parcouru",function(data) {
+		//	console.log("DEBUT DATA CARTE =>"); 
+
+		//console.log("nbr :"+data.parcouru[2].nbreParcouru);
+		if(data.parcouru[2].nbreParcouru!=0){
+			for(var i=0;i<data.parcouru[2].nbreParcouru;i++)
+			{
+				xinter=data.parcouru[0].x[i];
+				yinter = data.parcouru[1].y[i];
+//				console.log("--------------------------------");
+//				console.log("xinter : "+xinter);
+//				console.log("yinter : "+yinter);
+
+				var_parcouru[xinter][yinter]=6;
+			}
+		}
+
+
+		});
+
+}
+
+Map.prototype.brouillardMap=function(){	
+	var xinter=0;
+	var yinter=0;
+	var_brouillard=this.brouillard;
+//	console.log("parcouru : "+this.parcouru);
+
+	$.get("rest/cmd/masquage",function(data) {
+
+		if(data.masquage[2].nbreMasquage!=0){
+			for(var i=0;i<data.masquage[2].nbreMasquage;i++)
+			{
+				xinter=data.masquage[0].x[i];
+				yinter = data.masquage[1].y[i];
+
+
+				var_brouillard[xinter][yinter]=0;
+			}
+
+
+
+		}
+
+
+		});
+	
+
+}
+
 
 
 // Pour récupérer la taille (en tiles) de la carte

@@ -1,23 +1,21 @@
 
 $(document).ready(function(){
-	var test = [];
   $("#ButtonUp").click(function(){
 	  	$.post("rest/cmd/UP",
     		  {},
     		  function(data,status){
+    			  test=data;
 //      		    alert("Post Done 1received data: " + data + "\nStatus: " + status);
-    			  if(data=="true")
-    			 {
+    			  if(data=="true"){
         			  joueur.deplacer(DIRECTION.HAUT, map);
-
     			 }
-    			  else
-    			{
-        		    alert("Déplacement impossible");
- 
-    			}
+    			  else{ alert("Déplacement impossible");}
+    			  
+    			  	console.log("data_interieur : "+data);
 
-    		  });    
+    		  });  
+
+
   });
 
   $("#ButtonDown").click(function(){
