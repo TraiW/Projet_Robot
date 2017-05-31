@@ -64,7 +64,9 @@ public class RobotCtr {
 		//TODO penser au RAZAutoCall(); lorsqu'on désactive l'automapping
 		this.incAutoCall();
 		int move=0;
+		int countblock=0;
 		if(this.getAutocall()==1){
+			System.out.println("######init du bordel");
 			indiceDir=0;
 			dir[indiceDir]=Enum_Orientation_Robot.E;
 			//RobotCtr.xy=false; // false = x true = y
@@ -78,42 +80,61 @@ public class RobotCtr {
 		}
 			
 		do{
+			System.out.println("we're in !");
 				if(!robot.getEnv_decouvert().isBordureEnvDir(this.robot.getX(), this.robot.getY(), dir[indiceDir]) 
-						&& robot.getEnv_decouvert().isBordureEnvDirMoinsUn(this.robot.getX(), this.robot.getY(), dir[indiceDir]))
+						&& !robot.getEnv_decouvert().isBordureEnvDirMoinsUn(this.robot.getX(), this.robot.getY(), dir[indiceDir]))
 				{
+					System.out.println("pas bordure 1");
 						if(contournement==0)
 						{
+							System.out.println("pas contournement");
 									if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(dir[indiceDir]))){
+										System.out.println("deplacement OK 1");
 										move+=1;
 										contournement=0;
 									}else{
-											if(indiceDir==0)
-												indiceDir=1;
-											else
-												indiceDir=0;
-					
+//											if(indiceDir==0)
+//												indiceDir=1;
+//											else
+//												indiceDir=0;
+											System.out.println("deplacement KO -> contournement=1");
 											contournement+=1;
 									}
 						}else{//coutournement!=0
-							if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(dir[indiceDir])))
-								move+=1;
-							
+								System.out.println("Contournement");
+								if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(dir[indiceDir]))){
+									System.out.println("deplacement du contournement OK");
+									move+=1;
+								}else{System.out.println("deplacement du contournement KO");}
 						}
-				}else{
-					
+				}else{//changement direction
+						System.out.println("bordure 1");
+						if(indiceDir==0)
+							indiceDir=1;
+						else
+							indiceDir=0;
+						countblock+=1;
+						System.out.println("Countblock = " + countblock);
+						if(countblock>2)
+							dir[0]=Enum_Orientation_Robot.getOpposite(dir[0]);
 				}
-				
-				
 				
 				if(move==1)
 				{
-					if(robot.getEnv_decouvert().isBordureEnvY(this.robot.getY()))
-						RobotCtr.dir[0]=RobotCtr.dir[1];
-					
+						indiceDir=1;
+						move=0;
+						System.out.println("move DONE -> modifs prochaines dir");
+						if(!robot.getEnv_decouvert().isBordureEnvDir(this.robot.getX(), this.robot.getY(), dir[indiceDir]) 
+								&& !robot.getEnv_decouvert().isBordureEnvDirMoinsUn(this.robot.getX(), this.robot.getY(), dir[indiceDir]))
+							dir[0]=dir[1];
+						
+						indiceDir=0;
+						
 				}	
+				System.out.println("Fin condition");
 		}while(move!=1);
+		System.out.println("END");
 		
-		do{
 			//SI n'est pas en bordure ou ne le sera pas si deplacement dans la direction initiale et si contournement==0
 			//		SI deplacement possible
 			//			do it (sens de base here)
@@ -135,9 +156,6 @@ public class RobotCtr {
 			//
 			
 			
-			
-			
-		}while(move!=1);
 		
 //		Enum_Orientation_Robot [] Tab = Enum_Orientation_Robot.values();
 //		int i = (int) (Math.random() * 4);		

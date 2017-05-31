@@ -24,4 +24,26 @@ public enum Enum_Orientation_Robot {
 		 }
 		 return retour;
 	  }
+	 
+	 public static Enum_Orientation_Robot getOpposite(Enum_Orientation_Robot dir){
+		 Enum_Orientation_Robot retour=Enum_Orientation_Robot.W;
+		 switch(dir)
+		 {
+		 	case N:
+		 		retour=Enum_Orientation_Robot.S;
+		 		break;
+		 	case S:
+		 		retour=Enum_Orientation_Robot.N;
+		 		break;
+		 	case E:
+		 		retour=Enum_Orientation_Robot.W;
+		 		break;
+		 	case W:
+		 		retour=Enum_Orientation_Robot.E;
+		 		break;
+	 		default:
+	 			break;
+		 }
+		 return retour;
+	  }
 }

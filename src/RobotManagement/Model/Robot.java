@@ -80,7 +80,6 @@ public class Robot{
 						|| this.env_decouvert.getTableauEnv()[x][y].isParcouru()) {
 					retour = true;
 				} else {
-					mesures.addObstaclesRencontres();
 					System.out.println("Déplacement impossible : Obstacle");
 				}
 			}else{
@@ -90,7 +89,6 @@ public class Robot{
 		} else {
 			System.out.println("Coordonnées hors plateau");
 		}
-		System.out.println("depl is valide retour");
 		return retour;
 	}
 	
@@ -119,29 +117,37 @@ public class Robot{
 						case N:
 							if(this.env_decouvert.coordEtreDansPlateau(this.x-1+j, this.y-i)){
 								this.env_decouvert.getTableauEnv()[this.x-1+j][this.y-i].setMasquage(false);
-								if(this.env_decouvert.getTableauEnv()[this.x-1+j][this.y-i].isObstacle())
+								if(this.env_decouvert.getTableauEnv()[this.x-1+j][this.y-i].isObstacle()){
 									this.mesures.addObstaclesVisibles();
+									this.mesures.addObstaclesRencontres();
+								}
 							}
 							break;
 						case S:
 							if(this.env_decouvert.coordEtreDansPlateau(this.x-1+j, this.y+i)){
 								this.env_decouvert.getTableauEnv()[this.x-1+j][this.y+i].setMasquage(false);
-								if(this.env_decouvert.getTableauEnv()[this.x-1+j][this.y+i].isObstacle())
+								if(this.env_decouvert.getTableauEnv()[this.x-1+j][this.y+i].isObstacle()){
 									this.mesures.addObstaclesVisibles();
+									this.mesures.addObstaclesRencontres();
 								}
+							}
 							break;
 						case E:
 							if(this.env_decouvert.coordEtreDansPlateau(this.x+j, this.y-i+1)){
 								this.env_decouvert.getTableauEnv()[this.x+j][this.y-i+1].setMasquage(false);
-								if(this.env_decouvert.getTableauEnv()[this.x+j][this.y-i+1].isObstacle())
+								if(this.env_decouvert.getTableauEnv()[this.x+j][this.y-i+1].isObstacle()){
 									this.mesures.addObstaclesVisibles();
+									this.mesures.addObstaclesRencontres();
+								}
 							}
 							break;
 						case W:
 							if(this.env_decouvert.coordEtreDansPlateau(this.x-j, this.y-i+1)){
 								this.env_decouvert.getTableauEnv()[this.x-j][this.y-i+1].setMasquage(false);
-								if(this.env_decouvert.getTableauEnv()[this.x-j][this.y-i+1].isObstacle())
+								if(this.env_decouvert.getTableauEnv()[this.x-j][this.y-i+1].isObstacle()){
 									this.mesures.addObstaclesVisibles();
+									this.mesures.addObstaclesRencontres();
+								}
 							}
 							break;
 						default:
