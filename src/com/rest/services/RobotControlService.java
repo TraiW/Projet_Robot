@@ -141,7 +141,7 @@ public class RobotControlService {
 			
 			for(j=0;j<RobotInit.getInstance().getX_plateau();j++){
 				for(i=0;i<RobotInit.getInstance().getY_plateau();i++){
-					if(tabEnv[i][j].isObstacle()==true){
+					if(tabEnv[j][i].isObstacle()==true){
 						CX.add(cpt, i);
 						CY.add(cpt, j);
 						cpt+=1;
@@ -195,7 +195,7 @@ public class RobotControlService {
 			
 			for(j=0;j<RobotInit.getInstance().getX_plateau();j++){
 				for(i=0;i<RobotInit.getInstance().getY_plateau();i++){
-					if(tabEnv[i][j].isMasquage()==true){
+					if(tabEnv[j][i].isMasquage()==true){
 						CX.add(cpt, i);
 						CY.add(cpt, j);
 						cpt+=1;
@@ -236,7 +236,7 @@ public class RobotControlService {
 			
 			for(j=0;j<RobotInit.getInstance().getX_plateau();j++){
 				for(i=0;i<RobotInit.getInstance().getY_plateau();i++){
-					if(tabEnv[i][j].isParcouru()==true){
+					if(tabEnv[j][i].isParcouru()==true){
 						CX.add(cpt, i);
 						CY.add(cpt, j);
 						cpt+=1;
