@@ -29,7 +29,7 @@ public class RobotControlService {
 	RobotCtr robotCtr = new RobotCtr(robot.getEnv_decouvert(), robot);
 	private Case[][]tabEnv = null;
 	private String[]tabAutoMapping=null;
-	private static boolean unlock=true;
+	private static boolean unlock=false;
 	//Inject servlet context (needed to get general context, application memory space, session memory space ...)
 	@Context
 	ServletContext context;
