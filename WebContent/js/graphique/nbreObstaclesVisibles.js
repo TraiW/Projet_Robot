@@ -26,7 +26,7 @@ $(document).ready(function () {
                 			//console.log("Graph Mesure Obstacle Visible"); 
                 			var x = (new Date()).getTime(); // current time
                 			var y;
-                			y = data.mesuresGraphes[1].value;
+                			y = data.mesuresGraphes[2].value;
                 			//console.log("y : ",y);
                             series.addPoint([x, y], true, true);
                 		});

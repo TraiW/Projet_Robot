@@ -28,7 +28,7 @@ Highcharts.chart('nbreObstacle_rencontres', {
             			//console.log("Graph Mesure Obstacle Rencontre"); 
             			var x = (new Date()).getTime(); // current time
             			var y;
-            			y = data.mesuresGraphes[2].value;
+            			y = data.mesuresGraphes[1].value;
             			//console.log("y : ",y);
                         series.addPoint([x, y], true, true);
             		});

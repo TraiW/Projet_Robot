@@ -20,7 +20,7 @@ public class Measures {
 	public int getObstaclesRencontres(){return nbrObstaclesRencontres;}	
 	public void addObstaclesVisibles(){Measures.nbrObstaclesVisibles += 1;}
 	public int getObstaclesVisibles(){return nbrObstaclesVisibles;}	
-	public void RAZObstaclesVisibles(){Measures.nbrObstaclesRencontres = 0;}	
+	public void RAZObstaclesVisibles(){Measures.nbrObstaclesVisibles = 0;}	
 	public void addDistanceParcourue(){Measures.distanceParcourue += 1;}
 	public int getDistanceParcourue(){return distanceParcourue;}
 	

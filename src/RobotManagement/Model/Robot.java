@@ -52,9 +52,10 @@ public class Robot{
 		boolean retour=false;
 		this.mesures.addCommandes();
 		//ajouter nbr obstacles visibles
+		this.mesures.RAZObstaclesVisibles();
 		if (DeplacementEtreValide(x, y)) {
 			this.mesures.addDistanceParcourue();
-			this.mesures.RAZObstaclesVisibles();
+			
 			//System.out.println("X = "+x + " Y = "+y);
 			Case[][] tab=env_decouvert.getTableauEnv();
 			tab[this.x][this.y].setParcouru();
