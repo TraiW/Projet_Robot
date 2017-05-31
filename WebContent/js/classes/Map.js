@@ -27,50 +27,30 @@ test=this.terrain;
 console.log("test0 : "+test);
 
 	$.get("rest/cmd/obstacle",function(data) {
-		console.log("DEBUT DATA CARTE =>"); 
+	//	console.log("DEBUT DATA CARTE =>"); 
 
-		console.log("nbr :"+data.terrain[2].nbreObstacle);
+	//	console.log("nbr :"+data.terrain[2].nbreObstacle);
 
 		for(var i=0;i<data.terrain[2].nbreObstacle;i++)
 		{
 			xinter=data.terrain[0].x[i];
 			yinter = data.terrain[1].y[i];
-			console.log("--------------------------------");
-			console.log("xinter : "+xinter);
-			console.log("yinter : "+yinter);
-			console.log("--------------------------------");
+//			console.log("--------------------------------");
+//			console.log("xinter : "+xinter);
+//			console.log("yinter : "+yinter);
+//			console.log("--------------------------------");
 
-			test[yinter][xinter]=1;
+			test[xinter][yinter]=1;
 		}
 
-		console.log("test1 : "+test);
+	//	console.log("test1 : "+test);
 
 	});
 
 	
 }
-Map.prototype.modifMap=function(){	
-		
-	//while(wait!=1){}
-		for(var j=0;j<20;j++)
-		{
-			for(var i=0;i<20;i++)
-			{
-				console.log("this.terrain[j][i] => "+this.terrain[j][i]);
-			}
-		}
-		
 
 
-
-	}
-Map.prototype.ecrire = function(){
-	console.log("this.terrain = >"+this.terrain);
-//	this.terrain[0][0]=1;
-	console.log("this.terrain[0][0] => "+this.terrain[0][0])
-	console.log("this.terrain = >"+this.terrain);
-
-}
 // Pour récupérer la taille (en tiles) de la carte
 Map.prototype.getHauteur = function() {
 	return this.terrain.length;
