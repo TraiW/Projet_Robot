@@ -38,6 +38,8 @@ public class Robot{
 	public void setX(int x) {this.x = x;}
 	public int getY() {return y;}
 	public void setY(int y) {this.y = y;}
+	public MatriceVision getMatVision() { return this.matriceVision;}
+	public void setMatVision(MatriceVision mat) {this.matriceVision = mat;}
 	public Enum_Orientation_Robot getOrientationInit() {return orientationInit;}
 	public void setOrientationInit(Enum_Orientation_Robot orientationInit){this.orientationInit = orientationInit;}
 	public Enum_Orientation_Robot getOrientation() {return orientation;}
@@ -183,6 +185,8 @@ public class Robot{
 		}
 		return retour;
 	}
+	
+	
 	
 	@Override
 	public String toString() {

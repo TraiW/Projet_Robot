@@ -64,6 +64,22 @@ public class RobotCtr {
 		return retour;
 	}
 	
+	public Robot razRobot(){
+		
+		for (int i=0;i<environnement.getX_plateau();i++){
+			for (int j=0;j<environnement.getY_plateau();j++){
+				this.environnement.getTableauEnv()[j][i].setMasquage(true);
+				if(this.environnement.getTableauEnv()[j][i].getEtat_case()==Enum_Etat_Case.parcouru)
+					{this.environnement.getTableauEnv()[j][i].setRAZParcouru();}
+			}
+		}
+		robot.getMeasures().razMesures();
+		//environnement.GenerationEnv();
+		robot.setX(0);
+		robot.setY(0);
+		return robot;
+	}
+	
 	/*public void autoMappingHard(){
 		//TODO penser au RAZAutoCall(); lorsqu'on désactive l'automapping
 		this.incAutoCall();

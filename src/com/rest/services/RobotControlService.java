@@ -17,6 +17,7 @@ import org.json.simple.JSONObject;
 import RobotManagement.Controler.RobotCtr;
 import RobotManagement.Model.Case;
 import RobotManagement.Model.Enum_Direction_Robot;
+import RobotManagement.Model.Enum_Orientation_Robot;
 import RobotManagement.Model.Env;
 import RobotManagement.Model.Robot;
 import RobotManagement.Model.RobotInit;
@@ -29,7 +30,7 @@ public class RobotControlService {
 	RobotCtr robotCtr = new RobotCtr(robot.getEnv_decouvert(), robot);
 	private Case[][]tabEnv = null;
 	private int[]tabAutoMapping=null;
-	private static boolean unlock=false;
+	private static boolean unlock=true;
 	//Inject servlet context (needed to get general context, application memory space, session memory space ...)
 	@Context
 	ServletContext context;
@@ -151,11 +152,13 @@ public class RobotControlService {
 		}
 		
 		
-		@GET		
-		@Produces(MediaType.TEXT_HTML)
-		@Path("test")
-		public String test(){
-			return "index-1.html";
+		@POST
+		@Produces(MediaType.TEXT_PLAIN)
+		@Path("CLEAR")
+		public void goClear()
+		{
+			this.robot = robotCtr.razRobot();			
+			//return bool;
 		}
 		
 		@SuppressWarnings("unchecked")

@@ -17,6 +17,11 @@ public class Case {
 	public boolean isMasquage(){return masquage;}
 	public void setMasquage(boolean masquage) {this.masquage = masquage;}
 	
+	public void setRAZParcouru()
+	{
+		this.setEtat_case(Enum_Etat_Case.vide);
+		//en théorie déjà unmasked
+	}
 	public void setParcouru()
 	{
 		this.setEtat_case(Enum_Etat_Case.parcouru);

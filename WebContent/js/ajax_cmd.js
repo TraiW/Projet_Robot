@@ -72,25 +72,36 @@ $(document).ready(function(){
 			  
 		});    
   });
+  		$("#ButtonStart").click(function(){
+			  $.post("rest/cmd/START",
+			 {},
+			function(data,status){
+			alert("Robot déverouillé avec succès");
+			document.location.href=data;
+		
+			});
+		});
 
+		$("#ButtonStop").click(function(){
+			$.post("rest/cmd/STOP",
+			{},
+				function(data,status){
+				alert("Robot déverouillé avec succès");
+				document.location.href=data;
+			});
+		});
+		
+		$("#ButtonClear").click(function(){
+			$.post("rest/cmd/CLEAR",
+				{},
+			function(data,status){
+			alert("Post Done data: " + data + "\nStatus: " + status);
+				if(data == false){
+					alert("RAZ impossible");
+				}
+			});
+		});
 });
 
 
-$("#ButtonStart").click(function(){
-	  $.post("rest/cmd/START",
-	 {},
-	function(data,status){
-	alert("Robot déverouillé avec succès");
-	document.location.href=data;
-
-	});
-});
-
-$("#ButtonStop").click(function(){
-$.post("rest/cmd/STOP",
-{},
-function(data,status){
-alert("Robot déverouillé avec succès");
-document.location.href=data;
-});
-});
+		
