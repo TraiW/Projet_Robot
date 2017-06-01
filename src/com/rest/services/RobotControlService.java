@@ -137,7 +137,7 @@ public class RobotControlService {
 		{
 			this.unlock = true;
 			System.out.println("goStart : " + unlock);
-			return "login.xhtml";
+			return "login.jsf";
 		}
 
 		@POST
@@ -147,7 +147,7 @@ public class RobotControlService {
 		{
 			this.unlock=false;
 			System.out.println("goStop : " + unlock);
-			return "login.xhtml";
+			return "login.jsf";
 		}
 		
 		

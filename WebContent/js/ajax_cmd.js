@@ -80,7 +80,7 @@ $("#ButtonStart").click(function(){
 	  $.post("rest/cmd/START",
 	 {},
 	function(data,status){
-	alert("Post Done data: " + data + "\nStatus: " + status);
+	alert("Robot déverouillé avec succès");
 	document.location.href=data;
 
 	});
@@ -90,7 +90,7 @@ $("#ButtonStop").click(function(){
 $.post("rest/cmd/STOP",
 {},
 function(data,status){
-alert("Post Done data: " + data + "\nStatus: " + status);
+alert("Robot déverouillé avec succès");
 document.location.href=data;
 });
 });
