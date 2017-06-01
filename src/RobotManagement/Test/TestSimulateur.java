@@ -11,32 +11,40 @@ import RobotManagement.Model.RobotInit;
 public class TestSimulateur {
 
 	@Test
-	public void test() {
+	public void test() throws CloneNotSupportedException {
 		int i=0,j=0;
 		int xEnv=20,yEnv=20;
+		int[] val = new int[10000];
 		Env enviro=new Env();
 		enviro.GenerationEnv();
-		//enviro.getTableauEnv()[0][1].setEtat_case(Enum_Etat_Case.obstacle);
 		Robot bot=RobotInit.getInstance().createRobot(); 
 		bot.setEnv_decouvert(enviro);
 		RobotCtr botctrl = new RobotCtr(bot.getEnv_decouvert(), bot);
-		System.out.println("***********BASE****************");
-		for(i=0;i<xEnv;i++)
-		{
-			for(j=0;j<yEnv;j++)
-			{
-				System.out.print(bot.getEnv_decouvert().getTableauEnv()[j][i].isMasquage()+" ");
-			}
-			System.out.println("");
-		}
+		botctrl.RAZAutoCall();
 		int count=0;
-		do
-		{
-			botctrl.autoMappingSimple();
+		do{
+			val[count]=botctrl.autoMappingSimple();
+			switch(val[count]){
+					case 0:
+						System.out.println("//////////////////////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
+						break;
+					case 1:
+						botctrl.deplacerRobot(Enum_Direction_Robot.UP);
+						break;
+					case 2:
+						botctrl.deplacerRobot(Enum_Direction_Robot.DOWN);
+						break;
+					case 3:
+						botctrl.deplacerRobot(Enum_Direction_Robot.RIGHT);
+						break;
+					case 4:
+						botctrl.deplacerRobot(Enum_Direction_Robot.LEFT);
+						break;
+					default:
+						break;
+			}
 			count+=1;
-		}while(botctrl.getRobot().getEnv_decouvert().CountMask()!=0);
-		
-		botctrl.setAutoDeplList(botctrl.getAutocall(),0);//place en première case le nombre de déplacement total
+		}while(val[count-1]!=5);//botctrl.getRobot().getEnv_decouvert().CountMask()!=0);
 		
 		for(i=0;i<xEnv;i++)
 		{
@@ -66,10 +74,10 @@ public class TestSimulateur {
 			}
 			System.out.println("");
 		}
-		for(i=0;i<botctrl.getAutocall();i++)
-		{
-			System.out.println(botctrl.getAutoDeplList()[i]);
-		}
+//		for(i=0;i<count;i++)
+//		{
+//			System.out.println("valeur renvoyée d'automappin : "+val[i]);
+//		}
 		//System.out.println(enviro.getX_plateau()+" par "+enviro.getY_plateau());
 
 	}
