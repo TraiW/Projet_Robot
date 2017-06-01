@@ -1,4 +1,5 @@
-
+var test=0;
+var test1=0;
 $(document).ready(function(){
   $("#ButtonUp").click(function(){
 	  	$.post("rest/cmd/UP",
@@ -102,16 +103,15 @@ $(document).ready(function(){
 			});
 		});
 		
-		$("#ButtonRefresh").click(function(){
-			$.post("rest/cmd/measure",
-				{},
-			function(data,status){
-			//alert("Post Done data: " + data + "\nStatus: " + status);
-				if(data == false){
-					alert("Refresh impossible");
-				}
+		$('#signup8').change(function() {
+			console.log("test : "+test);
+			   if($(this).is(":checked")) {
+					test=1;
+					test1=1;
+				   return;
+			   }
+			   test=0;
 			});
-		});
 });
 
 

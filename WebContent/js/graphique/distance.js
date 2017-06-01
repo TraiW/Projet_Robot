@@ -22,6 +22,25 @@ $(document).ready(function () {
                     }, 1000);
                     */
                     setInterval(function(){
+            			if(test==1){ 
+            				var refreshId = setInterval(function(){
+
+                			                		$.get("rest/cmd/measure",function(data) {
+                			                            //console.log("test1111111 : "+test);
+                			                			//console.log("Graph Mesure Distance"); 
+                			                			var x = (new Date()).getTime(); // current time
+                			                			var y;
+                			                			y = data.mesuresGraphes[3].value;
+                			                			
+                			                			//console.log("y : ",y);
+                			                            series.addPoint([x, y], true, true);
+
+                			        });  
+                			                	if(test==0){clearInterval(refreshId);}
+                			                	},800)
+                			            }
+            			
+            			
                 		$.get("rest/cmd/measure",function(data) {
                 			//console.log("Graph Mesure Distance"); 
                 			var x = (new Date()).getTime(); // current time
@@ -29,10 +48,13 @@ $(document).ready(function () {
                 			y = data.mesuresGraphes[3].value;
                 			//console.log("y : ",y);
                             series.addPoint([x, y], true, true);
-                		});
+
+                		});                            
+
                 		//console.log('FIN MesuresGraph Distance');
                 	},5000);
                     }
+                
             }
         },
         title: {

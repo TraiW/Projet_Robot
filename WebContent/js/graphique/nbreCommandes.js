@@ -22,6 +22,21 @@ $(document).ready(function () {
                     }, 1000);*/
                     
                     setInterval(function(){
+                    	if(test==1){ 
+            				var refreshId = setInterval(function(){
+
+                			                		$.get("rest/cmd/measure",function(data) {
+                			                            
+                			                			var x = (new Date()).getTime(); // current time
+                			                			var y;
+                			                			y = data.mesuresGraphes[0].value;
+                			                			//console.log("y : ",y);
+                			                            series.addPoint([x, y], true, true);
+
+                			                	});  
+                			                	if(test==0){clearInterval(refreshId);}
+                			                	},800)
+                			            }
                 		$.get("rest/cmd/measure",function(data) {
                 			//console.log("Graph Mesure Commande"); 
                 			var x = (new Date()).getTime(); // current time

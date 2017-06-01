@@ -29,8 +29,8 @@ public class RobotControlService {
 	private static Robot robot=RobotInit.getInstance().createRobot(); 
 	RobotCtr robotCtr = new RobotCtr(robot.getEnv_decouvert(), robot);
 	private Case[][]tabEnv = null;
-	private int[]tabAutoMapping=null;
 	private static boolean unlock=true;
+	
 	//Inject servlet context (needed to get general context, application memory space, session memory space ...)
 	@Context
 	ServletContext context;
@@ -303,78 +303,7 @@ public class RobotControlService {
 			return objContainer.toJSONString();
 		}		
 			
-/*		// METHODE : Envoie objet JSON avec les infos sur l'herbe et sur les obstacles	
-		@GET
-		@Produces(MediaType.APPLICATION_JSON)
-		@Path("env")
-		public String getEnv()
-				{
-			tabEnv=RobotInit.getInstance().getEnvironnement().getTableauEnv();
-			int i=0,j=0;
-			String[] Env_converti=new String[RobotInit.getInstance().getX_plateau()*RobotInit.getInstance().getY_plateau()+40];
-			String debut ="[";
-			String fin ="]";
-			String obstacle="1";
-			String herbe="2";
-			int cpt=0;
-			
-			for(j=0;j<RobotInit.getInstance().getX_plateau();j++){
-				Env_converti[cpt]=debut;
-				cpt+=1;
-				for(i=0;i<RobotInit.getInstance().getY_plateau();i++){
-					if(tabEnv[i][j].isVide()==true){
-						if(Env_converti[cpt]==debut){
-							Env_converti[cpt]=debut+herbe;
-						}
-						else if(i==RobotInit.getInstance().getX_plateau()-1){
-							Env_converti[cpt]=herbe+fin;
-						}
-						else{
-							Env_converti[cpt]=herbe;
-						}	
-					}
-					else if(tabEnv[i][j].isObstacle()==true){
-						if(i==RobotInit.getInstance().getX_plateau()-1){
-							Env_converti[cpt]=obstacle+fin;
-						}
-						else{
-							Env_converti[cpt]=obstacle;
-						}
-					}
-					cpt+=1;	
-					//System.out.println(Env_converti[cpt]);
-				}
-			}
-			
-			JSONObject objContainer = new JSONObject();
-			//create set of json objects
-			JSONObject objVal1 = new JSONObject();
-			
-			//create a json list
-			JSONArray list = new JSONArray();
-			JSONArray list1 = new JSONArray();
-			
-			//add json objects to jsonlist
-			list.add("chemin.png");
-			for(i=0;i<Env_converti.length;i++){
-				//System.out.println(Env_converti[i]);
 
-					list1.add(Env_converti[i]);
-			}
-			
-			//add jsonlist to json container
-			objContainer.put("terrain", list1);
-			objContainer.put("tileset", list);
-			
-			System.out.println(objContainer.toString());
-			//return json string of the json container
-			return objContainer.toJSONString();
-			
-			
-			//ALTERNATIVE send direct a json String
-			//return "{\"data\":[{\"x\":0,\"y\":0,\"val\":\"FREE\"},{\"x\":0,\"y\":1,\"val\":\"WALL\"},{\"x\":1,\"y\":1,\"val\":\"ROBOT\"}]}";
-		}
-*/
 		@SuppressWarnings("unchecked")
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
@@ -423,36 +352,21 @@ public class RobotControlService {
 		@Path("automapping")
 		public String RecupAutoMapping()
 				{
-			
+			int direction =0;
 			JSONObject objContainer = new JSONObject();
 			JSONObject objVal1 = new JSONObject();
 
-			ArrayList<Integer>AutoMappingString=new ArrayList<Integer>();
-			robotCtr.RAZAutoDeplList();
-			robotCtr.RAZAutoCall();//Attention a ne pas faire avant le RAZAutoDeplList !!
-			do
-			{
-				robotCtr.autoMappingSimple();
-			}while(robotCtr.getRobot().getEnv_decouvert().CountMask()!=0);
-			robotCtr.setAutoDeplList(robotCtr.getAutocall(),0);
+			robotCtr.RAZAutoCall();
+			direction=robotCtr.autoMappingSimple();
+
+			objVal1.put("AutoMappingString", direction);
 			
-			tabAutoMapping=robotCtr.getAutoDeplList();
-			int i=0;
-			int cpt=0;
-			
-			for(i=0;i<tabAutoMapping[0]+1;i++){
-				AutoMappingString.add(cpt,tabAutoMapping[i]);
-				cpt+=1;		
-			}
-			
-			objVal1.put("AutoMappingString", AutoMappingString);
-			
-			JSONArray list = new JSONArray();
+			//JSONArray list = new JSONArray();
 			//add json objects to jsonlist
-			list.add(objVal1);
+			//list.add(objVal1);
 
 			//add jsonlist to json container
-			objContainer.put("Automapping", list);
+			objContainer.put("Automapping", objVal1);
 
 			return objContainer.toJSONString();
 		}	
