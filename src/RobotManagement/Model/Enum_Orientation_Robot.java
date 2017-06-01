@@ -47,6 +47,25 @@ public enum Enum_Orientation_Robot {
 		 return retour;
 	  }
 	 
+	 public static Enum_Orientation_Robot getAleatHorizontal(){
+		 Enum_Orientation_Robot retour=Enum_Orientation_Robot.W;
+		 if((int)(Math.random()+0.5)==1)
+				retour=Enum_Orientation_Robot.E;
+		else
+				retour=Enum_Orientation_Robot.W;
+		 return retour;
+	  }
+	 
+	 public static Enum_Orientation_Robot getAleatVertical(){
+		 Enum_Orientation_Robot retour=Enum_Orientation_Robot.S;
+		 if((int)(Math.random()+0.5)==1)
+				retour=Enum_Orientation_Robot.N;
+		else
+				retour=Enum_Orientation_Robot.S;
+		 return retour;
+	  }
+	 
+	 
 	 public static boolean isHorizontal(Enum_Orientation_Robot dir){
 		 boolean retour=false;
 		 switch(dir)
