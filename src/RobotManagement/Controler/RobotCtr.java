@@ -8,12 +8,13 @@ public class RobotCtr {
 	private Env environnement;
 	private Robot robot;
 	private static int autoCall=0;
+	private static Enum_Orientation_Robot prochDirAutoMap=Enum_Orientation_Robot .E;
 //	private static int xInit=-1;
 //	private static int yInit=-1;
-	private static Enum_Orientation_Robot[] dir={null,null};
-	private static int indiceDir=0;
-	private static int contournement=0;
-	private static int[] autoDeplList= new int[10000];
+//	private static Enum_Orientation_Robot[] dir={null,null};
+//	private static int indiceDir=0;
+//	private static int contournement=0;
+	
 	
 	public RobotCtr(Env environnement, Robot robot) {
 		this.environnement = environnement;
@@ -28,9 +29,27 @@ public class RobotCtr {
 	public void decAutoCall(){RobotCtr.autoCall-=1;}
 	public int getAutocall(){return RobotCtr.autoCall;}
 	public void RAZAutoCall(){RobotCtr.autoCall=0;}
-	public int[] getAutoDeplList(){return RobotCtr.autoDeplList;}
-	public void setAutoDeplList(int val,int indice){RobotCtr.autoDeplList[indice]=val;}
-	public void RAZAutoDeplList(){for(int i=0;i<(RobotCtr.autoCall+1);i++){RobotCtr.autoDeplList[i]=-1;}}
+//	public int getAutoDeplList(){return RobotCtr.autoDeplList;}
+//	public void setAutoDeplList(int val,int indice){RobotCtr.autoDeplList[indice]=val;}
+//	public void RAZAutoDeplList(){for(int i=0;i<(RobotCtr.autoCall+1);i++){RobotCtr.autoDeplList[i]=-1;}}
+	
+//	public Robot CopyRobot() {
+//		cpRobot=new Robot(this.robot.getxInit(), this.robot.getyInit(),
+//				this.robot.getOrientationInit(), this.CopyEnvironnement(), new MatriceVision());
+//		cpRobot.setX(this.robot.getX());
+//		cpRobot.setY(this.robot.getY());
+//		cpRobot.setOrientation(this.robot.getOrientation());
+//		return cpRobot;
+//	}
+//	
+//	public Env CopyEnvironnement() {
+//		cpEnvironnement.setX_plateau(this.environnement.getX_plateau());
+//		cpEnvironnement.setY_plateau(this.environnement.getY_plateau());
+//		cpEnvironnement.setNbreCase_plateau(this.environnement.getNbreCase_plateau());
+//		cpEnvironnement.setTaux_chance(this.environnement.getTaux_chance());
+//		cpEnvironnement.setTableauEnv(this.environnement.getTableauEnv());
+//		return cpEnvironnement;
+//	}
 	
 	public boolean deplacerRobot(Enum_Direction_Robot dir){
 		boolean retour=false;
@@ -64,21 +83,23 @@ public class RobotCtr {
 		return retour;
 	}
 	
-	public Robot razRobot(){
-		
-		for (int i=0;i<environnement.getX_plateau();i++){
-			for (int j=0;j<environnement.getY_plateau();j++){
-				this.environnement.getTableauEnv()[j][i].setMasquage(true);
-				if(this.environnement.getTableauEnv()[j][i].getEtat_case()==Enum_Etat_Case.parcouru)
-					{this.environnement.getTableauEnv()[j][i].setRAZParcouru();}
-			}
+		public Robot razRobot(){
+				
+				for (int i=0;i<environnement.getX_plateau();i++){
+					for (int j=0;j<environnement.getY_plateau();j++){
+						this.environnement.getTableauEnv()[j][i].setMasquage(true);
+						if(this.environnement.getTableauEnv()[j][i].getEtat_case()==Enum_Etat_Case.parcouru)
+							{this.environnement.getTableauEnv()[j][i].setRAZParcouru();}
+					}
+				}
+				robot.getMeasures().razMesures();
+				//environnement.GenerationEnv();
+				robot.setX(0);
+				robot.setY(0);
+				return robot;
 		}
-		robot.getMeasures().razMesures();
-		//environnement.GenerationEnv();
-		robot.setX(0);
-		robot.setY(0);
-		return robot;
-	}
+	
+	
 	
 	/*public void autoMappingHard(){
 		//TODO penser au RAZAutoCall(); lorsqu'on désactive l'automapping
@@ -179,7 +200,7 @@ public class RobotCtr {
 		}while(move!=1);
 		move=0;
 		System.out.println("*******************END*********************");
-		
+	}
 			//SI n'est pas en bordure ou ne le sera pas si deplacement dans la direction initiale et si contournement==0
 			//		SI deplacement possible
 			//			do it (sens de base here)
@@ -201,165 +222,89 @@ public class RobotCtr {
 			//
 			
 			
-		
-//		Enum_Orientation_Robot [] Tab = Enum_Orientation_Robot.values();
-//		int i = (int) (Math.random() * 4);		
-//		robot.setOrientation(Tab[i]);
-		//while(this.robot.getEnv_decouvert().CountMask()!=0)
-		
-//			Enum_Orientation_Robot orientation=robot.getOrientation();		
-			//do{
-//				switch (orientation){
-//					case N :
-//						System.out.println("Switch N");
-//						if(!robot.getEnv_decouvert().isBordureEnvY(robot.getY()+1))
-//						{
-//							if(!robot.deplacement(robot.getX(),robot.getY()-1,orientation)){
-//								if((int)(Math.random()+0.5)==1)
-//									robot.setOrientation(Enum_Orientation_Robot.E);
-//								else
-//									robot.setOrientation(Enum_Orientation_Robot.W);
-//							}
-//						}
-//						break;
-//					case S :
-//						System.out.println("Switch S");
-//						if(!robot.getEnv_decouvert().isBordureEnvY(robot.getY()-1))
-//						{
-//							if(!robot.deplacement(robot.getX(),robot.getY()+1,orientation)){
-//								if((int)(Math.random()+0.5)==1)
-//									robot.setOrientation(Enum_Orientation_Robot.W);
-//								else
-//									robot.setOrientation(Enum_Orientation_Robot.E);
-//							}
-//						}
-//						break;
-//					case E :
-//						System.out.println("Switch E");
-//						if(!robot.getEnv_decouvert().isBordureEnvX(robot.getX()+1))
-//						{
-//							if(!robot.deplacement(robot.getX()+1,robot.getY(),orientation)){
-//								if((int)(Math.random()+0.5)==1)
-//									robot.setOrientation(Enum_Orientation_Robot.S);
-//								else
-//									robot.setOrientation(Enum_Orientation_Robot.N);
-//							}
-//						}
-//						break;
-//					case W :
-//						System.out.println("Switch W");
-//						if(!robot.getEnv_decouvert().isBordureEnvX(robot.getX()-1))
-//						{
-//							if(!robot.deplacement(robot.getX()-1,robot.getY(),orientation)){
-//								if((int)(Math.random()+0.5)==1)
-//									robot.setOrientation(Enum_Orientation_Robot.N);
-//								else
-//									robot.setOrientation(Enum_Orientation_Robot.S);
-//							}
-//						}
-//						break;
-//					 default :
-//						break;
-//				}
-			//}while(this.robot.getEnv_decouvert().);
-		
-	}
-	
-	*/
-	public void autoMappingSimple(){
-			
+*/
+	public int autoMappingSimple() throws CloneNotSupportedException{
 		Enum_Orientation_Robot [] Tab = Enum_Orientation_Robot.values();
+		int autoDeplList=0;
 		this.incAutoCall();
 		if(this.getAutocall()==1){
+			prochDirAutoMap=robot.getOrientation();
 			int i = (int) (Math.random() * 4);		
 			robot.setOrientation(Tab[i]);
 		}
+		int x=robot.getX(),y=robot.getY();
 		
-		Enum_Orientation_Robot orientation=robot.getOrientation();
-				
-		switch (orientation){
-		case N :
-			if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(orientation))){
-				autoDeplList[this.getAutocall()]=1;
-				if(robot.getEnv_decouvert().coordEtreDansPlateau(robot.getX(), robot.getY()-1)){
-					if(robot.getEnv_decouvert().getTableauEnv()[robot.getX()][robot.getY()-1].isParcouru()){
-						if((int)(Math.random()+0.5)==1)
-							robot.setOrientation(Enum_Orientation_Robot.E);
-						else
-							robot.setOrientation(Enum_Orientation_Robot.W);
-					}
+		do{
+			autoDeplList=0;
+			if(robot.getEnv_decouvert().CountMask()==0)
+			{
+				autoDeplList=5;
+			}
+			else{
+					switch (prochDirAutoMap){
+						case N :
+								if(robot.DeplacementEtreValide(x, y-1)){
+										autoDeplList=1;
+										if(robot.getEnv_decouvert().isBordureEnvDir(x, y-1,prochDirAutoMap) 
+												|| robot.getEnv_decouvert().isBordureEnvDirMoinsUn(x, y-1,prochDirAutoMap)
+												|| robot.getEnv_decouvert().isColonneParcourue(y))
+										{
+												prochDirAutoMap=Enum_Orientation_Robot.getAleatHorizontal();
+										}
+								}else {
+									prochDirAutoMap=Enum_Orientation_Robot.getAleatHorizontal();
+								}
+							break;
+						case S :
+								if(robot.DeplacementEtreValide(x, y+1)){
+										autoDeplList=2;
+										if(robot.getEnv_decouvert().isBordureEnvDir(x, y+1,prochDirAutoMap) 
+												|| robot.getEnv_decouvert().isBordureEnvDirMoinsUn(x, y+1,prochDirAutoMap)
+												|| robot.getEnv_decouvert().isColonneParcourue(y))
+										{
+												prochDirAutoMap=Enum_Orientation_Robot.getAleatHorizontal();
+										}
+								}
+								else {
+									prochDirAutoMap=Enum_Orientation_Robot.getAleatHorizontal();
+								}
+							break;
+						case E :
+								if(robot.DeplacementEtreValide(x+1, y)){
+										autoDeplList=3;
+										if(robot.getEnv_decouvert().isBordureEnvDir(x+1, y,prochDirAutoMap) 
+												|| robot.getEnv_decouvert().isBordureEnvDirMoinsUn(x+1, y,prochDirAutoMap)
+												|| robot.getEnv_decouvert().isLigneParcourue(y))
+										{
+												prochDirAutoMap=Enum_Orientation_Robot.getAleatVertical();
+										}
+								}
+								else {				
+									prochDirAutoMap=Enum_Orientation_Robot.getAleatVertical();
+								}
+							break;
+						case W :
+								if(robot.DeplacementEtreValide(x-1, y)){
+										autoDeplList=4;
+										if(robot.getEnv_decouvert().isBordureEnvDir(x-1, y,prochDirAutoMap) 
+												|| robot.getEnv_decouvert().isBordureEnvDirMoinsUn(x-1, y,prochDirAutoMap)
+												|| robot.getEnv_decouvert().isLigneParcourue(y))
+										{
+												prochDirAutoMap=Enum_Orientation_Robot.getAleatVertical();
+										}
+								}
+								else {
+									prochDirAutoMap=Enum_Orientation_Robot.getAleatVertical();
+								}
+							break;
+						 default :
+							break;
 				}
-			}else {
-				this.decAutoCall();
-				if((int)(Math.random()+0.5)==1)
-					robot.setOrientation(Enum_Orientation_Robot.E);
-				else
-					robot.setOrientation(Enum_Orientation_Robot.W);
+//				if(prochDirAutoMap!=robot.getOrientation())
+//					prochDirAutoMap=robot.getOrientation();
 			}
-			break;
-		case S :
-			if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(orientation))){
-				autoDeplList[this.getAutocall()]=2;
-				if(robot.getEnv_decouvert().coordEtreDansPlateau(robot.getX(), robot.getY()+1)){
-					if(robot.getEnv_decouvert().getTableauEnv()[robot.getX()][robot.getY()+1].isParcouru()){
-						if((int)(Math.random()+0.5)==1)
-							robot.setOrientation(Enum_Orientation_Robot.W);
-						else
-							robot.setOrientation(Enum_Orientation_Robot.E);
-					}
-				}
-			}
-			else {
-				this.decAutoCall();
-				if((int)(Math.random()+0.5)==1)
-					robot.setOrientation(Enum_Orientation_Robot.W);
-				else
-					robot.setOrientation(Enum_Orientation_Robot.E);
-			}
-			break;
-		case E :
-			if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(orientation))){
-				autoDeplList[this.getAutocall()]=3;
-				if(robot.getEnv_decouvert().coordEtreDansPlateau(robot.getX()+1, robot.getY())){
-					if(robot.getEnv_decouvert().getTableauEnv()[robot.getX()+1][robot.getY()].isParcouru()){
-						if((int)(Math.random()+0.5)==1)
-							robot.setOrientation(Enum_Orientation_Robot.S);
-						else
-							robot.setOrientation(Enum_Orientation_Robot.N);
-					}
-				}
-			}
-			else {				
-				this.decAutoCall();
-				if((int)(Math.random()+0.5)==1)
-					robot.setOrientation(Enum_Orientation_Robot.S);
-				else
-					robot.setOrientation(Enum_Orientation_Robot.N);
-			}
-			break;
-		case W :
-			if(deplacerRobot(Enum_Orientation_Robot.getCorrespondance(orientation))){
-				autoDeplList[this.getAutocall()]=4;
-				if(robot.getEnv_decouvert().coordEtreDansPlateau(robot.getX()-1, robot.getY())){
-					if(robot.getEnv_decouvert().getTableauEnv()[robot.getX()-1][robot.getY()].isParcouru()){
-						if((int)(Math.random()+0.5)==1)
-							robot.setOrientation(Enum_Orientation_Robot.N);
-						else
-							robot.setOrientation(Enum_Orientation_Robot.S);
-					}
-				}
-			}
-			else {
-				this.decAutoCall();
-				if((int)(Math.random()+0.5)==1)
-					robot.setOrientation(Enum_Orientation_Robot.N);
-				else
-					robot.setOrientation(Enum_Orientation_Robot.S);
-			}
-			break;
-		 default :
-			break;
-		}
+		}while(autoDeplList==0);
+		return autoDeplList;
 	}
 		
 		
