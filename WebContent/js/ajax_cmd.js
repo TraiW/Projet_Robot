@@ -101,6 +101,17 @@ $(document).ready(function(){
 				}
 			});
 		});
+		
+		$("#ButtonRefresh").click(function(){
+			$.post("rest/cmd/measure",
+				{},
+			function(data,status){
+			//alert("Post Done data: " + data + "\nStatus: " + status);
+				if(data == false){
+					alert("Refresh impossible");
+				}
+			});
+		});
 });
 
 
