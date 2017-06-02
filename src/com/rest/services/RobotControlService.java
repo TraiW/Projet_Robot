@@ -54,6 +54,20 @@ public class RobotControlService {
 		
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
+		@Path("Verrou")
+		public String goVerrou()
+		{
+			if(unlock==true){
+			return "Running...";
+			}
+			else{
+				return "Blocking...";
+			}
+		}
+
+		
+		@POST
+		@Produces(MediaType.TEXT_PLAIN)
 		@Path("UP")
 		public boolean goUp()
 		{
