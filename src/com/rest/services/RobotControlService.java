@@ -51,6 +51,14 @@ public class RobotControlService {
 				//TODO
 			}
 		}
+	
+		@POST
+		@Produces(MediaType.TEXT_PLAIN)
+		@Path("Depart")
+		public String goDepart()
+		{
+			return "login.jsf";
+		}
 		
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
