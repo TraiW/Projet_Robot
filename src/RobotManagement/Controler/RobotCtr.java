@@ -223,7 +223,7 @@ public class RobotCtr {
 			
 			
 */
-	public int autoMappingSimple() throws CloneNotSupportedException{
+	public int autoMappingSimple(){
 		Enum_Orientation_Robot [] Tab = Enum_Orientation_Robot.values();
 		int autoDeplList=0;
 		this.incAutoCall();

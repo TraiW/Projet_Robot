@@ -14,7 +14,7 @@ public class TestSimulateur {
 	public void test() throws CloneNotSupportedException {
 		int i=0,j=0;
 		int xEnv=20,yEnv=20;
-		int[] val = new int[10000];
+		int[] val = new int[3000];
 		Env enviro=new Env();
 		enviro.GenerationEnv();
 		Robot bot=RobotInit.getInstance().createRobot(); 
@@ -44,7 +44,7 @@ public class TestSimulateur {
 						break;
 			}
 			count+=1;
-		}while(val[count-1]!=5);//botctrl.getRobot().getEnv_decouvert().CountMask()!=0);
+		}while(val[count-1]!=5 && count<3000);//botctrl.getRobot().getEnv_decouvert().CountMask()!=0);
 		
 		for(i=0;i<xEnv;i++)
 		{
