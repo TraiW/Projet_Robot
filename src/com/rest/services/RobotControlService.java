@@ -356,7 +356,7 @@ public class RobotControlService {
 			JSONObject objContainer = new JSONObject();
 			JSONObject objVal1 = new JSONObject();
 
-			robotCtr.RAZAutoCall();
+			//robotCtr.RAZAutoCall();
 			direction=robotCtr.autoMappingSimple();
 
 			objVal1.put("AutoMappingString", direction);

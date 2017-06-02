@@ -109,7 +109,6 @@ Map.prototype.brouillardMap=function(){
 }
 
 
-
 // Pour récupérer la taille (en tiles) de la carte
 Map.prototype.getHauteur = function() {
 	return this.terrain.length;

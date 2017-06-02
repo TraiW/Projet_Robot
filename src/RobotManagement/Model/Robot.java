@@ -186,6 +186,32 @@ public class Robot{
 		return retour;
 	}
 	
+	public boolean isFrontParcouru2(Enum_Orientation_Robot orient){
+		boolean retour=false;
+		switch (orient){
+			case N:
+				if(this.env_decouvert.coordEtreDansPlateau(this.x, this.y-2))
+					retour=this.env_decouvert.getTableauEnv()[this.x][this.y-2].isParcouru();
+				break;
+			case S:
+				if(this.env_decouvert.coordEtreDansPlateau(this.x, this.y+2))
+					retour=this.env_decouvert.getTableauEnv()[this.x][this.y+2].isParcouru();
+				break;
+			case E:
+				if(this.env_decouvert.coordEtreDansPlateau(this.x+2, this.y))
+					retour=this.env_decouvert.getTableauEnv()[this.x+2][this.y].isParcouru();
+				break;
+			case W:
+				if(this.env_decouvert.coordEtreDansPlateau(this.x-2, this.y))
+					retour=this.env_decouvert.getTableauEnv()[this.x-2][this.y].isParcouru();
+				break;
+				
+			default:
+				break;	
+		}
+		return retour;
+	}
+	
 	
 	
 	@Override

@@ -47,6 +47,7 @@ window.onload = function() {
 					   parc=0;
 //					alert("Decoché"+perso);	
 					});
+
 				map.dessinerMap(ctx);
 				if(parc==1){parcouru.dessinerMap(ctx);}
 				clone.dessinerMap(ctx);

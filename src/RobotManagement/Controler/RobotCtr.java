@@ -225,111 +225,144 @@ public class RobotCtr {
 */
 	public int autoMappingSimple(){
 		Enum_Orientation_Robot [] Tab = Enum_Orientation_Robot.values();
+		int cpt=0;
+		int nbBlock=8;
 		int autoDeplList=0;
-		int start=0;
+		boolean detour=false;
 		this.incAutoCall();
 		if(this.getAutocall()==1){
+			System.out.println("IN INIT");
 			int i = (int) (Math.random() * 4);		
 			robot.setOrientation(Tab[i]);
 			prochDirAutoMap=robot.getOrientation();
-			start+=1;
 		}
 		int x=robot.getX(),y=robot.getY();
-		
+	
 		do{
-			autoDeplList=0;
-			if(robot.getEnv_decouvert().CountMask()==0)
+			if(cpt>=nbBlock)
 			{
-				autoDeplList=5;
+				prochDirAutoMap=Enum_Orientation_Robot.getAleat();
+				switch (prochDirAutoMap){
+					case N :
+						if(robot.DeplacementEtreValide(x, y-1))
+							autoDeplList=1;
+						break;
+					case S :
+						if(robot.DeplacementEtreValide(x, y+1))
+							autoDeplList=2;
+						break;
+					case E :
+						if(robot.DeplacementEtreValide(x+1, y))
+							autoDeplList=3;
+						break;
+					case W :
+						if(robot.DeplacementEtreValide(x-1, y))
+							autoDeplList=4;
+						break;
+					default:
+						break;
+				}
 			}
 			else{
-//				if(start==1){
-//					if(deplacerRobot(Enum_Direction_Robot.DOWN)){
-//						System.out.println("deplacement du start 1 OK");
-//						autoDeplList=1;
-//					}
-//					start+=1;
-//				}else if(start==2){
-//					if(deplacerRobot(Enum_Direction_Robot.RIGHT)){
-//						System.out.println("deplacement du start 2 OK");
-//						autoDeplList=3;
-//					}
-//					start=0;
-//				}else{
-					switch (prochDirAutoMap){
-						case N :
-								if(robot.DeplacementEtreValide(x, y-1)){
-										if(y==1
-												//robot.getEnv_decouvert().isBordureEnvDir(x, y-1,prochDirAutoMap) 
-												//|| robot.getEnv_decouvert().isColonneParcourue(y)
-												//|| robot.isFrontParcouru(prochDirAutoMap)
-												)
-										{
+				System.out.println("dir : " +prochDirAutoMap);
+				autoDeplList=0;
+				if(robot.getEnv_decouvert().CountMask()==0)
+				{
+					autoDeplList=5;
+				}
+				else{
+						switch (prochDirAutoMap){
+							case N :
+									if(robot.DeplacementEtreValide(x, y-1)){// && !detour){
+											if(robot.getEnv_decouvert().isBordureEnvDir(x, y-1,prochDirAutoMap) 
+													|| robot.getEnv_decouvert().isColonneParcourue(y)
+													|| robot.isFrontParcouru(prochDirAutoMap)
+													)
+											{
 												prochDirAutoMap=Enum_Orientation_Robot.getAleatHorizontal();
-										}else{
-											autoDeplList=1;
-										}
-								}else {
-									prochDirAutoMap=Enum_Orientation_Robot.getAleatHorizontal();
-								}
-							break;
-						case S :
-								if(robot.DeplacementEtreValide(x, y+1)){
-										if(y==robot.getEnv_decouvert().getY_plateau()-1
-												//robot.getEnv_decouvert().isBordureEnvDir(x, y+1,prochDirAutoMap) 
-												//|| robot.getEnv_decouvert().isColonneParcourue(y)
-												//|| robot.isFrontParcouru(prochDirAutoMap)
-												)
-										{
+												detour=true;
+											}else{
+												autoDeplList=1;
+											}
+									}else if(detour){
+										prochDirAutoMap=Enum_Orientation_Robot.getOpposite(prochDirAutoMap);
+										detour=false;
+									}else {
+										prochDirAutoMap=Enum_Orientation_Robot.getAleatHorizontal();
+										detour=true;
+									}
+								break;
+							case S :
+									if(robot.DeplacementEtreValide(x, y+1)){//&& !detour){
+											if(robot.getEnv_decouvert().isBordureEnvDir(x, y+1,prochDirAutoMap) 
+													|| robot.getEnv_decouvert().isColonneParcourue(y)
+													|| robot.isFrontParcouru(prochDirAutoMap)
+													)
+											{
 												prochDirAutoMap=Enum_Orientation_Robot.getAleatHorizontal();
-										}else{
-											autoDeplList=2;
-										}
-								}
-								else {
-									prochDirAutoMap=Enum_Orientation_Robot.getAleatHorizontal();
-								}
-							break;
-						case E :
-								if(robot.DeplacementEtreValide(x+1, y)){
-										if(x==robot.getEnv_decouvert().getX_plateau()-1
-												//robot.getEnv_decouvert().isBordureEnvDir(x+1, y,prochDirAutoMap) 
-												//|| robot.getEnv_decouvert().isLigneParcourue(y)
-												//|| robot.isFrontParcouru(prochDirAutoMap)
-												)
-										{
+												detour=true;
+											}else{
+												autoDeplList=2;
+											}
+									}else if(detour){
+										prochDirAutoMap=Enum_Orientation_Robot.getOpposite(prochDirAutoMap);
+										detour=false;
+									}else {
+										prochDirAutoMap=Enum_Orientation_Robot.getAleatHorizontal();
+										detour=true;
+									}
+								break;
+							case E :
+									if(robot.DeplacementEtreValide(x+1, y)){//&& !detour){
+											if(robot.getEnv_decouvert().isBordureEnvDir(x+1, y,prochDirAutoMap) 
+													|| robot.getEnv_decouvert().isLigneParcourue(y)
+													|| robot.isFrontParcouru(prochDirAutoMap)
+													)
+											{
+													prochDirAutoMap=Enum_Orientation_Robot.getAleatVertical();
+													detour=true;
+											}else{
+												autoDeplList=3;
+											}
+									}else if(detour){
+										prochDirAutoMap=Enum_Orientation_Robot.getOpposite(prochDirAutoMap);
+										detour=false;
+									}else {				
+										prochDirAutoMap=Enum_Orientation_Robot.getAleatVertical();
+										detour=true;
+									}
+								break;
+							case W :
+									if(robot.DeplacementEtreValide(x-1, y)){//&& !detour){
+											if(robot.getEnv_decouvert().isBordureEnvDir(x-1, y,prochDirAutoMap) 
+													|| robot.getEnv_decouvert().isLigneParcourue(y)
+													|| robot.isFrontParcouru(prochDirAutoMap)
+													)
+											{
 												prochDirAutoMap=Enum_Orientation_Robot.getAleatVertical();
-										}else{
-											autoDeplList=3;
-										}
-								}
-								else {				
-									prochDirAutoMap=Enum_Orientation_Robot.getAleatVertical();
-								}
-							break;
-						case W :
-								if(robot.DeplacementEtreValide(x-1, y)){
-										if(x==1
-												//robot.getEnv_decouvert().isBordureEnvDir(x-1, y,prochDirAutoMap) 
-												//|| robot.getEnv_decouvert().isLigneParcourue(y)
-												//|| robot.isFrontParcouru(prochDirAutoMap)
-												)
-										{
-												prochDirAutoMap=Enum_Orientation_Robot.getAleatVertical();
-										}else{
-											autoDeplList=4;
-										}
-								}
-								else {
-									prochDirAutoMap=Enum_Orientation_Robot.getAleatVertical();
-								}
-							break;
-						 default :
-							break;
-					}//fin switch
-//				}//fin else start
-			}//fin else countmask
+												detour=true;
+											}else{
+												autoDeplList=4;
+											}
+									}else if(detour){
+										prochDirAutoMap=Enum_Orientation_Robot.getOpposite(prochDirAutoMap);
+										detour=false;
+									}else {
+										prochDirAutoMap=Enum_Orientation_Robot.getAleatVertical();
+										detour=true;
+									}
+								break;
+							 default :
+								break;
+						}//fin switch
+						System.out.println("dir sortie switch : " +prochDirAutoMap);
+				}//fin else countmask
+			}//fin else cpt
+			cpt++;
 		}while(autoDeplList==0);
+		cpt=0;
+		detour=false;
+		System.out.println("dir sortie while : " +prochDirAutoMap);
 		return autoDeplList;
 	}
 		
