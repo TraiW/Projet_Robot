@@ -160,7 +160,6 @@ public class RobotControlService {
 			this.robot = robotCtr.razRobot();			
 			//return bool;
 		}
-		
 		@SuppressWarnings("unchecked")
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
@@ -185,6 +184,7 @@ public class RobotControlService {
 						CX.add(cpt, i);
 						CY.add(cpt, j);
 						cpt+=1;
+
 					}
 				}
 			}

@@ -136,110 +136,117 @@ $(document).ready(function(){
 			});
 		
 		
-		  $("#Buttontest").click(function(){
-		
-//		$('#signup5').change(function() {
-//			   if($(this).is(":checked")) {
-				   //demande automapping au serveur avec intervalle
-				   //1 NORD, 2 SUD, 3 EST, 4 OUEST
-				   
-//		setInterval(function() {
- 
-				   $.get("rest/cmd/automapping",function(data) {
-					   			var moove;
-					   			moove=data.Automapping.AutoMappingString;
-					   			console.log("moove :"+moove);
-					   			if(moove==1){
-					   				$.post("rest/cmd/UP",
-					   		    		  {},
-					   		    		  function(data,status){
-					   		    			  test=data;
-//					   		      		    alert("Post Done 1received data: " + data + "\nStatus: " + status);
-					   		    			  if(data=="true"){
-					   		    				  console.log("data :"+data);
-					   		        			  joueur.deplacer(DIRECTION.HAUT, map);
-					   		    			 }
-					   		    			  else{ alert("Déplacement impossible");}
-					   		    			  
+		var automapp=0;
+		$('#signup5').change(function() {
+			   
 
-					   		    		  });   
-					   				
-					   			}
-					   			if(moove==2){
-					   				$.post("rest/cmd/DOWN",
-					   			  		  {},
-					   			  		function(data,status){
-//					   			    		    alert("Post Done downb data: " + data + "\nStatus: " + status);
+					   
+					   if($(this).is(":checked")) {
+							console.log("Automapping ON");
 
-					   						  if(data=="true")
-					   			 			 {
-					   			     			  joueur.deplacer(DIRECTION.BAS, map);
+						   	automapp=1;
+						   	refresh=20;
+						 }					   
+					   else{ // automapping à 0
+						   	automapp=0;
+  
+						console.log("Automapping OFF");
+						return;
+								   
+						}
 
-					   			 			 }
-					   						  else
-					   			  			{
-					   			      		    alert("Déplacement impossible");
-
-					   			  			}
-					   						  
-					   			  		 });    
-					   			}
-					   			if(moove==3){
-					   				$.post("rest/cmd/RIGHT",
-					   			  		  {},
-					   			  		function(data,status){
-					   						  if(data=="true")
-					   			 			 {
-					   			     			  joueur.deplacer(DIRECTION.DROITE, map);
-
-					   			 			 }  
-					   						  else
-					   				  			{
-					   				      		    alert("Déplacement impossible");
-
-					   				  			}
-					   					});    
-					   			}
-					   			if(moove==4){
-					   				$.post("rest/cmd/LEFT",
-					   			  		  {},
-					   			  		function(data,status){
-//					   			  			 alert("Post Done down data: " + data + "\nStatus: " + status);
-					   						  if(data=="true")
-					   				 			 {
-					   				     			  joueur.deplacer(DIRECTION.GAUCHE, map);
-					   				 			 }
-					   						  else
-					   				  			{
-					   				      		    alert("Déplacement impossible");
-
-					   				  			}
-					   						  
-					   					});    
-
-					   			}
+					   refresh=setInterval(function() { 
+						   console.log("refresh "+refresh);
+						   console.log("set intervall");
+						   if(automapp==1){
+							   
+							   $.get("rest/cmd/automapping",function(data) {
+								   
+								   moove=data.Automapping.AutoMappingString;
+							         if(moove==1){
+							           $.post("rest/cmd/UP",
+							                 {},
+							                 function(data,status){
+							                   test=data;
+//												   		      		    alert("Post Done 1received data: " + data + "\nStatus: " + status);
+							                   if(data=="true"){
+							                       joueur.deplacer(DIRECTION.HAUT, map);
+							                  }
+							                   else{ alert("Déplacement impossible");}
 
 
+							                 });
 
-						});
+							         }
+							         if(moove==2){
+							           $.post("rest/cmd/DOWN",
+							                 {},
+							               function(data,status){
+//												   			    		    alert("Post Done downb data: " + data + "\nStatus: " + status);
 
-//		}, 1000);	   
-				   
-				   
-				   
-				   
-				   
-				   
-//			   }
-//			   else{ // on arrete tout
-//				   
-//				   
-//				   
-//				   
-//				   
-//				   
-//			   }
-//			});
+							                 if(data=="true")
+							                {
+							                     joueur.deplacer(DIRECTION.BAS, map);
+
+							                }
+							                 else
+							                 {
+							                       alert("Déplacement impossible");
+
+							                 }
+
+							                });
+							         }
+							         if(moove==3){
+							           $.post("rest/cmd/RIGHT",
+							                 {},
+							               function(data,status){
+							                 if(data=="true")
+							                {
+							                     joueur.deplacer(DIRECTION.DROITE, map);
+
+							                }
+							                 else
+							                   {
+							                         alert("Déplacement impossible");
+
+							                   }
+							             });
+							         }
+							         if(moove==4){
+							           $.post("rest/cmd/LEFT",
+							                 {},
+							               function(data,status){
+//												   			  			 alert("Post Done down data: " + data + "\nStatus: " + status);
+							                 if(data=="true")
+							                  {
+							                       joueur.deplacer(DIRECTION.GAUCHE, map);
+							                  }
+							                 else
+							                   {
+							                         alert("Déplacement impossible");
+
+							                   }
+
+							             });
+
+							         }
+								   
+								   
+								   
+							   });
+							   
+							   
+						   }
+						   else{
+							   
+							   clearInterval(refresh);							   
+						   }
+					   }, 1000);
+
+				  
+	   
+
 			});
 		
 

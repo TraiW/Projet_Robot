@@ -24,4 +24,4 @@ $(document).ready(function(){
 	  		
   		    alert("Get Done received data: " + data + "\nStatus: " + status);
   	});    
-});
+})
