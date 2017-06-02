@@ -96,7 +96,26 @@ $(document).ready(function(){
 			$.post("rest/cmd/CLEAR",
 				{},
 			function(data,status){
-			alert("Post Done data: " + data + "\nStatus: " + status);
+			alert("Nettoyage de la carte en Cours");
+			for(var i=0;i<20;i++)
+			{
+				for(var j=0;j<20;j++)
+				{
+					var_parcouru[i][j]=0
+					var_brouillard[i][j]=3
+				}
+
+			}
+			var_brouillard[0][0]=0;
+			var_brouillard[1][0]=0;
+			var_brouillard[1][1]=0;
+			joueur.x=0;
+			joueur.y=0;
+			joueur.direction=DIRECTION.BAS;
+
+
+
+
 				if(data == false){
 					alert("RAZ impossible");
 				}
