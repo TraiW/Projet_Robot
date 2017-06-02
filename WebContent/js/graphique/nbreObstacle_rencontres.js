@@ -54,7 +54,7 @@ Highcharts.chart('nbreObstacle_rencontres', {
         }
     },
     title: {
-        text: 'Nombre d obstacles rencontrés par le robot depuis le lancement du simulateur'
+        text: 'Nombre d\'obstacles rencontrés par le robot depuis le lancement du simulateur'
     },
     xAxis: {
         type: 'datetime',
@@ -62,7 +62,7 @@ Highcharts.chart('nbreObstacle_rencontres', {
     },
     yAxis: {
         title: {
-            text: 'Nombre d obstacles rencontrés'
+            text: 'Nombre d\'obstacles rencontrés'
         },
         plotLines: [{
             value: 0,
@@ -84,7 +84,7 @@ Highcharts.chart('nbreObstacle_rencontres', {
         enabled: false
     },
     series: [{
-        name: 'Nombre d obstacles rencontrés par le robot',
+        name: 'Nombre d\'obstacles rencontrés par le robot',
         data: (function () {
             // generate an array of random data
             var data = [],

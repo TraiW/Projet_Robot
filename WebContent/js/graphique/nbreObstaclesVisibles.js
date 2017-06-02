@@ -52,7 +52,7 @@ $(document).ready(function () {
             }
         },
         title: {
-            text: 'Nombre d obstacles visibles par le robot'
+            text: 'Nombre d\'obstacles visibles par le robot'
         },
         xAxis: {
             type: 'datetime',
@@ -60,7 +60,7 @@ $(document).ready(function () {
         },
         yAxis: {
             title: {
-                text: 'Nombre d obstacles visibles'
+                text: 'Nombre d\'obstacles visibles'
             },
             plotLines: [{
                 value: 0,
@@ -82,7 +82,7 @@ $(document).ready(function () {
             enabled: false
         },
         series: [{
-            name: 'Nombre d obstacles visibles par le robot',
+            name: 'Nombre d\'obstacles visibles par le robot',
             data: (function () {
                 // generate an array of random data
                 var data = [],
