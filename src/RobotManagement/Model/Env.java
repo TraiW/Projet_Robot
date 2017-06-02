@@ -81,29 +81,6 @@ public class Env extends Config {
 	    return retour;
 	}
 	
-	public boolean isBordureEnvDirMoinsUn(int x,int y,Enum_Orientation_Robot orient)
-	{
-		boolean retour=false;
-	    switch(orient)
-	    {
-		    case N:
-		    	retour=this.isBordureEnvY(y-1);
-		    	break;
-		    case S:
-		    	retour=this.isBordureEnvY(y+1);
-		    	break;
-		    case E:
-		    	retour=this.isBordureEnvX(x+1);
-		    	break;
-		    case W:
-		    	retour=this.isBordureEnvX(x-1);
-		    	break;
-	    	default:
-	    		break;
-	    }
-	    return retour;
-	}
-	
 	public boolean isBordureEnvX(int x)
 	{
 		boolean retour=false;
