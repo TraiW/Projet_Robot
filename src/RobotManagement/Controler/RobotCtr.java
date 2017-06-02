@@ -259,7 +259,8 @@ public class RobotCtr {
 					switch (prochDirAutoMap){
 						case N :
 								if(robot.DeplacementEtreValide(x, y-1)){
-										if(robot.getEnv_decouvert().isBordureEnvDir(x, y-1,prochDirAutoMap) 
+										if(y==1
+												//robot.getEnv_decouvert().isBordureEnvDir(x, y-1,prochDirAutoMap) 
 												//|| robot.getEnv_decouvert().isColonneParcourue(y)
 												//|| robot.isFrontParcouru(prochDirAutoMap)
 												)
@@ -274,7 +275,8 @@ public class RobotCtr {
 							break;
 						case S :
 								if(robot.DeplacementEtreValide(x, y+1)){
-										if(robot.getEnv_decouvert().isBordureEnvDir(x, y+1,prochDirAutoMap) 
+										if(y==robot.getEnv_decouvert().getY_plateau()-1
+												//robot.getEnv_decouvert().isBordureEnvDir(x, y+1,prochDirAutoMap) 
 												//|| robot.getEnv_decouvert().isColonneParcourue(y)
 												//|| robot.isFrontParcouru(prochDirAutoMap)
 												)
@@ -290,7 +292,8 @@ public class RobotCtr {
 							break;
 						case E :
 								if(robot.DeplacementEtreValide(x+1, y)){
-										if(robot.getEnv_decouvert().isBordureEnvDir(x+1, y,prochDirAutoMap) 
+										if(x==robot.getEnv_decouvert().getX_plateau()-1
+												//robot.getEnv_decouvert().isBordureEnvDir(x+1, y,prochDirAutoMap) 
 												//|| robot.getEnv_decouvert().isLigneParcourue(y)
 												//|| robot.isFrontParcouru(prochDirAutoMap)
 												)
@@ -306,7 +309,8 @@ public class RobotCtr {
 							break;
 						case W :
 								if(robot.DeplacementEtreValide(x-1, y)){
-										if(robot.getEnv_decouvert().isBordureEnvDir(x-1, y,prochDirAutoMap) 
+										if(x==1
+												//robot.getEnv_decouvert().isBordureEnvDir(x-1, y,prochDirAutoMap) 
 												//|| robot.getEnv_decouvert().isLigneParcourue(y)
 												//|| robot.isFrontParcouru(prochDirAutoMap)
 												)
