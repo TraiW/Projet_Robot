@@ -160,24 +160,24 @@ public class Robot{
 		}
 	}
 	
-	public boolean isFrontMasked(Enum_Orientation_Robot orient){
+	public boolean isFrontParcouru(Enum_Orientation_Robot orient){
 		boolean retour=false;
 		switch (orient){
 			case N:
 				if(this.env_decouvert.coordEtreDansPlateau(this.x, this.y-1))
-					retour=this.env_decouvert.getTableauEnv()[this.x][this.y-1].isMasquage();
+					retour=this.env_decouvert.getTableauEnv()[this.x][this.y-1].isParcouru();
 				break;
 			case S:
 				if(this.env_decouvert.coordEtreDansPlateau(this.x, this.y+1))
-					retour=this.env_decouvert.getTableauEnv()[this.x][this.y+1].isMasquage();
+					retour=this.env_decouvert.getTableauEnv()[this.x][this.y+1].isParcouru();
 				break;
 			case E:
 				if(this.env_decouvert.coordEtreDansPlateau(this.x+1, this.y))
-					retour=this.env_decouvert.getTableauEnv()[this.x+1][this.y].isMasquage();
+					retour=this.env_decouvert.getTableauEnv()[this.x+1][this.y].isParcouru();
 				break;
 			case W:
 				if(this.env_decouvert.coordEtreDansPlateau(this.x-1, this.y))
-					retour=this.env_decouvert.getTableauEnv()[this.x-1][this.y].isMasquage();
+					retour=this.env_decouvert.getTableauEnv()[this.x-1][this.y].isParcouru();
 				break;
 				
 			default:

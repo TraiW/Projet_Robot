@@ -66,20 +66,20 @@ public class TestSimulateur {
 		System.out.println("parcouru en "+botctrl.getAutocall()+" déplacements réels");
 		System.out.println("");
 		
-		for(i=0;i<xEnv;i++)
-		{
-			for(j=0;j<yEnv;j++)
-			{
-				System.out.print(bot.getEnv_decouvert().getTableauEnv()[j][i].isMasquage()+" ");
-			}
-			System.out.println("");
-		}
+//		for(i=0;i<xEnv;i++)
+//		{
+//			for(j=0;j<yEnv;j++)
+//			{
+//				System.out.print(bot.getEnv_decouvert().getTableauEnv()[j][i].isMasquage()+" ");
+//			}
+//			System.out.println("");
+//		}
+		
 //		for(i=0;i<count;i++)
 //		{
 //			System.out.println("valeur renvoyée d'automappin : "+val[i]);
 //		}
 		//System.out.println(enviro.getX_plateau()+" par "+enviro.getY_plateau());
-
 	}
 
 }
