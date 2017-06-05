@@ -1,7 +1,7 @@
-package dao.fabric;
+package UserManagement.dao.fabric;
 
-import dao.instance.AdminDao;
-import dao.instance.UserDao;
+import UserManagement.dao.instance.AdminDao;
+import UserManagement.dao.instance.UserDao;
 
 public final class DaoFabric {
 	// L'utilisation du mot clé volatile permet, en Java version 5 et supérieur,

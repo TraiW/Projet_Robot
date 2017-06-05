@@ -1,4 +1,4 @@
-package processing;
+package UserManagement.processing;
 
 import java.util.Map;
 
@@ -11,11 +11,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import dao.fabric.DaoFabric;
-import dao.instance.AdminDao;
-import dao.instance.UserDao;
-import model.AdminUserModelBean;
-import model.LoginBean;
+import UserManagement.dao.fabric.DaoFabric;
+import UserManagement.dao.instance.AdminDao;
+import UserManagement.dao.instance.UserDao;
+import UserManagement.model.AdminUserModelBean;
+import UserManagement.model.LoginBean;
 
 @ManagedBean(name = "AdminUserControler")
 @ApplicationScoped // Utilisation de application scope afin d'offrir un point d'entrée unique à l'ensemble des clients

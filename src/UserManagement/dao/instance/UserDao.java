@@ -1,10 +1,10 @@
-package dao.instance;
+package UserManagement.dao.instance;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import model.AdminUserModelBean;
+import UserManagement.model.AdminUserModelBean;
 
 
 public class UserDao {
